@@ -1,51 +1,54 @@
-.App {
-  text-align: center;
+/*---Font for headings and paragraph and subtext only----*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap');
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+root {
+    --primary-color: #0e72c9;
+    --primary-hover: #0662b3;
+    --primary-text: #353535f3;
+    --footer-bg: #00000015;
+    --body-bg: #f7f7f7;
+    --box-shadow: 0px 0px 10px 4px #00000015;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+html {
+    font-size: 67%;
 }
 
-.App-header {
-  background-color: #22201c;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
+@media screen and (min-width: 900px) {
+
+    html {
+        font-size: 70%;
+    }
 }
 
-.App-link {
-  color: #61dafb;
+body {
+    background-color: var(--body-bg);
 }
 
-.brand-title {
-  font-size: 3rem;
-  color: #d9d9d9;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Poppins", sans-serif;
 }
 
-.brand-title span {
-  color: #ffde59;
-}
-
-.brand-description {
-  font-size: 1.4rem;
-}
-
-.links {
-  display: flex;
-}
-
-.links a {
-  color: #d9d9d9;
-  font-size: 1.2rem;
-  margin: 1rem;
+li,
+p,
+span,
+button,
+input,
+::placeholder,
+label,
+textarea {
+    font-family: 'Source Sans Pro', sans-serif;
 }
