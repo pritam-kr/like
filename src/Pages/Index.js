@@ -1,1 +1,1 @@
-export {Login} from "./LoginPage/Login"
+export {Login} from "./AuthPage/Login"
