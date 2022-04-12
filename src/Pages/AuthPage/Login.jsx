@@ -53,10 +53,10 @@ const Login = () => {
               </div>
 
               <div className="form-footer mt-4">
-              <p className="text-credential center text-sm">
+              <p className="text-credential center text-sm underline cursor-pointer">
                   Login with Test Credential
                 </p>
-                <p className="paragraph">
+                <p className="paragraph mt-2">
                   <Link to="/signup" className="links">
                     Create an Account.
                   </Link>

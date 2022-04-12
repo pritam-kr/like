@@ -1,0 +1,23 @@
+ .form{
+     box-shadow: none;
+     background-color: var(--footer-bg);
+     border: 0;
+ }
+
+ .form-heading{
+     font-size: 2rem;
+ }
+
+ .gif-wrapper .gif{
+    width: 15rem;
+ }
+
+ .btn-submit{
+     border-radius: 5px;
+ }
+
+@media screen and (min-width: 768px) {
+    .gif-wrapper .gif{
+        width: auto;
+     }
+}
