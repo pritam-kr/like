@@ -1,0 +1,22 @@
+footer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.8em;
+    background-color: var(--footer-bg);
+}
+footer .paragraph{
+    font-size: medium;
+    font-weight: bold;
+    font-size: 1rem;
+}
+footer .icons{
+}
+footer ul li{
+    display: inline-block;
+    margin-right: 15px;
+}
+footer .links{
+    font-size: 1.6rem;
+}

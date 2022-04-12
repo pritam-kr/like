@@ -9,7 +9,7 @@
 }
 
 
-root {
+:root {
     --primary-color: #0e72c9;
     --primary-hover: #0662b3;
     --primary-text: #353535f3;
