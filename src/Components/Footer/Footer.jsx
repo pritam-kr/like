@@ -6,7 +6,7 @@ import * as FaIcons from "react-icons/fa";
 const Footer = () => {
     return (
         <footer className="footer ">
-            <p className="paragraph ">Code By Pritam</p>
+            <p className="text-xl font-semibold">Code By Pritam</p>
             <ul>
                 <li className="lists ">
                     <a href="https://twitter.com/Pritamkr_" target="_blank" rel="noreferrer" className="links"> <FaIcons.FaTwitter className="icons" /> </a> </li>

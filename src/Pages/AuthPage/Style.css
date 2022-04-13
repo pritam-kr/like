@@ -1,7 +1,16 @@
+ 
+ .input{
+     width: 100%;
+     padding: .8rem 1rem;
+     border-radius: 5px;
+     outline: none;
+    background-color: var(--lite-blue);
+ }
+  
  .form{
      box-shadow: none;
      background-color: var(--footer-bg);
-     border: 0;
+     border-radius: 5px;
  }
 
  .form-heading{
@@ -12,8 +21,10 @@
     width: 15rem;
  }
 
- .btn-submit{
-     border-radius: 5px;
+ .btn{
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    color: var(--white-text);
  }
 
 @media screen and (min-width: 768px) {
