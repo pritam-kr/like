@@ -53,32 +53,30 @@ const Signup = () => {
                   />
                 </div>
 
-                <div >
+                <div>
                   <label className="input-label block">
                     Confirm Password: <span className="required">*</span>
                   </label>
-                  
-                  <div className="relative">
-                  <input
-                    type={!showHide ? "password" : "text"}
-                    placeholder="******"
-                    className="input mt-3 mb-3"
-                    required
-                  />
-                  {showHide ? (
-                    <FaIcons.FaEye
-                      className="icons eye-icon"
-                      onClick={() => setShowHide(!showHide)}
-                    />
-                  ) : (
-                    <FaIcons.FaEyeSlash
-                      className="icons eye-icon"
-                      onClick={() => setShowHide(!showHide)}
-                    />
-                  )}
-                  </div>
 
-                  
+                  <div className="relative">
+                    <input
+                      type={!showHide ? "password" : "text"}
+                      placeholder="******"
+                      className="input mt-3 mb-3"
+                      required
+                    />
+                    {showHide ? (
+                      <FaIcons.FaEye
+                        className="icons eye-icon"
+                        onClick={() => setShowHide(!showHide)}
+                      />
+                    ) : (
+                      <FaIcons.FaEyeSlash
+                        className="icons eye-icon"
+                        onClick={() => setShowHide(!showHide)}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
 
@@ -101,7 +99,7 @@ const Signup = () => {
 
               <div>
                 <button className="btn btn-primary w-full p-4 font-semibold">
-                  Login
+                  Signup
                 </button>
               </div>
 
