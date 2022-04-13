@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Style.css";
 import { Link } from "react-router-dom";
+import * as FaIcons from "react-icons/fa";
 
 const Signup = () => {
+  const [showHide, setShowHide] = useState(false);
+
   return (
     <>
       <div className="container login-container mx-auto ">
         <div className="auth-wrapper login-wrapper min-h-screen grid p-6 md:grid-cols-2  gap-2">
-          <div className="gif-wrapper flex justify-center max-h-36 md:max-h-full items-end md:justify-center md:items-center">
+          <div className="gif-wrapper flex justify-center items-baseline max-h-36 md:max-h-full md:justify-center md:items-center">
             <img src="./likeGIf.gif" alt="gif" className="gif" />
           </div>
 
@@ -50,16 +53,32 @@ const Signup = () => {
                   />
                 </div>
 
-                <div>
+                <div >
                   <label className="input-label block">
                     Confirm Password: <span className="required">*</span>
                   </label>
+                  
+                  <div className="relative">
                   <input
-                    type="password"
+                    type={!showHide ? "password" : "text"}
                     placeholder="******"
                     className="input mt-3 mb-3"
                     required
                   />
+                  {showHide ? (
+                    <FaIcons.FaEye
+                      className="icons eye-icon"
+                      onClick={() => setShowHide(!showHide)}
+                    />
+                  ) : (
+                    <FaIcons.FaEyeSlash
+                      className="icons eye-icon"
+                      onClick={() => setShowHide(!showHide)}
+                    />
+                  )}
+                  </div>
+
+                  
                 </div>
               </div>
 
