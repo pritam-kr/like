@@ -1,5 +1,6 @@
 import React from "react";
 import * as FaIcons from "react-icons/fa";
+import {Link} from "react-router-dom"
 
 const Logout = () => {
   return (
@@ -11,7 +12,7 @@ const Logout = () => {
             <h3 className="text-2xl font-semibold">
               Oh no! You're leaving... Are you sure{" "}
             </h3>
-            <button className="btn btn-login mt-3 text-lg">Login</button>
+           <Link to="/"> <button className="btn btn-login mt-3 text-lg">Login</button></Link>
           </div>
         </div>
       </div>
