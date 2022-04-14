@@ -1,7 +1,6 @@
 import React from "react";
 import "./Style.css";
 import { Link } from "react-router-dom";
-import * as FaIcons from "react-icons/fa";
 
 const Login = () => {
   return (
@@ -49,7 +48,9 @@ const Login = () => {
               </div>
 
               <div className="form-footer text-center mt-4">
-                <p className="underline underline-offset-1 cursor-pointer text">Login with Test Credential</p>
+                <p className="underline underline-offset-1 cursor-pointer text">
+                  Login with Test Credential
+                </p>
                 <p className="paragraph mt-2 ">
                   <Link to="/signup" className="links font-bold">
                     Create an Account.

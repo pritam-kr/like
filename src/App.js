@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Login, Signup } from "./Pages/Index";
+import { Login, Signup, Logout } from "./Pages/Index";
 import {Footer} from "./Components/Index"
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
       <Footer />
     </div>

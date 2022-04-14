@@ -43,7 +43,7 @@ h4,
 h5,
 h6 {
     font-family: "Poppins", sans-serif;
-     
+
 }
 
 li,
@@ -53,12 +53,26 @@ button,
 input,
 ::placeholder,
 label,
-textarea, a, .paragraph {
+textarea,
+a,
+.paragraph {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-a:hover{
+a:hover {
     color: var(--primary-hover);
     transition: 0.3s ease-out;
 }
- 
+
+
+.btn {
+    background-color: var(--primary-color);
+    border-radius: 2px;
+    color: var(--white-text);
+
+}
+
+.btn:hover {
+    background-color: var(--primary-hover);
+    transition: 0.3s ease-out;
+}
