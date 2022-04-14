@@ -1,51 +1,78 @@
-.App {
-  text-align: center;
+/*---Font for headings and paragraph and subtext only----*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Source+Sans+Pro:wght@200;300;400;600;700&display=swap');
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+:root {
+    --primary-color: #0e72c9;
+    --primary-hover: #0662b3;
+    --primary-text: #353535f3;
+    --footer-bg: #00000015;
+    --secondary-bg: #00000015;
+    --body-bg: #f7f7f7;
+    --white-text: #f7f7f7;
+    --box-shadow: 0px 0px 10px 4px #00000015;
+    --lite-blue: #E8F0FE;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+html {
+    font-size: 67%;
 }
 
-.App-header {
-  background-color: #22201c;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: white;
+@media screen and (min-width: 900px) {
+
+    html {
+        font-size: 70%;
+    }
 }
 
-.App-link {
-  color: #61dafb;
+body {
+    background-color: var(--body-bg);
 }
 
-.brand-title {
-  font-size: 3rem;
-  color: #d9d9d9;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Poppins", sans-serif;
+
 }
 
-.brand-title span {
-  color: #ffde59;
+li,
+p,
+span,
+button,
+input,
+::placeholder,
+label,
+textarea,
+a,
+.paragraph {
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
-.brand-description {
-  font-size: 1.4rem;
+a:hover {
+    color: var(--primary-hover);
+    transition: 0.3s ease-out;
 }
 
-.links {
-  display: flex;
+
+.btn {
+    background-color: var(--primary-color);
+    border-radius: 2px;
+    color: var(--white-text);
+
 }
 
-.links a {
-  color: #d9d9d9;
-  font-size: 1.2rem;
-  margin: 1rem;
+.btn:hover {
+    background-color: var(--primary-hover);
+    transition: 0.3s ease-out;
 }
