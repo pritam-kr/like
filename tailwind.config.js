@@ -18,13 +18,20 @@ module.exports = {
         "2xl": "1536px",
         // => @media (min-width: 1536px) { ... }
       },
-      
-     
-    },
-    backgroundColor: {
+      boxShadow: {
+        topbar: " rgb(0 0 0 / 5%) 0px 0px 10px 4px",
+      },
+      colors: {
+         
+      },
 
+      fontSize: {
+        'logo-icon': "2rem"
+      }
     },
-     
+    backgroundColor: {},
+
+   
   },
   plugins: [],
 };

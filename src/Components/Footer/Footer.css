@@ -5,6 +5,7 @@ footer{
     align-items: center;
     padding: 1.8em;
     background-color: var(--footer-bg);
+    
 }
 footer .paragraph{
     font-size: medium;
@@ -19,3 +20,4 @@ footer ul li{
 footer .links{
     font-size: 1.6rem;
 }
+

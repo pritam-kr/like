@@ -1,8 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Style.css";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+
+const [formData, setFormData] = useState({email: "", password: ""})
+
+const loginSubmitHandler = () => {
+    console.log(formData)
+}
+
   return (
     <>
       <div className="container login-container mx-auto ">
@@ -12,7 +19,7 @@ const Login = () => {
           </div>
 
           <div className="flex justify-center items-center">
-            <form className="form w-full max-w-xl p-7 text-xl">
+            <div className="form w-full max-w-xl p-7 text-xl">
               <div className="mt-4 mb-4 text-center">
                 <h1 className="form-heading font-bold">Login</h1>
               </div>
@@ -20,8 +27,8 @@ const Login = () => {
               <label className="block">Email: </label>
               <input
                 type="text"
-                placeholder="Enter email"
-                className="input mt-3 mb-3"
+                placeholder="Enter email" required
+                className="input mt-3 mb-3" onChange={(event) => setFormData((prev) => ({...prev, email: event.target.value}))}
               />
 
               <p className="text-sm error"></p>
@@ -33,7 +40,7 @@ const Login = () => {
                 type="password"
                 placeholder="******"
                 className="input mt-3 mb-3 bg-[#F7F7F7]"
-                required
+                required  onChange={(event) => setFormData((prev) => ({...prev, password: event.target.value}))}
               />
 
               <label className="input-label flex items-center justify-start mt-2 mb-3">
@@ -42,7 +49,7 @@ const Login = () => {
               </label>
 
               <div className="input-row">
-                <button className="btn btn-primary w-full p-4 font-semibold">
+                <button className="btn btn-primary w-full p-4 font-semibold" onClick={() => loginSubmitHandler()}>
                   Login
                 </button>
               </div>
@@ -57,7 +64,7 @@ const Login = () => {
                   </Link>
                 </p>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
