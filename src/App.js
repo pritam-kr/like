@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
-import { Login, Signup, Logout, NotFound, Feeds } from "./Pages/Index";
+import { Login, Signup, Logout, NotFound, Feeds, Profile } from "./Pages/Index";
 import {Footer, FeedFooter} from "./Components/Index"
 
 function App() {
@@ -14,9 +14,10 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/feeds" element={<Feeds />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {pathname === "/feeds" ? <FeedFooter /> : <Footer />}
+      {pathname === "/feeds" || pathname === "/profile" ? <FeedFooter /> : <Footer />}
     </div>
   );
 }

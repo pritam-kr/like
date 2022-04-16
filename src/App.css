@@ -13,6 +13,7 @@
     --primary-color: #0e72c9;
     --primary-hover: #0662b3;
     --primary-text: #353535f3;
+    --secondary-text: #5e6266;
     --footer-bg: #00000015;
     --secondary-bg: #00000015;
     --body-bg: #f7f7f7;
@@ -79,14 +80,26 @@ a:hover {
     transition: 0.3s ease-out;
 }
 
-.icons{
+.icons {
     font-size: 1.6rem;
     cursor: pointer;
 }
-.icons:hover{
+
+.icons:hover {
     color: var(--primary-hover);
 }
 
-::placeholder{
+::placeholder {
     font-size: 1.5rem;
+}
+
+
+.parent-container {
+    min-height: 100vh;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.content-wrapper {
+    padding: 2rem 1rem;
 }
