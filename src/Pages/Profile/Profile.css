@@ -1,0 +1,49 @@
+ 
+.chips-container button {
+    padding: .2rem 1rem;
+    font-size: 1.3rem;
+}
+
+.user-name{
+    margin-top: -0.6rem;
+    color: var(--secondary-text);
+    font-weight: 600;
+}
+.profile-icons {
+    color: var(--secondary-text);
+    font-size: 1.3rem;
+}
+
+.post-wrapper{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    justify-content: center;
+    gap: 10px;
+}
+
+.post-avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 10rem;
+}
+.post-user-name{
+    font-weight: 500;
+    font-size: 1.4rem;
+}
+
+.post-thumbnail-wrapper{
+    height: 15rem;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+.post-thumbnail-wrapper img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+@media screen and (min-width: 676px) {
+    .post-wrapper{
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: center;
+    }
+}
