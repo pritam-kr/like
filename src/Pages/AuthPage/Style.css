@@ -3,7 +3,7 @@
      padding: .8rem 1rem;
      border-radius: 2px;
      outline: none;
-     background-color: var(--lite-blue);
+     /* background-color: var(--lite-blue); */
  }
 
  .form {

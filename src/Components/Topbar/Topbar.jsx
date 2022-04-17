@@ -14,9 +14,9 @@ const Topbar = () => {
         </div>
         <div className="topbar-middle basis-72 md:basis-1/4">
           <div className="searchbar">
-            <input
+            <input 
               type="search"
-              className="searchbar input"
+              className="searchbar input bg-gray-100"
               placeholder="Search"
             />
           </div>

@@ -1,11 +1,10 @@
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { Login, Signup, Logout, NotFound, Feeds, Profile } from "./Pages/Index";
-import {Footer, FeedFooter} from "./Components/Index"
+import { Footer, FeedFooter } from "./Components/Index";
 
 function App() {
-
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
 
   return (
     <div className="App">
@@ -17,7 +16,11 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {pathname === "/feeds" || pathname === "/profile" ? <FeedFooter /> : <Footer />}
+      {pathname === "/feeds" || pathname === "/profile" ? (
+        <FeedFooter />
+      ) : (
+        <Footer />
+      )}
     </div>
   );
 }

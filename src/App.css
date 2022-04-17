@@ -45,7 +45,12 @@ h4,
 h5,
 h6 {
     font-family: "Poppins", sans-serif;
+    color: #323232;
 
+}
+
+p{
+    color: #323232;
 }
 
 li,
@@ -90,7 +95,7 @@ a:hover {
 }
 
 ::placeholder {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 

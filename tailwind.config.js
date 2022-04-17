@@ -23,8 +23,10 @@ module.exports = {
       boxShadow: {
         topbar: " rgb(0 0 0 / 5%) 0px 0px 10px 4px",
       },
-      colors: {
-         
+       
+
+      gridTemplateColumns:{
+        'feed-col': "70% 30%"
       },
 
       fontSize: {

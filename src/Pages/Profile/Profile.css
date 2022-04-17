@@ -41,6 +41,23 @@
     width: 100%;
     object-fit: cover;
 }
+
+
+/*==============post-form-modal========*/
+
+.post-form-modal{
+    background-color: rgba(0, 0, 0, 0.447);
+    display: none;
+}
+
+.post-form-wrapper{
+    border-radius: 5px;
+    width: 50rem;
+    max-width: 400px;
+    margin-top: 6rem;
+    background-color: #fff;
+}
+
 @media screen and (min-width: 676px) {
     .post-wrapper{
         grid-template-columns: repeat(3, 1fr);
