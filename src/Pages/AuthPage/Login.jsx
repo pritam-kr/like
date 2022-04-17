@@ -49,9 +49,9 @@ const loginSubmitHandler = () => {
               </label>
 
               <div className="input-row">
-                <button className="btn btn-primary w-full p-4 font-semibold" onClick={() => loginSubmitHandler()}>
-                 <Link to="/feeds"> Login</Link>
-                </button>
+              <Link to="/feeds">  <button className="btn btn-primary w-full p-4 font-semibold" onClick={() => loginSubmitHandler()}>
+                 login
+                </button></Link>
               </div>
 
               <div className="form-footer text-center mt-4">
