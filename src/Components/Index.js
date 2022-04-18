@@ -1,5 +1,10 @@
-export {Footer} from "./Footer/Footer"
-export {Topbar} from "./Topbar/Topbar"
-export {FeedFooter} from "./FeedFooter/FeedFooter"
-export {PostCard} from "./PostCard/PostCard"
-export {FeedPostCard} from "./FeedPostCard/FeedPostCard"
+export { Footer } from "./Footer/Footer";
+export { Topbar } from "./Topbar/Topbar";
+export { FeedFooter } from "./FeedFooter/FeedFooter";
+export { PostCard } from "./PostCard/PostCard";
+export { PostModal } from "./PostModal/PostModal";
+export { FeedPostCard } from "./FeedPostCard/FeedPostCard";
+export { ScrollTop } from "./ScrollTop/ScrollTop";
+export { FollowerModal } from "./FollowerModal/FollowerModal";
+export {FollowingModal} from "./FollowerModal/FollowingModal"
+ 
