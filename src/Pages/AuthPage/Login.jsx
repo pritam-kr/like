@@ -39,7 +39,7 @@ const loginSubmitHandler = () => {
               <input
                 type="password"
                 placeholder="******"
-                className="input mt-3 mb-3 bg-[#F7F7F7]"
+                className="input mt-3 mb-3"
                 required  onChange={(event) => setFormData((prev) => ({...prev, password: event.target.value}))}
               />
 
@@ -49,9 +49,9 @@ const loginSubmitHandler = () => {
               </label>
 
               <div className="input-row">
-                <button className="btn btn-primary w-full p-4 font-semibold" onClick={() => loginSubmitHandler()}>
-                  Login
-                </button>
+              <Link to="/feeds">  <button className="btn btn-primary w-full p-4 font-semibold" onClick={() => loginSubmitHandler()}>
+                 login
+                </button></Link>
               </div>
 
               <div className="form-footer text-center mt-4">

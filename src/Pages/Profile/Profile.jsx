@@ -1,13 +1,17 @@
 import React from "react";
 import "./Profile.css";
-import { Topbar,PostCard } from "../../Components/Index";
+import { Topbar, PostCard, PostModal, FollowerModal, FollowingModal } from "../../Components/Index";
 import * as FaIcons from "react-icons/fa";
+import {useModalContext} from "../../Context/ModalContext"
+ 
 
 const Profile = () => {
+
+  const {setFollowerModal, setFollowingModal} = useModalContext()
   return (
     <>
+      <Topbar />
       <div className="parent-container profile-container ">
-        <Topbar />
         <div className="content-wrapper profile-wrapper w-full max-w-screen-lg mx-auto">
           <div className="user-info-wrapper flex-col flex justify-center  items-center my-1rem">
             <div className="user-avatar-wrapper mb-2">
@@ -33,18 +37,25 @@ const Profile = () => {
               </div>
               <div className="chips-container text-center mt-2 text-sub-heading">
                 <button className="btn mx-1">Posts 05 </button>{" "}
-                <button className="btn mx-1">Followers 1k</button>
-                <button className="btn mx-1">Following 409</button>
+                <button className="btn mx-1" onClick={() => setFollowerModal(true)}>Followers 1k</button>
+                <button className="btn mx-1" onClick={() => setFollowingModal(true)}>Following 409</button>
               </div>
             </div>
           </div>
 
-          {/*--Post---*/}
+          {/*--Post---Card*/}
           <div className="post-wrapper my-6 p-3">
-            <PostCard /> 
+            <PostCard />
             <PostCard />
             <PostCard />
           </div>
+
+          {/*post modal start*/}
+          <PostModal />
+          {/*post modal end*/}
+
+           <FollowerModal /> 
+           <FollowingModal />
         </div>
       </div>
     </>

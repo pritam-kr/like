@@ -1,6 +1,6 @@
 .nav{
    border-bottom: 1px solid var(--border-color);
-   
+   background-color: #fff;
  }
 .nav-icons {
   color: var(--primary-color);
@@ -13,6 +13,11 @@
 
 .searchbar input {
   border: 0.1rem solid var(--border-color);
+  background-color:  var(--input-bg);
+}
+
+.text-logo-icon{
+  color: var(--primary-color);
 }
 
 @media screen and (max-width: 768px) {
