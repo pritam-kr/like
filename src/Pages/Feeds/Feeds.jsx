@@ -1,8 +1,17 @@
 import React from "react";
 import "./Feed.css";
 import { Topbar, FeedPostCard,PostModal } from "../../Components/Index";
+import { useSelector } from "react-redux";
+ 
 
 const Feeds = () => {
+
+  const state = useSelector((state) => state);
+  const { auth } = state;
+  const token = auth.token;
+  const userProfile = auth.userInfo
+
+  
   return (
     <>
       <Topbar />
