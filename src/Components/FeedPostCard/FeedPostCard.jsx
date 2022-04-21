@@ -1,7 +1,16 @@
 import React from "react";
 import * as FaIcons from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const FeedPostCard = () => {
+
+  const state = useSelector((state) => state);
+  const { auth  } = state;
+  const token = auth.token;
+ 
+
+ 
+
   return (
     <div className="feed-post-card border-2 mb-4 pb-0 ">
       <div className="flex items-center justify-between p-2">
