@@ -9,7 +9,6 @@ import { getUser } from "../../Store/Slice/AuthSlice";
  
  
  
- 
 
 const Profile = () => {
 
@@ -18,9 +17,6 @@ const Profile = () => {
   const token = auth.token;
   const {setFollowerModal, setFollowingModal} = useModalContext()
 
- useEffect(() => {
-  getUser()
- }, [])
 
   return (
     <>
