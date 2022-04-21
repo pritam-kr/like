@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { regEx } from "../Utils/RegEx";
 import toast from "react-hot-toast";
@@ -9,8 +9,15 @@ import { authInfo, getToken } from "../Store/Slice/AuthSlice";
 export const useLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation()
   //State for Forms error
   const [error, setError] = useState("");
+
+  //from we are comming from 
+
+  const from = location.state?.from?.pathname || "/";
+
+   
 
   const loginFormHandler = async (formData) => {
 
@@ -25,7 +32,7 @@ export const useLogin = () => {
             position: "top-right",
             duration: 500,
           });
-          navigate("/feeds");
+          navigate(from);
           localStorage.setItem("login-token", encodedToken);
           localStorage.setItem("user", JSON.stringify(foundUser));
 
