@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Profile.css";
 import { Topbar, PostCard, PostModal, FollowerModal, FollowingModal } from "../../Components/Index";
 import * as FaIcons from "react-icons/fa";
 import {useModalContext} from "../../Context/ModalContext"
+import { useSelector } from "react-redux";
+ 
+import { getUser } from "../../Store/Slice/AuthSlice";
+ 
+ 
+ 
  
 
 const Profile = () => {
 
+  const state = useSelector((state) => state);
+  const { auth } = state;
+  const token = auth.token;
   const {setFollowerModal, setFollowingModal} = useModalContext()
+
+ useEffect(() => {
+  getUser()
+ }, [])
+
   return (
     <>
       <Topbar />

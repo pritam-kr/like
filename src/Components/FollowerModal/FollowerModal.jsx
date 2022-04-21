@@ -1,9 +1,13 @@
 import React from "react";
 import * as FaIcons from "react-icons/fa";
+ 
 import { useModalContext } from "../../Context/ModalContext";
+ 
 
 const FollowerModal = () => {
   const { followerModal, setFollowerModal } = useModalContext();
+
+  
 
   return (
     followerModal && (
