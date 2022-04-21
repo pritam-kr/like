@@ -7,7 +7,7 @@ import { useLogin } from "../../Services/useLogin";
  
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ username: "", password: "" });
 
   const { loginFormHandler, error } = useLogin();
 
@@ -19,7 +19,7 @@ const Login = () => {
 
   //Text credential
   const loginTextHandler = () => {
-    setFormData({ email: "pritamvr9@gmail.com", password: "pritam123" });
+    setFormData({ username: "adarshbalika", password: "adarshBalika123" });
   };
 
   return (
@@ -36,17 +36,17 @@ const Login = () => {
                 <h1 className="form-heading font-bold">Login</h1>
               </div>
 
-              <label className="block">Email: </label>
+              <label className="block">Username: </label>
               <input
                 type="text"
-                placeholder="Enter email"
+                placeholder="Enter username"
                 required
-                value={formData.email}
+                value={formData.username}
                 className="input mt-3 mb-3"
                 onChange={(event) =>
                   setFormData((prev) => ({
                     ...prev,
-                    email: event.target.value,
+                    username: event.target.value,
                   }))
                 }
               />

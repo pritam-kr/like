@@ -13,7 +13,7 @@ export const useLogin = () => {
   const [error, setError] = useState("");
 
   const loginFormHandler = async (formData) => {
-    if (regEx.test(formData.email)) {
+
       try {
         const {
           status,
@@ -39,11 +39,7 @@ export const useLogin = () => {
         } = error.response;
         setError(errors);
       }
-    } else if (!regEx.test(formData.email)) {
-      setError("Email is not valid. Try Again");
-    } else {
-      setError("");
-    }
+    
   };
 
   return { loginFormHandler, error };
