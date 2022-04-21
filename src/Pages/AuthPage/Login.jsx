@@ -1,14 +1,26 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./Style.css";
 import { Link } from "react-router-dom";
+import { useLogin } from "../../Services/useLogin";
+
+
+ 
 
 const Login = () => {
+  const [formData, setFormData] = useState({ username: "", password: "" });
 
-const [formData, setFormData] = useState({email: "", password: ""})
+  const { loginFormHandler, error } = useLogin();
 
-const loginSubmitHandler = () => {
-    console.log(formData)
-}
+ 
+  const loginSubmitHandler = (event) => {
+    event.preventDefault();
+    loginFormHandler(formData);
+  };
+
+  //Text credential
+  const loginTextHandler = () => {
+    setFormData({ username: "adarshbalika", password: "adarshBalika123" });
+  };
 
   return (
     <>
@@ -24,11 +36,19 @@ const loginSubmitHandler = () => {
                 <h1 className="form-heading font-bold">Login</h1>
               </div>
 
-              <label className="block">Email: </label>
+              <label className="block">Username: </label>
               <input
                 type="text"
-                placeholder="Enter email" required
-                className="input mt-3 mb-3" onChange={(event) => setFormData((prev) => ({...prev, email: event.target.value}))}
+                placeholder="Enter username"
+                required
+                value={formData.username}
+                className="input mt-3 mb-3"
+                onChange={(event) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    username: event.target.value,
+                  }))
+                }
               />
 
               <p className="text-sm error"></p>
@@ -40,7 +60,14 @@ const loginSubmitHandler = () => {
                 type="password"
                 placeholder="******"
                 className="input mt-3 mb-3"
-                required  onChange={(event) => setFormData((prev) => ({...prev, password: event.target.value}))}
+                value={formData.password}
+                required
+                onChange={(event) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    password: event.target.value,
+                  }))
+                }
               />
 
               <label className="input-label flex items-center justify-start mt-2 mb-3">
@@ -49,13 +76,22 @@ const loginSubmitHandler = () => {
               </label>
 
               <div className="input-row">
-              <Link to="/feeds">  <button className="btn btn-primary w-full p-4 font-semibold" onClick={() => loginSubmitHandler()}>
-                 login
-                </button></Link>
+                <Link to="/feeds">
+                  {" "}
+                  <button
+                    className="btn btn-primary w-full p-4 font-semibold"
+                    onClick={(event) => loginSubmitHandler(event)}
+                  >
+                    login
+                  </button>
+                </Link>
               </div>
 
               <div className="form-footer text-center mt-4">
-                <p className="underline underline-offset-1 cursor-pointer text">
+                <p
+                  className="underline underline-offset-1 cursor-pointer text"
+                  onClick={() => loginTextHandler()}
+                >
                   Login with Test Credential
                 </p>
                 <p className="paragraph mt-2 ">
