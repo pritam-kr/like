@@ -11,7 +11,7 @@ const Feeds = () => {
   const token = auth.token;
   const userProfile = auth.userInfo
 
-  
+
   return (
     <>
       <Topbar />
@@ -27,13 +27,13 @@ const Feeds = () => {
             <div className="admin-short-info p-2 border-2 border-b-0">
               <div className="flex items-center">
                 <img
-                  src="https://avatars.githubusercontent.com/u/84632214?v=4"
+                  src={userProfile?.avatar === "" ? "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png" : userProfile?.avatar}
                   alt="admin"
                   className="post-avatar"
                 />
                 <div className="ml-2">
-                  <h1 className="post-user-name leading-none">Pritam Kumar</h1>
-                  <p>@pritamkr</p>
+                  <h1 className="post-user-name leading-none">{userProfile?.firstName} {userProfile?.lastName}</h1>
+                  <p>{userProfile?.username}</p>
                 </div>
               </div>
             </div>
