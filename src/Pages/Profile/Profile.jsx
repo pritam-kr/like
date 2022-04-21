@@ -4,7 +4,6 @@ import { Topbar, PostCard, PostModal, FollowerModal, FollowingModal } from "../.
 import * as FaIcons from "react-icons/fa";
 import {useModalContext} from "../../Context/ModalContext"
 import { useSelector } from "react-redux";
- 
 import { getUser } from "../../Store/Slice/AuthSlice";
  
  
@@ -34,9 +33,9 @@ const Profile = () => {
             <div className="profile-info">
               <div className="text-center">
                 <h1 className="user-full-name text-medium-heading font-semibold flex justify-center items-center">
-                  Pritam Kumar{" "}
+                  Pritam Kumar 
                   <span className="ml-4 ">
-                    {" "}
+                     
                     <FaIcons.FaEdit className="icons profile-icons" />{" "}
                   </span>
                 </h1>
