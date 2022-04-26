@@ -1,0 +1,1 @@
+export { contentShort} from "./ContentShort"

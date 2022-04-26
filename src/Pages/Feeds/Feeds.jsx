@@ -2,6 +2,7 @@ import React from "react";
 import "./Feed.css";
 import { Topbar, FeedPostCard,PostModal } from "../../Components/Index";
 import { useSelector } from "react-redux";
+import { usePost } from "../../Hooks/index";
  
 
 const Feeds = () => {
@@ -11,6 +12,8 @@ const Feeds = () => {
   const token = auth.token;
   const userProfile = auth.userInfo
 
+  const {addNewPost} = usePost()
+ 
 
   return (
     <>
