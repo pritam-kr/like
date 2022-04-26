@@ -14,11 +14,9 @@ export const useLogin = () => {
   const [error, setError] = useState("");
 
   //from we are comming from 
-
-  const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/feeds";
 
    
-
   const loginFormHandler = async (formData) => {
 
       try {
