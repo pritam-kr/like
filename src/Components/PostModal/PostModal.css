@@ -1,0 +1,4 @@
+.progress-bar{
+    min-height: 5px;
+    background-color: var(--primary-color);
+}

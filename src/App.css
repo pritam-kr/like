@@ -8,6 +8,9 @@
     box-sizing: border-box;
 }
 
+body{
+    background-color: #1a202c ;
+}
 
 :root {
     --primary-color: #0e72c9;
@@ -22,6 +25,11 @@
     --lite-blue: #E8F0FE;
     --border-color: rgba(0, 0, 0, 0.079);
     --input-bg: rgba(32, 32, 32, 0.081);
+
+    --bg-color: #070f1f;
+    --input-color: #292929;
+    --secondary-text-color: #909090;
+    --text-color: #292929;
 }
 
 html {
@@ -35,9 +43,11 @@ html {
     }
 }
 
-body {
+/* body {
     background-color: var(--body-bg);
-}
+} */
+
+/*for components background bg-[#070f1f]  for text color text-[#292929]*/
 
 h1,
 h2,
@@ -46,13 +56,13 @@ h4,
 h5,
 h6 {
     font-family: "Poppins", sans-serif;
-    color: #323232;
+    color: #f7f7f7;
 
 }
 
-p {
+/* p {
     color: #323232;
-}
+} */
 
 li,
 p,
@@ -89,7 +99,7 @@ a:hover {
 .icons {
     font-size: 1.6rem;
     cursor: pointer;
-    color: #323232;;
+    
 }
 
 .icons:hover {

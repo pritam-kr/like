@@ -5,8 +5,6 @@ import axios from "axios";
 const token = localStorage.getItem("login-token") || ""
 const userInfo = JSON.parse(localStorage.getItem("user")) || null
 
- 
-
 const initialState = {
   userInfo: userInfo,
   token: token,
@@ -28,7 +26,7 @@ const authSlice = createSlice({
   },
 });
 
-
+ 
  
 
 export const getUser = async () =>{

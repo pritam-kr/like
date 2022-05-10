@@ -5,3 +5,4 @@ export { NotFound } from "./404/NotFound";
 export { Feeds } from "./Feeds/Feeds";
 export { Profile } from "./Profile/Profile";
 export {MockAPI} from "./Mockman/Mockman"
+export {UserProfile} from "./UserProfile/UserProfile"

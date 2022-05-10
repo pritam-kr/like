@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation} from "react-router-dom";
 import {
   Login,
   Signup,
@@ -7,11 +7,13 @@ import {
   NotFound,
   Feeds,
   Profile,
-  MockAPI,
+  MockAPI,UserProfile
 } from "./Pages/Index";
 import { Footer, FeedFooter, ScrollTop } from "./Components/Index";
 import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { PrivateRoute } from "./Router/PrivateRoute/PrivateRoute";
+ 
 
 function App() {
   const { pathname } = useLocation();
@@ -19,10 +21,7 @@ function App() {
   const state = useSelector((state) => state);
   const { auth } = state;
   const token = auth.token;
-
-  const PrivateRoute = ({ children }) => {
-    return token ? children : <Navigate to="/" replace />;
-  };
+  
 
   return (
     <div className="App">
@@ -36,6 +35,7 @@ function App() {
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="*" element={<NotFound />} />
           <Route path="/mock" element={<MockAPI />} />
+          <Route path="profile/:username" element={<PrivateRoute><UserProfile /></PrivateRoute>}  />
         </Routes>
       </ScrollTop>
       {pathname === "/feeds" || pathname === "/profile" ? (
