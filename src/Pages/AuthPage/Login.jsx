@@ -27,8 +27,8 @@ const Login = () => {
     <Nav/>
       <div className="container login-container mx-auto ">
         <div className="auth-wrapper login-wrapper min-h-screen grid p-6 md:grid-cols-2  gap-2">
-          <div className="gif-wrapper flex justify-center items-baseline max-h-36 md:max-h-full md:justify-center md:items-center">
-            <img src="./likeGIf.gif" alt="gif" className="gif" />
+          <div className="gif-wrapper flex justify-center items-baseline max-h-36 md:max-h-full md:justify-center md:items-center ">
+            <img src="https://res.cloudinary.com/dhqxln7zi/image/upload/v1652208993/giph-unscreen_jcskdl.gif" alt="gif" className="gif" />
           </div>
 
           <div className="flex justify-center items-center">

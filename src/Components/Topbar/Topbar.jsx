@@ -33,10 +33,10 @@ const Topbar = () => {
                <Link to="/feeds"> <FaIcons.FaHome className="icons nav-icons" /> </Link>
               </li>
               <li className="inline-block md:mr-6">
-                <FaIcons.FaPlus className="icons nav-icons" onClick={() => setPostModal(true)} />
+                <FaIcons.FaPlusCircle className="icons nav-icons" onClick={() => setPostModal(true)} />
               </li>
               <li className="inline-block md:mr-6">
-                <FaIcons.FaBell className="icons nav-icons" />
+                <FaIcons.FaCompass className="icons nav-icons" />
               </li>
               <li className="inline-block md:mr-6">
                 <Link to="/profile"><FaIcons.FaUserCircle className="icons nav-icons" /></Link>

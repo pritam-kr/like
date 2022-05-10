@@ -3,8 +3,16 @@
 }
 
 .nav-icons {
-  color: var(--white-text);
+  /* color: var(--white-text); */
   cursor: pointer;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+  width: 2rem;
+  height: 2rem;
+padding: .3rem;
 }
 
 .logo {
