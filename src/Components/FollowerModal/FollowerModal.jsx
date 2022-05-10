@@ -12,7 +12,7 @@ const FollowerModal = () => {
   return (
     followerModal && (
       <div className="post-form-modal follower-modal fixed top-0 left-0 right-0 bottom-0 flex justify-center items-start w-full ">
-        <div className="post-form-wrapper follower-modal-wrapper mx-3">
+        <div className="post-form-wrapper follower-modal-wrapper mx-3 rounded-3xl">
           <div className="p-6 border-b-2 flex justify-between">
             <FaIcons.FaTimes className="icons" onClick={() => setFollowerModal(false)} />
             <p className="font-semibold text-2xl">Followers</p>
@@ -27,11 +27,11 @@ const FollowerModal = () => {
                     alt="admin"
                     className="post-avatar mr-3"
                   />
-                  <h1 className="post-user-name leading-none ">Pritam Kumar</h1>
+                  <h1 className="post-user-name leading-none text-[#292929]">Pritam Kumar</h1>
                 </div>
 
                 <div className="ml-2">
-                  <button className="btn btn-secondary">Remove</button>
+                  <button className="btn btn-secondary rounded-3xl">Remove</button>
                 </div>
               </div>
             </li>
@@ -43,11 +43,11 @@ const FollowerModal = () => {
                     alt="admin"
                     className="post-avatar mr-3"
                   />
-                  <h1 className="post-user-name leading-none ">Pritam Kumar</h1>
+                  <h1 className="post-user-name leading-none text-[#292929]">Pritam Kumar</h1>
                 </div>
 
                 <div className="ml-2">
-                  <button className="btn btn-secondary">Remove</button>
+                  <button className="btn btn-secondary rounded-3xl">Remove</button>
                 </div>
               </div>
             </li>
@@ -59,11 +59,11 @@ const FollowerModal = () => {
                     alt="admin"
                     className="post-avatar mr-3"
                   />
-                  <h1 className="post-user-name leading-none ">Pritam Kumar</h1>
+                  <h1 className="post-user-name leading-none text-[#292929]">Pritam Kumar</h1>
                 </div>
 
                 <div className="ml-2">
-                  <button className="btn btn-secondary">Remove</button>
+                  <button className="btn btn-secondary rounded-3xl">Remove</button>
                 </div>
               </div>
             </li>

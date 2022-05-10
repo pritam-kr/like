@@ -1,11 +1,10 @@
 import React from "react";
- 
 import "./Footer.css"
 import * as FaIcons from "react-icons/fa";
 
 const Footer = () => {
     return (
-        <footer className="footer ">
+        <footer className="footer bg-[#070f1f]">
             <p className="text-xl font-semibold">Code By Pritam</p>
             <ul>
                 <li className="lists ">

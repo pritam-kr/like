@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import "./Style.css";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
+import { Nav } from "../../Components/Index";
+
 
 const Signup = () => {
   const [showHide, setShowHide] = useState(false);
 
   return (
     <>
+    <Nav />
       <div className="container login-container mx-auto ">
         <div className="auth-wrapper login-wrapper min-h-screen grid p-6 md:grid-cols-2  gap-2">
           <div className="gif-wrapper flex justify-center items-baseline max-h-36 md:max-h-full md:justify-center md:items-center">
@@ -15,7 +18,7 @@ const Signup = () => {
           </div>
 
           <div className="flex justify-center items-center">
-            <form className="form w-full max-w-xl p-7 text-xl">
+            <form className="form w-full max-w-xl p-7 text-xl bg-[#070f1f] rounded-3xl text-[#f7f7f7]">
               <div className="mt-4 mb-10 text-center">
                 <h1 className="form-heading font-bold">Signup</h1>
               </div>
@@ -26,7 +29,7 @@ const Signup = () => {
                   <input
                     type="text"
                     placeholder="First Name"
-                    className="input mt-3 mb-3"
+                    className="input mt-3 mb-3 rounded-full text-[#292929]"
                   />
                 </div>
 
@@ -35,7 +38,7 @@ const Signup = () => {
                   <input
                     type="text"
                     placeholder="Last Name"
-                    className="input mt-3 mb-3"
+                    className="input mt-3 mb-3 rounded-full text-[#292929]"
                   />
                 </div>
               </div>
@@ -48,7 +51,7 @@ const Signup = () => {
                   <input
                     type="password"
                     placeholder="******"
-                    className="input mt-3 mb-3"
+                    className="input mt-3 mb-3 rounded-full text-[#292929]"
                     required
                   />
                 </div>
@@ -62,7 +65,7 @@ const Signup = () => {
                     <input
                       type={!showHide ? "password" : "text"}
                       placeholder="******"
-                      className="input mt-3 mb-3"
+                      className="input mt-3 mb-3 rounded-full text-[#292929]"
                       required
                     />
                     {showHide ? (
@@ -87,7 +90,7 @@ const Signup = () => {
                 <input
                   type="email"
                   placeholder="example@gmail.com"
-                  className="input mt-3 mb-3"
+                  className="input mt-3 mb-3 rounded-full text-[#292929]"
                   required
                 />
               </div>
@@ -98,7 +101,7 @@ const Signup = () => {
               </label>
 
               <div>
-                <button className="btn btn-primary w-full p-4 font-semibold">
+                <button className="btn btn-primary w-full p-4 font-semibold rounded-full">
                   Signup
                 </button>
               </div>

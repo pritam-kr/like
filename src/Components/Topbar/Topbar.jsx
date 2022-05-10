@@ -9,19 +9,19 @@ const Topbar = () => {
   const {setPostModal} = useModalContext()
 
   return (
-    <nav className="nav w-full">
+    <nav className="nav w-full bg-[#070f1f]" >
       <div className=" topbar px-8 py-4 relative  flex justify-between items-center max-w-screen-xl mx-auto ">
         <div className="topbar-left">
           <div className="logo flex ">
-           <Link to="/feeds" className="flex items-center"><FaIcons.FaThumbsUp className="icons text-logo-icon mr-2" />
-            <span className="text-logo-icon font-bold">Like</span> </Link> 
+           <Link to="/feeds" className="flex items-center"><FaIcons.FaThumbsUp className="icons text-[#f7f7f7] text-logo-icon mr-2" />
+            <span className="text-logo-icon font-bold text-[#f7f7f7]">Like</span> </Link> 
           </div>
         </div>
         <div className="topbar-middle basis-72 md:basis-1/4">
           <div className="searchbar">
             <input 
               type="search"
-              className="input"
+              className="input rounded-full bg-[#1a202c] text-xl "
               placeholder="Search"
             />
           </div>

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getDeletePost,
   fetchPostData,
-  getNewPost,
+  getNewPost, getLikePost, getDislikePost
 } from "../Store/Slice/PostSlice";
 
 export const usePost = () => {
@@ -35,8 +35,10 @@ export const usePost = () => {
 
       if (status === 201) {
         // Doing filter data on the basis of user
-        const filteredData = posts.filter((eachPost) => eachPost.username === `${userInfo.username}`)
-         
+        const filteredData = posts.filter(
+          (eachPost) => eachPost.username === `${userInfo.username}`
+        );
+
         dispatch(getNewPost(filteredData));
       }
     } catch (error) {
@@ -67,5 +69,26 @@ export const usePost = () => {
     }
   };
 
-  return { addNewPost, deletedPost };
+  //Like Post
+  const likePost = async (postId) => {
+    
+    try {
+      const {data: {posts}, status} = await axios.post(`/api/posts/like/${postId}`,{}, {
+        headers: {
+          authorization: token,
+        },
+      });
+      if(status === 201){
+        // Doing filter data on the basis of user
+        const filteredData = posts.filter(
+          (eachPost) => eachPost.username === `${userInfo.username}`
+        );
+        dispatch(getLikePost(filteredData))
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+  return { addNewPost, deletedPost, likePost };
 };

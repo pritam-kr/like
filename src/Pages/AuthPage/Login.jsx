@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./Style.css";
 import { Link } from "react-router-dom";
 import { useLogin } from "../../Services/useLogin";
+import { Nav } from "../../Components/Index";
+
 
 
 const Login = () => {
@@ -22,6 +24,7 @@ const Login = () => {
 
   return (
     <>
+    <Nav/>
       <div className="container login-container mx-auto ">
         <div className="auth-wrapper login-wrapper min-h-screen grid p-6 md:grid-cols-2  gap-2">
           <div className="gif-wrapper flex justify-center items-baseline max-h-36 md:max-h-full md:justify-center md:items-center">
@@ -29,7 +32,7 @@ const Login = () => {
           </div>
 
           <div className="flex justify-center items-center">
-            <div className="form w-full max-w-xl p-7 text-xl">
+            <div className="form w-full max-w-xl p-7 text-xl bg-[#070f1f] rounded-3xl text-[#f7f7f7]">
               <div className="mt-4 mb-4 text-center">
                 <h1 className="form-heading font-bold">Login</h1>
               </div>
@@ -40,7 +43,7 @@ const Login = () => {
                 placeholder="Enter username"
                 required
                 value={formData.username}
-                className="input mt-3 mb-3"
+                className="input mt-3 mb-3 rounded-full text-[#292929]"
                 onChange={(event) =>
                   setFormData((prev) => ({
                     ...prev,
@@ -57,7 +60,7 @@ const Login = () => {
               <input
                 type="password"
                 placeholder="******"
-                className="input mt-3 mb-3"
+                className="input mt-3 mb-3 rounded-full text-[#292929]"
                 value={formData.password}
                 required
                 onChange={(event) =>
@@ -77,7 +80,7 @@ const Login = () => {
                 <Link to="/feeds">
                   {" "}
                   <button
-                    className="btn btn-primary w-full p-4 font-semibold"
+                    className="btn btn-primary w-full p-4 font-semibold rounded-full"
                     onClick={(event) => loginSubmitHandler(event)}
                   >
                     login

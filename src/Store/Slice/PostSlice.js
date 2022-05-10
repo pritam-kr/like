@@ -31,10 +31,17 @@ const postSlice = createSlice({
     getDeletePost: (state, action) => {
       state.posts = action.payload;
     },
+
+    getLikePost: (state, action) => {
+        console.log(action.payload)
+    }, 
+    getDislikePost: (state, action) => {
+
+    }
   },
 });
 
-export const { getNewPost, getDeletePost, getAllPost, setStatus } =
+export const { getNewPost, getDeletePost, getAllPost, setStatus, getDislikePost, getLikePost } =
   postSlice.actions;
 export default postSlice.reducer;
 

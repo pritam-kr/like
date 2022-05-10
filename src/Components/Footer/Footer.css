@@ -4,7 +4,8 @@ footer{
     justify-content: space-between;
     align-items: center;
     padding: 1.8em;
-    background-color: var(--footer-bg);
+    background-color: #070f1f;
+    color: #fff;
     
 }
 footer .paragraph{

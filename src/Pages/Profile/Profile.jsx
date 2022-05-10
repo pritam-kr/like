@@ -25,7 +25,7 @@ const Profile = () => {
   //Post related Data
   const { posts, status } = post;
 
-  const { deletedPost } = usePost();
+  const { deletedPost, likePost} = usePost();
 
   //User info
   const userInfo = auth.userInfo;
@@ -36,6 +36,7 @@ const Profile = () => {
       <div className="parent-container profile-container ">
         <div className="content-wrapper profile-wrapper w-full max-w-screen-lg mx-auto">
           <div className="user-info-wrapper flex-col flex justify-center  items-center my-1rem">
+
             <div className="user-avatar-wrapper mb-2">
               <img
                 // src="https://avatars.githubusercontent.com/u/84632214?v=4"
@@ -48,6 +49,7 @@ const Profile = () => {
                 }
               />
             </div>
+            
             <div className="profile-info">
               <div className="text-center">
                 <h1 className="user-full-name text-medium-heading font-semibold flex justify-center items-center">
@@ -59,23 +61,23 @@ const Profile = () => {
                 <p className="text-sub-heading user-name">
                   @{userInfo.username}
                 </p>
-                <p className="text-sub-heading">
+                <p className="text-sub-heading text-[#f7f7f7]">
                   I'm front end developer based on Ranchi (Jharkhand).
                 </p>
               </div>
               <div className="chips-container text-center mt-2 text-sub-heading">
-                <button className="btn mx-1">
+                <button className="btn mx-1 rounded-3xl">
                   Posts{" "}
                   {posts?.length < 10 ? "0" + posts?.length : posts?.length}
                 </button>
                 <button
-                  className="btn mx-1"
+                  className="btn mx-1 rounded-3xl"
                   onClick={() => setFollowerModal(true)}
                 >
                   Followers 1k
                 </button>
                 <button
-                  className="btn mx-1"
+                  className="btn mx-1 rounded-3xl"
                   onClick={() => setFollowingModal(true)}
                 >
                   Following 409
@@ -93,7 +95,7 @@ const Profile = () => {
                 <PostCard
                   eachPost={eachPost}
                   key={i}
-                  deletedPost={deletedPost}
+                  deletedPost={deletedPost} likePost={likePost}
                 />
               ))}
             </div>
