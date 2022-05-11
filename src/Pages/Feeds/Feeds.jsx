@@ -27,7 +27,7 @@ const Feeds = () => {
             <FeedPostCard />
           </div>
           <div className="users-suggestion hidden p-2 h-min md:block">
-            <div className="admin-short-info p-2   border-b-0 rounded-3xl mb-2 bg-[#070f1f]">
+            <div className="admin-short-info p-2   border-b-0 rounded-3xl mb-2 bg-light-bg">
               <div className="flex items-center">
                 <img
                   src={userProfile?.avatar === "" ? "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png" : userProfile?.avatar}
@@ -41,12 +41,12 @@ const Feeds = () => {
               </div>
             </div>
 
-            <div className="suggestion-people-wrapper p-4 bg-[#070f1f]  rounded-3xl">
+            <div className="suggestion-people-wrapper p-4 bg-light-bg  rounded-3xl">
               <h1 className=" font-bold">Suggestions for You</h1>
 
               <ul className="suggestions-people-list">
                 <li className="my-2  py-2" >
-                  <div className="admin-short-info border-b-0 bg-[#070f1f]">
+                  <div className="admin-short-info border-b-0 bg-light-bg">
                     <div className="flex items-center">
                       <img
                         src="https://avatars.githubusercontent.com/u/84632214?v=4"
@@ -64,26 +64,7 @@ const Feeds = () => {
                 </li>
 
                 <li className="my-2  py-2" >
-                  <div className="admin-short-info border-b-0 bg-[#070f1f]">
-                    <div className="flex items-center">
-                      <img
-                        src="https://avatars.githubusercontent.com/u/84632214?v=4"
-                        alt="admin"
-                        className="post-avatar"
-                      />
-                      <div className="ml-2">
-                        <h1 className="post-user-name leading-none ">
-                          Pritam Kumar
-                        </h1>
-                        <p className="text-[#909090]">@pritamkr</p>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-
-
-                <li className="my-2  py-2" >
-                  <div className="admin-short-info border-b-0 bg-[#070f1f]">
+                  <div className="admin-short-info border-b-0 bg-light-bg">
                     <div className="flex items-center">
                       <img
                         src="https://avatars.githubusercontent.com/u/84632214?v=4"
@@ -102,7 +83,7 @@ const Feeds = () => {
 
 
                 <li className="my-2  py-2" >
-                  <div className="admin-short-info border-b-0 bg-[#070f1f]">
+                  <div className="admin-short-info border-b-0 bg-light-bg">
                     <div className="flex items-center">
                       <img
                         src="https://avatars.githubusercontent.com/u/84632214?v=4"
@@ -121,7 +102,26 @@ const Feeds = () => {
 
 
                 <li className="my-2  py-2" >
-                  <div className="admin-short-info border-b-0 bg-[#070f1f]">
+                  <div className="admin-short-info border-b-0 bg-light-bg">
+                    <div className="flex items-center">
+                      <img
+                        src="https://avatars.githubusercontent.com/u/84632214?v=4"
+                        alt="admin"
+                        className="post-avatar"
+                      />
+                      <div className="ml-2">
+                        <h1 className="post-user-name leading-none ">
+                          Pritam Kumar
+                        </h1>
+                        <p className="text-[#909090]">@pritamkr</p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+
+                <li className="my-2  py-2" >
+                  <div className="admin-short-info border-b-0 bg-light-bg">
                     <div className="flex items-center">
                       <img
                         src="https://avatars.githubusercontent.com/u/84632214?v=4"

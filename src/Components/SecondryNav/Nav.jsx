@@ -4,7 +4,7 @@ import * as FaIcons from "react-icons/fa";
 
 const Nav = () => {
   return (
-    <nav className="nav w-full bg-[#070f1f]">
+    <nav className="nav w-full bg-light-bg">
       <div className=" topbar px-8 py-4 relative  flex justify-between items-center max-w-screen-xl mx-auto ">
         <div className="topbar-left">
           <div className="logo flex ">

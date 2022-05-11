@@ -9,7 +9,7 @@ const FeedPostCard = () => {
   const token = auth.token;
 
   return (
-    <div className="feed-post-card mb-4 pd-0 rounded-3xl p-3 bg-[#070f1f] text-[#fff]">
+    <div className="feed-post-card mb-4 pd-0 rounded-3xl p-3 bg-light-bg text-[#fff]">
       <div className="flex items-center justify-between p-2">
         <div className="flex items-center ">
           <img

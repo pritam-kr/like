@@ -4,7 +4,7 @@ import * as FaIcons from "react-icons/fa";
 
 const Footer = () => {
     return (
-        <footer className="footer bg-[#070f1f]">
+        <footer className="footer bg-light-bg">
             <p className="text-xl font-semibold">Code By Pritam</p>
             <ul>
                 <li className="lists ">
