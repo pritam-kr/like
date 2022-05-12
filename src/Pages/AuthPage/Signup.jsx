@@ -18,7 +18,7 @@ const Signup = () => {
           </div>
 
           <div className="flex justify-center items-center">
-            <form className="form w-full max-w-xl p-7 text-xl bg-[#070f1f] rounded-3xl text-[#f7f7f7]">
+            <form className="form w-full max-w-xl p-7 text-xl bg-light-bg rounded-3xl text-[#f7f7f7]">
               <div className="mt-4 mb-10 text-center">
                 <h1 className="form-heading font-bold">Signup</h1>
               </div>

@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import "./Style.css";
 import { Link } from "react-router-dom";
-import { useLogin } from "../../Services/useLogin";
 import { Nav } from "../../Components/Index";
+import {useLogin} from "../../Hooks/useLogin"
 
 
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
 
+  
   const { loginFormHandler, error } = useLogin();
 
  
@@ -32,7 +33,7 @@ const Login = () => {
           </div>
 
           <div className="flex justify-center items-center">
-            <div className="form w-full max-w-xl p-7 text-xl bg-[#070f1f] rounded-3xl text-[#f7f7f7]">
+            <div className="form w-full max-w-xl p-7 text-xl bg-light-bg rounded-3xl text-[#f7f7f7]">
               <div className="mt-4 mb-4 text-center">
                 <h1 className="form-heading font-bold">Login</h1>
               </div>

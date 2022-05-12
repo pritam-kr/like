@@ -1,0 +1,7 @@
+.btn-follow-unfollow{
+ border: 1px solid var(--primary-color)
+}
+
+.btn-follow-unfollow:hover{
+    color: var(--primary-color);
+}

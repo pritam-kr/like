@@ -9,7 +9,8 @@
 }
 
 body{
-    background-color: #1a202c ;
+    /* background-color: #1a202c ; */
+    background-color: #070f1f;
 }
 
 :root {
@@ -43,11 +44,9 @@ html {
     }
 }
 
-/* body {
-    background-color: var(--body-bg);
-} */
+ 
 
-/*for components background bg-[#070f1f]  for text color text-[#292929]*/
+/*for components background bg-[#1a202c]  for text color text-[#292929]*/
 
 h1,
 h2,
@@ -132,3 +131,24 @@ a:hover {
 .btn-secondary:hover {
     color: var(--white-text);
 }
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 2px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
