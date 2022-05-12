@@ -4,22 +4,32 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getDeletePost,
   fetchPostData,
-  getNewPost, getLikePost, getDislikePost
+  getNewPost,
+  getLikePost,
+  getDislikePost,
+  getAllPost,
 } from "../Store/Slice/PostSlice";
+import { getAllUserData} from "../Store/Slice/UserSlice";
+ 
 
 export const usePost = () => {
   const state = useSelector((state) => state);
+
   const { auth } = state;
   const token = auth.token;
   const { userInfo } = auth;
 
   const dispatch = useDispatch();
 
-  //Fetching post Data from database
-
+  //Fetching post Data for a specific user from database
   useEffect(() => {
     dispatch(fetchPostData(userInfo.username));
   }, [token, dispatch, userInfo.username]);
+
+  useEffect(() => {
+    dispatch(getAllPost())
+    dispatch(getAllUserData());
+  }, []);
 
   //Add new post to database
   const addNewPost = async (post) => {
@@ -71,24 +81,33 @@ export const usePost = () => {
 
   //Like Post
   const likePost = async (postId) => {
-    
     try {
-      const {data: {posts}, status} = await axios.post(`/api/posts/like/${postId}`,{}, {
-        headers: {
-          authorization: token,
-        },
-      });
-      if(status === 201){
+      const {
+        data: { posts },
+        status,
+      } = await axios.post(
+        `/api/posts/like/${postId}`,
+        {},
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      if (status === 201) {
         // Doing filter data on the basis of user
         const filteredData = posts.filter(
           (eachPost) => eachPost.username === `${userInfo.username}`
         );
-        dispatch(getLikePost(filteredData))
+        dispatch(getLikePost(filteredData));
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
-  return { addNewPost, deletedPost, likePost };
+  //Edit Post
+  const editPost = async (postId) => {};
+
+  return { addNewPost, deletedPost, likePost, editPost };
 };
