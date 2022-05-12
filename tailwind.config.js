@@ -35,10 +35,12 @@ module.exports = {
         'sub-heading' : "1.5rem",
         'caption': "1.3rem",
         'caption-title': "1.4rem"
+        
       },
         colors: {
           'light-bg': '#1a202c',
-          'dark-bg': '#070f1f'
+          'dark-bg': '#070f1f',
+          'white-color': '#f7f7f7'
       },
     },
     

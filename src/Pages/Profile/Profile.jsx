@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Profile.css";
 import {
   Topbar,
@@ -11,8 +11,8 @@ import {
 import * as FaIcons from "react-icons/fa";
 import { useModalContext } from "../../Context/ModalContext";
 import { useSelector } from "react-redux";
-import { getUser } from "../../Store/Slice/AuthSlice";
 import { usePost } from "../../Hooks";
+import axios from "axios";
 
 const Profile = () => {
   const state = useSelector((state) => state);
@@ -24,19 +24,20 @@ const Profile = () => {
 
   //Post related Data
   const { posts, status } = post;
+  // Sort by Latest post by the user
+  const postSort = [...posts].sort((a, b) => b.id - a.id);
 
-  const { deletedPost, likePost} = usePost();
-
+  const { deletedPost, likePost } = usePost();
   //User info
   const userInfo = auth.userInfo;
 
+  
   return (
     <>
       <Topbar />
       <div className="parent-container profile-container ">
         <div className="content-wrapper profile-wrapper w-full max-w-screen-lg mx-auto">
           <div className="user-info-wrapper flex-col flex justify-center  items-center my-1rem">
-
             <div className="user-avatar-wrapper mb-2">
               <img
                 // src="https://avatars.githubusercontent.com/u/84632214?v=4"
@@ -49,7 +50,7 @@ const Profile = () => {
                 }
               />
             </div>
-            
+
             <div className="profile-info">
               <div className="text-center">
                 <h1 className="user-full-name text-medium-heading font-semibold flex justify-center items-center">
@@ -91,11 +92,12 @@ const Profile = () => {
             <Loading />
           ) : (
             <div className="post-wrapper my-6 p-3">
-              {posts?.map((eachPost, i) => (
+              {postSort?.map((eachPost, i) => (
                 <PostCard
                   eachPost={eachPost}
                   key={i}
-                  deletedPost={deletedPost} likePost={likePost}
+                  deletedPost={deletedPost}
+                  likePost={likePost}
                 />
               ))}
             </div>
