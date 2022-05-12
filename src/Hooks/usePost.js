@@ -1,61 +1,38 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getDeletePost,
-  fetchPostData,
-  getNewPost,
   getLikePost,
-  getDislikePost,
   getAllPost,
+  getUserPosts,
 } from "../Store/Slice/PostSlice";
 import { getAllUserData} from "../Store/Slice/UserSlice";
  
 
 export const usePost = () => {
+
+  const [postData, setPostData] = useState({ content: "", caption: "" });
+ 
+
+  // console.log(editPostData)
+
   const state = useSelector((state) => state);
-
-  const { auth } = state;
-  const token = auth.token;
-  const { userInfo } = auth;
-
+  const { auth: {token, userInfo: {username}} } = state;
   const dispatch = useDispatch();
+
 
   //Fetching post Data for a specific user from database
   useEffect(() => {
-    dispatch(fetchPostData(userInfo.username));
-  }, [token, dispatch, userInfo.username]);
+    dispatch(getUserPosts({username: username })) 
+  }, [token, dispatch, username]);
 
   useEffect(() => {
     dispatch(getAllPost())
     dispatch(getAllUserData());
   }, []);
 
-  //Add new post to database
-  const addNewPost = async (post) => {
-    try {
-      const {
-        data: { posts },
-        status,
-      } = await axios.post(
-        `/api/posts`,
-        { postData: post },
-        { headers: { authorization: token } }
-      );
-
-      if (status === 201) {
-        // Doing filter data on the basis of user
-        const filteredData = posts.filter(
-          (eachPost) => eachPost.username === `${userInfo.username}`
-        );
-
-        dispatch(getNewPost(filteredData));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  
   //Delete post from database
   const deletedPost = async (postId) => {
     try {
@@ -70,7 +47,7 @@ export const usePost = () => {
 
       if (status === 201) {
         const deletedPostForThisUser = posts.filter(
-          (eachPost) => eachPost.username === `${userInfo.username}`
+          (eachPost) => eachPost.username === `${username}`
         );
         dispatch(getDeletePost(deletedPostForThisUser));
       }
@@ -97,7 +74,7 @@ export const usePost = () => {
       if (status === 201) {
         // Doing filter data on the basis of user
         const filteredData = posts.filter(
-          (eachPost) => eachPost.username === `${userInfo.username}`
+          (eachPost) => eachPost.username === `${username}`
         );
         dispatch(getLikePost(filteredData));
       }
@@ -106,8 +83,7 @@ export const usePost = () => {
     }
   };
 
-  //Edit Post
-  const editPost = async (postId) => {};
+ 
 
-  return { addNewPost, deletedPost, likePost, editPost };
+  return { deletedPost, likePost,  setPostData, postData, };
 };

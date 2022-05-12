@@ -8,11 +8,13 @@ const ModalContextProvider = ({ children }) => {
   const [postModal, setPostModal] = useState(false);
   const [followerModal, setFollowerModal] = useState(false);
   const [followingModal, setFollowingModal] = useState(false);
+  const [editPostModal, setEditPostModal] = useState(false)
 
   useEffect(() => {
     setPostModal(false);
     setFollowerModal(false);
     setFollowingModal(false);
+    setEditPostModal(false)
   }, [location]);
 
   return (
@@ -24,6 +26,8 @@ const ModalContextProvider = ({ children }) => {
         followerModal,
         followingModal,
         setFollowingModal,
+        editPostModal, 
+        setEditPostModal
       }}
     >
       {children}

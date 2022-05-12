@@ -1,23 +1,32 @@
 import React, { useState } from "react";
 import * as FaIcons from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { useModalContext } from "../../Context/ModalContext";
 import { usePost } from "../../Hooks";
+import { createNewPost } from "../../Store/Slice/PostSlice";
 import "./PostModal.css";
 
 const PostModal = () => {
-  const { postModal, setPostModal } = useModalContext();
-  const [postData, setPostData] = useState({ content: "", caption: "" });
+  const {
+    auth: { token },
+  } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
-  const { addNewPost } = usePost();
+  const { postModal, setPostModal } = useModalContext();
+
+  const {postData, setPostData} = usePost()
+
 
   const postHandler = (event) => {
     event.preventDefault();
-
     if (postData.content && postData.caption) {
-      addNewPost(postData);
       setPostModal(false);
+      dispatch(createNewPost({ postData: postData, token: token }));
+      setPostData({ content: "", caption: "" });
     }
   };
+
+
 
   return (
     postModal && (
@@ -32,6 +41,7 @@ const PostModal = () => {
 
           <form className="post-form p-2">
             <input
+              value={postData.caption}
               className="input mt-2 text-xl"
               type="text"
               placeholder="Write Caption"
@@ -43,7 +53,8 @@ const PostModal = () => {
               }
             />
             <textarea
-              className="input mt-2 text-xl"
+              value={postData.content}
+              className="input mt-2 text-xl border-0"
               type="text"
               placeholder="What's Happening..."
               onChange={(event) =>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {  useState } from "react";
 import "./Profile.css";
 import {
   Topbar,
@@ -6,32 +6,32 @@ import {
   PostModal,
   FollowerModal,
   FollowingModal,
-  Loading,
+  Loading,EditPostModal
 } from "../../Components/Index";
 import * as FaIcons from "react-icons/fa";
 import { useModalContext } from "../../Context/ModalContext";
 import { useSelector } from "react-redux";
 import { usePost } from "../../Hooks";
-import axios from "axios";
+ 
+ 
 
 const Profile = () => {
   const state = useSelector((state) => state);
-
-  const { auth, post } = state;
-  const token = auth.token;
-
-  const { setFollowerModal, setFollowingModal } = useModalContext();
-
-  //Post related Data
-  const { posts, status } = post;
-  // Sort by Latest post by the user
-  const postSort = [...posts].sort((a, b) => b.id - a.id);
-
-  const { deletedPost, likePost } = usePost();
-  //User info
-  const userInfo = auth.userInfo;
-
+  const { auth:  {userInfo : {username , avatar, firstName, lastName, _id}, token }, post } = state
   
+  // console.log(state)
+  const { setFollowerModal, setFollowingModal, editPostModal, } = useModalContext();
+ 
+  //Post related Data
+  const { posts, loading } = post;
+  // Sort by Latest post by the user
+  const postSort = [...posts].sort((a, b) => b.id - a.id).filter((eachPost) => eachPost.username === username);
+  const { deletedPost, likePost } = usePost();
+
+  const [editPostData, setPostEditData] =  useState({ content: "", caption: "" })
+ 
+  
+
   return (
     <>
       <Topbar />
@@ -40,27 +40,22 @@ const Profile = () => {
           <div className="user-info-wrapper flex-col flex justify-center  items-center my-1rem">
             <div className="user-avatar-wrapper mb-2">
               <img
-                // src="https://avatars.githubusercontent.com/u/84632214?v=4"
                 alt="avatar"
                 className="w-40 rounded-full"
-                src={
-                  userInfo?.avatar === ""
-                    ? "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg"
-                    : userInfo?.avatar
-                }
+                src={ avatar || "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg"}
               />
             </div>
 
             <div className="profile-info">
               <div className="text-center">
                 <h1 className="user-full-name text-medium-heading font-semibold flex justify-center items-center">
-                  {userInfo.firstName} {userInfo.lastName}
+                  { firstName} { lastName}
                   <span className="ml-4 ">
                     <FaIcons.FaEdit className="icons profile-icons" />
                   </span>
                 </h1>
                 <p className="text-sub-heading user-name">
-                  @{userInfo.username}
+                  @{ username}
                 </p>
                 <p className="text-sub-heading text-[#f7f7f7]">
                   I'm front end developer based on Ranchi (Jharkhand).
@@ -88,7 +83,7 @@ const Profile = () => {
           </div>
 
           {/*--Post---Card*/}
-          {status ? (
+          {loading ? (
             <Loading />
           ) : (
             <div className="post-wrapper my-6 p-3">
@@ -98,6 +93,7 @@ const Profile = () => {
                   key={i}
                   deletedPost={deletedPost}
                   likePost={likePost}
+                  setPostEditData= {setPostEditData}
                 />
               ))}
             </div>
@@ -105,6 +101,7 @@ const Profile = () => {
 
           {/*post modal start*/}
           <PostModal />
+          {editPostModal && <EditPostModal editPostData={editPostData} setPostEditData={setPostEditData}  />}
           {/*post modal end*/}
 
           <FollowerModal />
