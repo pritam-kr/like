@@ -1,8 +1,13 @@
 import React from "react";
 import * as FaIcons from "react-icons/fa";
+import { useSelector } from "react-redux";
 import {useModalContext} from "../../Context/ModalContext"
 
 const FollowingModal = () => {
+
+  const {user : {users}, auth} = useSelector((state) => state)
+
+  // console.log(auth)
 
   const {followingModal, setFollowingModal} = useModalContext()
 
