@@ -15,6 +15,8 @@ import { useSelector } from "react-redux";
 import { PrivateRoute } from "./Router/PrivateRoute/PrivateRoute";
  
 
+ 
+
 function App() {
   const { pathname } = useLocation();
 
@@ -23,10 +25,12 @@ function App() {
   const token = auth.token;
   
 
+   
+
   return (
     <div className="App">
       <Toaster />
-      <ScrollTop>
+       
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -37,7 +41,7 @@ function App() {
           <Route path="/mock" element={<MockAPI />} />
           <Route path="profile/:username" element={<PrivateRoute><UserProfile /></PrivateRoute>}  />
         </Routes>
-      </ScrollTop>
+     
       {pathname === "/feeds" || pathname === "/profile" ? (
         <FeedFooter />
       ) : (
