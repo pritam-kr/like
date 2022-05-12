@@ -9,3 +9,4 @@ export { FollowerModal } from "./FollowerModal/FollowerModal";
 export {FollowingModal} from "./FollowerModal/FollowingModal"
 export {Loading} from "./Loading/Loading"
 export {Nav} from "./SecondryNav/Nav"
+export {Users} from "./Users/Users"
