@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // getting token and userInfo from local Storage
-const token = localStorage.getItem("login-token") || ""
-const userInfo = JSON.parse(localStorage.getItem("user")) || null
+const token = localStorage.getItem("login-token") || "";
+const userInfo = JSON.parse(localStorage.getItem("user")) || null;
 
 const initialState = {
   userInfo: userInfo,
@@ -17,37 +17,25 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     authInfo: (state, action) => {
-      state.userInfo = action.payload
+      state.userInfo = action.payload;
     },
 
     getToken: (state, action) => {
-        state.token = action.payload
-    }
+      state.token = action.payload;
+    },
   },
 });
 
- 
- 
+export const getUser = async () => {
+  try {
+    const res = await axios.get("/api/users");
 
-export const getUser = async () =>{
-
-  try{
-
-    const res = await axios.get("/api/users")
-
-    console.log(res)
-
-  }catch(error){
-      console.log(error.response)
+    console.log(res);
+  } catch (error) {
+    console.log(error.response);
   }
-
-}
-
-
-
+};
 
 export const { authInfo, getToken } = authSlice.actions;
 
 export default authSlice.reducer;
-
-

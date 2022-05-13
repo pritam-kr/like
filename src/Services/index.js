@@ -1,3 +1,3 @@
 export {followUserService, unFollowUserService} from "./UserServices"
-export {getPosts} from "./PostServices"
+export {getPosts, createPostService, getUserPostService, editPostService} from "./PostServices"
  
