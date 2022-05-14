@@ -12,6 +12,7 @@ import * as FaIcons from "react-icons/fa";
 import { useModalContext } from "../../Context/ModalContext";
 import { useSelector } from "react-redux";
 import { usePost } from "../../Hooks";
+import {likePost} from "../../Store/Slice/PostSlice"
  
  
 
@@ -19,14 +20,16 @@ const Profile = () => {
   const state = useSelector((state) => state);
   const { auth:  {userInfo : {username , avatar, firstName, lastName, _id}, token }, post } = state
   
-  // console.log(state)
+   
   const { setFollowerModal, setFollowingModal, editPostModal, } = useModalContext();
  
   //Post related Data
-  const { posts, loading } = post;
+  const { posts, loading, allPost } = post;
+
+  // console.log(allPost)
   // Sort by Latest post by the user
-  const postSort = [...posts].sort((a, b) => b.id - a.id).filter((eachPost) => eachPost.username === username);
-  const { deletedPost, likePost } = usePost();
+  const postSort = [...allPost].sort((a, b) => b.id - a.id).filter((eachPost) => eachPost.username === username);
+  const { deletedPost, } = usePost();
 
   const [editPostData, setPostEditData] =  useState({ content: "", caption: "" })
  
@@ -92,8 +95,7 @@ const Profile = () => {
                   eachPost={eachPost}
                   key={i}
                   deletedPost={deletedPost}
-                  likePost={likePost}
-                  setPostEditData= {setPostEditData}
+                  setPostEditData= {setPostEditData} 
                 />
               ))}
             </div>
