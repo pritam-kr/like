@@ -2,13 +2,13 @@ import React from "react";
 import * as FaIcons from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useModalContext } from "../../Context/ModalContext";
-import { likePost , dislikePost} from "../../Store/Slice/PostSlice";
+import { likePost , dislikePost, deletePost} from "../../Store/Slice/PostSlice";
 import { contentShort, } from "../../Utils/Index";
 import {likeByUser} from "../../Utils/Index"
 import {Avatar} from "../Index"
 
 
-const PostCard = ({ eachPost, deletedPost, setPostEditData }) => {
+const PostCard = ({ eachPost, setPostEditData }) => {
 
   //Like Post Handler
   const likePostHandler = (_id, token) =>{
@@ -29,8 +29,8 @@ const PostCard = ({ eachPost, deletedPost, setPostEditData }) => {
   const { auth: { userInfo, token },} = state;
 
   // Delete Post handler
-  const postDeleteHandler = (_id) => {
-    deletedPost(_id);
+  const postDeleteHandler = (_id, token) => {
+     dispatch(deletePost({postId: _id, token: token}))
   };
 
   //Post Edit Handler
@@ -54,7 +54,7 @@ const PostCard = ({ eachPost, deletedPost, setPostEditData }) => {
           <span className="mr-2">
             <FaIcons.FaTrash
               className="icons profile-icons"
-              onClick={() => postDeleteHandler(_id)}
+              onClick={() => postDeleteHandler(_id, token)}
             />
           </span>
           <span>

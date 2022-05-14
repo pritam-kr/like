@@ -23,7 +23,6 @@ export const usePost = () => {
   //Fetching post Data for a specific user from database
   useEffect(() => {
     dispatch(getUserPosts({username: username })) 
-
   }, [token,  username]);
 
   useEffect(() => {
@@ -55,34 +54,6 @@ export const usePost = () => {
     }
   };
 
-  //Like Post
-  // const likePost = async (postId) => {
-  //   try {
-  //     const {
-  //       data: { posts },
-  //       status,
-  //     } = await axios.post(
-  //       `/api/posts/like/${postId}`,
-  //       {},
-  //       {
-  //         headers: {
-  //           authorization: token,
-  //         },
-  //       }
-  //     );
-  //     if (status === 201) {
-  //       // Doing filter data on the basis of user
-  //       const filteredData = posts.filter(
-  //         (eachPost) => eachPost.username === `${username}`
-  //       );
-  //       dispatch(getLikePost(filteredData));
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
- 
 
   return { deletedPost,  setPostData, postData, };
 };

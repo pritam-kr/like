@@ -4,7 +4,9 @@ import {
   getPosts,
   createPostService,
   getUserPostService,
-  editPostService,likePostService, dislikePostService
+  editPostService,
+  likePostService,
+  dislikePostService,
 } from "../../Services/index";
 
 export const getAllPost = createAsyncThunk(
@@ -95,7 +97,7 @@ export const likePost = createAsyncThunk(
       const {
         data: { posts },
         status,
-      } = await likePostService(postId, token)
+      } = await likePostService(postId, token);
       if (status === 201) {
         return posts;
       }
@@ -113,15 +115,41 @@ export const dislikePost = createAsyncThunk(
       const {
         data: { posts },
         status,
-      } = await dislikePostService(postId, token)
+      } = await dislikePostService(postId, token);
       if (status === 201) {
-         return posts
+        return posts;
       }
     } catch (error) {
       return rejectWithValue("Error occured! Try Again Later");
     }
   }
 );
+
+//Delete a post of user
+
+export const deletePost = createAsyncThunk('posts/deletePost', async ({postId, token}, {re}) => {
+  try {
+    const {
+      data: { posts },
+      status,
+    } = await axios.delete(`/api/posts/${postId}`, {
+      headers: {
+        authorization: token,
+      },
+    });
+
+    if (status === 201) {
+      // const deletedPostForThisUser = posts.filter(
+      //   (eachPost) => eachPost.username === `${username}`
+      // );
+     
+       return posts
+    }
+  } catch (error) {
+      return 
+  }
+})
+
 
 const initialState = {
   allPost: [],
@@ -134,7 +162,6 @@ const postSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-  
     getDeletePost: (state, action) => {
       state.posts = action.payload;
     },
@@ -200,40 +227,55 @@ const postSlice = createSlice({
     },
 
     //Like Post
-  [likePost.pending]: (state) => {
-    state.loading = false;
+
+    [likePost.pending]: (state) => {
+      state.loading = false;
+    },
+
+    [likePost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.allPost = action.payload;
+    },
+
+    [likePost.rejected]: (state) => {
+      state.loading = false;
+      state.error = "Error occured! Try again later";
+    },
+
+    //Dislike Post
+
+    //Like Post
+    [dislikePost.pending]: (state) => {
+      state.loading = false;
+    },
+
+    [dislikePost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.allPost = action.payload;
+    },
+
+    [dislikePost.rejected]: (state) => {
+      state.loading = false;
+      state.error = "Error occured! Try again later";
+    },
+
+    //Delete Post 
+    [deletePost.pending]: (state) => {
+      state.loading = true;
+    },
+
+    [deletePost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.allPost = action.payload;
+    },
+
+    [deletePost.rejected]: (state) => {
+      state.loading = false;
+      state.error = "Error occured! Try again later";
+    },
+
+
   },
-
-  [likePost.fulfilled]: (state, action) => {
-    state.loading = false;
-    state.allPost = action.payload;
-  },
-
-  [likePost.rejected]: (state) => {
-    state.loading = false;
-    state.error = "Error occured! Try again later";
-  },
-
-  //Dislike Post 
-
- //Like Post
- [dislikePost.pending]: (state) => {
-  state.loading = false;
-},
-
-[dislikePost.fulfilled]: (state, action) => {
-  state.loading = false;
-  state.allPost = action.payload;
-},
-
-[dislikePost.rejected]: (state) => {
-  state.loading = false;
-  state.error = "Error occured! Try again later";
-},
-
-  },
-
-  
 });
 
 export const {
