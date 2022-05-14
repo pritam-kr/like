@@ -7,7 +7,7 @@ import {
   NotFound,
   Feeds,
   Profile,
-  MockAPI,UserProfile
+  MockAPI,UserProfile, Bookmark
 } from "./Pages/Index";
 import { Footer, FeedFooter, ScrollTop } from "./Components/Index";
 import { Toaster } from "react-hot-toast";
@@ -15,18 +15,12 @@ import { useSelector } from "react-redux";
 import { PrivateRoute } from "./Router/PrivateRoute/PrivateRoute";
  
 
- 
-
 function App() {
   const { pathname } = useLocation();
-
   const state = useSelector((state) => state);
-  const { auth } = state;
-  const token = auth.token;
-  
-
+  const { auth:{token} } = state;
    
-
+  
   return (
     <div className="App">
       <Toaster />
@@ -39,6 +33,7 @@ function App() {
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="*" element={<NotFound />} />
           <Route path="/mock" element={<MockAPI />} />
+          <Route path="/bookmark" element={<PrivateRoute><Bookmark /></PrivateRoute>} />
           <Route path="profile/:username" element={<PrivateRoute><UserProfile /></PrivateRoute>}  />
         </Routes>
      

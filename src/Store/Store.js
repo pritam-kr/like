@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import postReducer from "./Slice/PostSlice";
 import  authReducer from "./Slice/AuthSlice" 
+import bookmarkReducer from "./Slice/BookmarkSlice"
 import { userReducer } from "./Slice/UserSlice";
  
 
@@ -10,7 +11,8 @@ import { userReducer } from "./Slice/UserSlice";
       reducer: {
             auth: authReducer,
              post: postReducer,
-             user: userReducer
+             user: userReducer,
+             bookmark: bookmarkReducer
       }
   })
 

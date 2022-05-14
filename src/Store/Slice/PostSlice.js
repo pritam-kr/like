@@ -7,6 +7,7 @@ import {
   editPostService,
   likePostService,
   dislikePostService,
+  deletePostService,
 } from "../../Services/index";
 
 export const getAllPost = createAsyncThunk(
@@ -126,30 +127,25 @@ export const dislikePost = createAsyncThunk(
 );
 
 //Delete a post of user
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async ({ postId, token }, { rejectWithValue }) => {
+    try {
+      const {
+        data: { posts },
+        status,
+      } = await deletePostService(postId, token);
 
-export const deletePost = createAsyncThunk('posts/deletePost', async ({postId, token}, {re}) => {
-  try {
-    const {
-      data: { posts },
-      status,
-    } = await axios.delete(`/api/posts/${postId}`, {
-      headers: {
-        authorization: token,
-      },
-    });
-
-    if (status === 201) {
-      // const deletedPostForThisUser = posts.filter(
-      //   (eachPost) => eachPost.username === `${username}`
-      // );
-     
-       return posts
+      if (status === 201) {
+        return posts;
+      }
+    } catch (error) {
+      return rejectWithValue("Error occured! Try Again Later");
     }
-  } catch (error) {
-      return 
   }
-})
+);
 
+ 
 
 const initialState = {
   allPost: [],
@@ -161,15 +157,10 @@ const initialState = {
 const postSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {
-    getDeletePost: (state, action) => {
-      state.posts = action.payload;
-    },
-  },
+  reducers: {},
 
   extraReducers: {
     //Getting post of a specific user
-
     [getUserPosts.pending]: (state) => {
       state.loading = true;
     },
@@ -188,6 +179,7 @@ const postSlice = createSlice({
     [getAllPost.pending]: (state) => {
       state.loading = true;
     },
+
     [getAllPost.fulfilled]: (state, action) => {
       const { posts } = action.payload;
       state.loading = false;
@@ -227,9 +219,8 @@ const postSlice = createSlice({
     },
 
     //Like Post
-
     [likePost.pending]: (state) => {
-      state.loading = false;
+      state.loading = true;
     },
 
     [likePost.fulfilled]: (state, action) => {
@@ -243,10 +234,8 @@ const postSlice = createSlice({
     },
 
     //Dislike Post
-
-    //Like Post
     [dislikePost.pending]: (state) => {
-      state.loading = false;
+      state.loading = true;
     },
 
     [dislikePost.fulfilled]: (state, action) => {
@@ -259,7 +248,7 @@ const postSlice = createSlice({
       state.error = "Error occured! Try again later";
     },
 
-    //Delete Post 
+    //Delete Post
     [deletePost.pending]: (state) => {
       state.loading = true;
     },
@@ -274,7 +263,6 @@ const postSlice = createSlice({
       state.error = "Error occured! Try again later";
     },
 
-
   },
 });
 
@@ -282,7 +270,6 @@ export const {
   getNewPost,
   getDeletePost,
   userPosts,
-  setStatus,
   getDislikePost,
 } = postSlice.actions;
 

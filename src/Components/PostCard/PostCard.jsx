@@ -21,7 +21,7 @@ const PostCard = ({ eachPost, setPostEditData }) => {
  }
 
  const dispatch =  useDispatch()
-  const {username,caption,content,likes :{likeCount},_id,avatar,createdAt,updatedAt,} = eachPost || {};
+  const {username,caption,content,likes :{likeCount},_id, avatar,createdAt,updatedAt,} = eachPost || {};
   const {  setEditPostModal } = useModalContext();
 
 

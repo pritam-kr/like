@@ -1,7 +1,5 @@
 import React from "react";
-
 import * as FaIcons from "react-icons/fa";
-
 import * as AiIcons from "react-icons/ai";
 
 import { Link } from "react-router-dom";
@@ -17,7 +15,7 @@ const Topbar = () => {
         <div className="topbar-left">
           <div className="logo flex ">
             <Link to="/feeds" className="flex items-center">
-              <FaIcons.FaThumbsUp className="icons text-logo-icon mr-2 text-[#f7f7f7] " />
+              <AiIcons.AiFillLike className="icons text-logo-icon mr-2 text-[#f7f7f7] " />
               <span className="font-bold text-[#f7f7f7] text-3xl">Like</span>{" "}
             </Link>
           </div>
@@ -50,7 +48,9 @@ const Topbar = () => {
                 <FaIcons.FaCompass className="icons nav-icons" />
               </li>
               <li className="inline-block md:mr-6">
+              <Link to="/bookmark"> 
                 <FaIcons.FaBookmark className="icons nav-icons" />
+                </Link>
               </li>
             </ul>
             <ul>

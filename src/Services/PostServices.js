@@ -50,3 +50,15 @@ export const dislikePostService = (postId, token) => {
     }
   );
 };
+
+
+
+export const deletePostService = (postId, token) => {
+
+  return axios.delete(`/api/posts/${postId}`, {
+    headers: {
+      authorization: token,
+    },
+  });
+
+}

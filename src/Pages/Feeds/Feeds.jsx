@@ -28,22 +28,20 @@ const Feeds = () => {
     (eachUser) => eachUser.username !== userProfile.username
   );
 
- 
-  //Filter post with 
-  const recentPost = [...allPost].reverse();
-   //Trending post which post has more like
+  //Filter post with
+  const recentPost = [...allPost].sort((a, b) => b.id - a.id);
+  //Trending post which post has more like
   const trendingPost = [...allPost].sort(
     (a, b) => b.likes.likeCount - a.likes.likeCount
   );
 
   const sortByDate = [...allPost].sort(
-    (a, b) => new Date(a.createdAt).getDate() - new Date(b.createdAt).getDate()
+    (a, b) => new Date(b.createdAt).getDate() - new Date(a.createdAt).getDate()
   );
+
   const [filterPost, setFilterPost] = useState(recentPost);
- 
 
   const currentUser = users.find((each) => each.username === userInfo.username);
- 
 
   return (
     <>
@@ -51,35 +49,39 @@ const Feeds = () => {
       <div className="parent-container feed-container ">
         <div className="feed-wrapper  max-w-screen-lg mx-auto grid gap-2 grid-cols-1 md:grid-cols-feed-col px-2 my-2 ">
           <div className="feed-post p-2">
-            <div className=" flex justify-end items-center text-white-color p-2">
-              <button
-                className="mr-2 flex items-center icons text-sm"
-                onClick={() => setFilterPost(trendingPost)}
-              >
-                Trending
-              </button>
-              <button className="mr-2 flex items-center icons text-sm" onClick={() => setFilterPost(sortByDate)}>
-                Sort By Date
-              </button>
-              <button
-                className="mr-2 flex items-center icons text-sm"
-                onClick={() => setFilterPost(recentPost)}
-              >
-                Recent
-              </button>
+            <div className=" flex justify-between items-center text-white-color p-2">
+            <h1 className="text-xl">Feeds</h1>
+              <div className="flex">
+                <button
+                  className="mr-2 flex items-center icons text-sm"
+                  onClick={() => setFilterPost(trendingPost)}
+                >
+                  Trending
+                </button>
+                <button
+                  className="mr-2 flex items-center icons text-sm"
+                  onClick={() => setFilterPost(sortByDate)}
+                >
+                  Sort By Date
+                </button>
+                <button
+                  className="mr-2 flex items-center icons text-sm"
+                  onClick={() => setFilterPost(recentPost)}
+                >
+                  Recent
+                </button>
+              </div>
             </div>
 
             {loading ? (
               <Loading />
             ) : (
-              <div>
-                {(filterPost.length === 0 ? recentPost : filterPost)?.map(
-                  (eachPost) => {
-                    return (
-                      <FeedPostCard eachPost={eachPost} key={eachPost._id} />
-                    );
-                  }
-                )}
+              <div className=" h-auto md:h-128 md:overflow-y-scroll">
+                {[...allPost].reverse().map((eachPost) => {
+                  return (
+                    <FeedPostCard eachPost={eachPost} key={eachPost._id} />
+                  );
+                })}
               </div>
             )}
           </div>

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import axios from "axios";
-import toast from "react-hot-toast";
+ 
 import { followUserService, unFollowUserService } from "../../Services/";
 
 export const getAllUserData = createAsyncThunk(

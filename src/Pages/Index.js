@@ -6,3 +6,4 @@ export { Feeds } from "./Feeds/Feeds";
 export { Profile } from "./Profile/Profile";
 export {MockAPI} from "./Mockman/Mockman"
 export {UserProfile} from "./UserProfile/UserProfile"
+export {Bookmark} from "./Bookmark/Bookmark"
