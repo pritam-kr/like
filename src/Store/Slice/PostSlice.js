@@ -145,7 +145,12 @@ export const deletePost = createAsyncThunk(
   }
 );
 
- 
+//Trending post 
+export const getFilteredPost = createAsyncThunk('posts/trendingPost', async({trendingPost}) => {
+
+const data = await trendingPost
+return data
+})
 
 const initialState = {
   allPost: [],
@@ -200,6 +205,7 @@ const postSlice = createSlice({
       state.loading = false;
       state.allPost = action.payload;
     },
+
     [createNewPost.rejected]: (state) => {
       state.loading = false;
       state.error = "Error occured! Try again later";
@@ -262,6 +268,13 @@ const postSlice = createSlice({
       state.loading = false;
       state.error = "Error occured! Try again later";
     },
+
+    //Filtered Post 
+    [getFilteredPost.fulfilled]: (state, action) => {
+      console.log(action.payload)
+      state.allPost = action.payload
+    }
+
 
   },
 });
