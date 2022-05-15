@@ -29,6 +29,7 @@ const bookmarkPost = allPost?.filter((eachPost) =>  bookmarks?.includes(eachPost
     (eachUser) => eachUser.username !== userInfo.username
   );
 
+  
   return (
     <>
     <Topbar />
@@ -43,7 +44,7 @@ const bookmarkPost = allPost?.filter((eachPost) =>  bookmarks?.includes(eachPost
             {loading ? (
               <Loading />
             ) : (
-                <>{bookmarks ? <h1 className='text-white-color p-2  '>There is no post in the Bookmark</h1> : <div className=" h-auto md:h-128 md:overflow-y-scroll">
+                <>{bookmarks.length === 0 ? <h1 className='text-white-color p-2  '>There is no post in the Bookmark</h1> : <div className=" h-auto md:h-128 md:overflow-y-scroll">
                 {bookmarkPost?.map((eachPost) => <BookmarkCard key={eachPost._id} eachPost ={eachPost}/>)}
               </div>} 
               </>

@@ -36,7 +36,7 @@ const BookmarkCard = ({eachPost}) => {
       <div className="flex items-center justify-between p-2">
         <div className="flex items-center ">
            <Avatar username={username} />
-          <h1 className="post-user-name"> kkk</h1>
+          <h1 className="post-user-name"> {username}</h1>
         </div>
       </div>
 
