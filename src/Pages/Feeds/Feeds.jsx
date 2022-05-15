@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Feed.css";
-import { Topbar, FeedPostCard, PostModal, Users } from "../../Components/Index";
+import {
+  Topbar,
+  FeedPostCard,
+  PostModal,
+  Users,
+  Loading,
+} from "../../Components/Index";
 import { useSelector } from "react-redux";
 import { usePost } from "../../Hooks/index";
 import * as BiIcons from "react-icons/bi";
@@ -9,7 +15,6 @@ const Feeds = () => {
   const state = useSelector((state) => state);
 
   //User data to follow
-
   const {
     auth: { token, userInfo },
     post: { allPost, loading },
@@ -23,15 +28,22 @@ const Feeds = () => {
     (eachUser) => eachUser.username !== userProfile.username
   );
 
-  //Filter post of all following user only, current user post should not be their
+ 
+  //Filter post with 
+  const recentPost = [...allPost].reverse();
+   //Trending post which post has more like
+  const trendingPost = [...allPost].sort(
+    (a, b) => b.likes.likeCount - a.likes.likeCount
+  );
+
+  const sortByDate = [...allPost].sort(
+    (a, b) => new Date(a.createdAt).getDate() - new Date(b.createdAt).getDate()
+  );
+  const [filterPost, setFilterPost] = useState(recentPost);
+ 
+
   const currentUser = users.find((each) => each.username === userInfo.username);
-  // const postOfFollowingUser = allPost.filter((each))
-
-  console.log(currentUser?.following);
-
-  console.log(allPost);
-
-  const hh = allPost.filter((eachPost) => {});
+ 
 
   return (
     <>
@@ -40,14 +52,36 @@ const Feeds = () => {
         <div className="feed-wrapper  max-w-screen-lg mx-auto grid gap-2 grid-cols-1 md:grid-cols-feed-col px-2 my-2 ">
           <div className="feed-post p-2">
             <div className=" flex justify-end items-center text-white-color p-2">
-              <button className="mr-2 flex items-center">
-                <BiIcons.BiTrendingUp className="icons" />
+              <button
+                className="mr-2 flex items-center icons text-sm"
+                onClick={() => setFilterPost(trendingPost)}
+              >
+                Trending
+              </button>
+              <button className="mr-2 flex items-center icons text-sm" onClick={() => setFilterPost(sortByDate)}>
+                Sort By Date
+              </button>
+              <button
+                className="mr-2 flex items-center icons text-sm"
+                onClick={() => setFilterPost(recentPost)}
+              >
+                Recent
               </button>
             </div>
-            <FeedPostCard />
-            <FeedPostCard />
-            <FeedPostCard />
-            <FeedPostCard />
+
+            {loading ? (
+              <Loading />
+            ) : (
+              <div>
+                {(filterPost.length === 0 ? recentPost : filterPost)?.map(
+                  (eachPost) => {
+                    return (
+                      <FeedPostCard eachPost={eachPost} key={eachPost._id} />
+                    );
+                  }
+                )}
+              </div>
+            )}
           </div>
           <div className="users-suggestion hidden p-2 h-min md:block">
             <div className="admin-short-info p-2   border-b-0 rounded-3xl mb-2 bg-light-bg">

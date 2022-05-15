@@ -3,7 +3,10 @@ import axios from "axios";
 import {
   getPosts,
   createPostService,
-  getUserPostService,editPostService
+  getUserPostService,
+  editPostService,
+  likePostService,
+  dislikePostService,
 } from "../../Services/index";
 
 export const getAllPost = createAsyncThunk(
@@ -62,7 +65,7 @@ export const createNewPost = createAsyncThunk(
   }
 );
 
- //Edit a post 
+//Edit a post
 export const editPost = createAsyncThunk(
   "posts/editPost",
   async (
@@ -86,6 +89,68 @@ export const editPost = createAsyncThunk(
   }
 );
 
+//Like a post of user
+export const likePost = createAsyncThunk(
+  "posts/likePost",
+  async ({ postId, token }, { rejectWithValue }) => {
+    try {
+      const {
+        data: { posts },
+        status,
+      } = await likePostService(postId, token);
+      if (status === 201) {
+        return posts;
+      }
+    } catch (error) {
+      return rejectWithValue("Error occured! Try Again Later");
+    }
+  }
+);
+
+//Dislike a post of user
+export const dislikePost = createAsyncThunk(
+  "posts/dislikePost",
+  async ({ postId, token }, { rejectWithValue }) => {
+    try {
+      const {
+        data: { posts },
+        status,
+      } = await dislikePostService(postId, token);
+      if (status === 201) {
+        return posts;
+      }
+    } catch (error) {
+      return rejectWithValue("Error occured! Try Again Later");
+    }
+  }
+);
+
+//Delete a post of user
+
+export const deletePost = createAsyncThunk('posts/deletePost', async ({postId, token}, {re}) => {
+  try {
+    const {
+      data: { posts },
+      status,
+    } = await axios.delete(`/api/posts/${postId}`, {
+      headers: {
+        authorization: token,
+      },
+    });
+
+    if (status === 201) {
+      // const deletedPostForThisUser = posts.filter(
+      //   (eachPost) => eachPost.username === `${username}`
+      // );
+     
+       return posts
+    }
+  } catch (error) {
+      return 
+  }
+})
+
+
 const initialState = {
   allPost: [],
   posts: [],
@@ -97,20 +162,8 @@ const postSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    userPosts: (state, action) => {
-      state.posts = action.payload;
-    },
-
-    setStatus: (state, action) => {
-      state.status = action.payload;
-    },
-
     getDeletePost: (state, action) => {
       state.posts = action.payload;
-    },
-
-    getLikePost: (state, action) => {
-      console.log(action.payload);
     },
   },
 
@@ -153,7 +206,7 @@ const postSlice = createSlice({
 
     [createNewPost.fulfilled]: (state, action) => {
       state.loading = false;
-      state.posts = action.payload;
+      state.allPost = action.payload;
     },
     [createNewPost.rejected]: (state) => {
       state.loading = false;
@@ -172,6 +225,56 @@ const postSlice = createSlice({
       state.loading = false;
       state.error = "Error occured! Try again later";
     },
+
+    //Like Post
+
+    [likePost.pending]: (state) => {
+      state.loading = false;
+    },
+
+    [likePost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.allPost = action.payload;
+    },
+
+    [likePost.rejected]: (state) => {
+      state.loading = false;
+      state.error = "Error occured! Try again later";
+    },
+
+    //Dislike Post
+
+    //Like Post
+    [dislikePost.pending]: (state) => {
+      state.loading = false;
+    },
+
+    [dislikePost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.allPost = action.payload;
+    },
+
+    [dislikePost.rejected]: (state) => {
+      state.loading = false;
+      state.error = "Error occured! Try again later";
+    },
+
+    //Delete Post 
+    [deletePost.pending]: (state) => {
+      state.loading = true;
+    },
+
+    [deletePost.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.allPost = action.payload;
+    },
+
+    [deletePost.rejected]: (state) => {
+      state.loading = false;
+      state.error = "Error occured! Try again later";
+    },
+
+
   },
 });
 
@@ -181,22 +284,6 @@ export const {
   userPosts,
   setStatus,
   getDislikePost,
-  getLikePost,
 } = postSlice.actions;
 
 export default postSlice.reducer;
-
-// // Redux Toolkit Thunk
-// //Getting all post of a particular user
-// export const fetchPostData = (username) => {
-//   return async function fetchPostThunk(dispatch, state) {
-//     try {
-//       const { data, status } = await axios.get(`/api/posts/user/${username}`);
-//       const posts = data.posts;
-
-//       if (status === 200) {
-//         dispatch(userPosts(posts));
-//       }
-//     } catch (error) {}
-//   };
-// };
