@@ -35,7 +35,7 @@ const FeedPostCard = ({eachPost}) => {
   const isFound = bookmarks?.find((eachPost) => eachPost === _id)
 
  
-  //Remove book mark 
+  //Remove from bookmark 
   const removeBookmarkHandler = (_id, token) => {
       dispatch(removeFromBookmark({postId: _id, token: token}))
   }

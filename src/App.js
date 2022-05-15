@@ -7,7 +7,7 @@ import {
   NotFound,
   Feeds,
   Profile,
-  MockAPI,UserProfile, Bookmark
+  MockAPI,UserProfile, Bookmark , SinglePost
 } from "./Pages/Index";
 import { Footer, FeedFooter, ScrollTop } from "./Components/Index";
 import { Toaster } from "react-hot-toast";
@@ -34,6 +34,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
           <Route path="/mock" element={<MockAPI />} />
           <Route path="/bookmark" element={<PrivateRoute><Bookmark /></PrivateRoute>} />
+          <Route path="/post/:username" element={<PrivateRoute><SinglePost /></PrivateRoute>} />
           <Route path="profile/:username" element={<PrivateRoute><UserProfile /></PrivateRoute>}  />
         </Routes>
      
