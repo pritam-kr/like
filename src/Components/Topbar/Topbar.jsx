@@ -1,7 +1,6 @@
 import React from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-
 import { Link } from "react-router-dom";
 import "./Topbar.css";
 import { useModalContext } from "../../Context/ModalContext";
@@ -45,11 +44,13 @@ const Topbar = () => {
                 />
               </li>
               <li className="inline-block md:mr-6">
-                <FaIcons.FaCompass className="icons nav-icons" />
+                <Link to="/explore">
+                  <FaIcons.FaCompass className="icons nav-icons" />
+                </Link>
               </li>
               <li className="inline-block md:mr-6">
-              <Link to="/bookmark"> 
-                <FaIcons.FaBookmark className="icons nav-icons" />
+                <Link to="/bookmark">
+                  <FaIcons.FaBookmark className="icons nav-icons" />
                 </Link>
               </li>
             </ul>
