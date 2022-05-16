@@ -105,6 +105,7 @@ const userSlice = createSlice({
 
     [getAllUserData.fulfilled]: (state, action) => {
       state.loading = false;
+       
       state.users = action.payload;
     },
 
@@ -126,6 +127,7 @@ const userSlice = createSlice({
       state.users = updatingFollowingUser(current(state).users, user);
       state.users = updatingFollowedUser(current(state).users, followUser);
     },
+    
   },
 });
 export const userReducer = userSlice.reducer;
