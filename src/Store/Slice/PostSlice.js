@@ -145,12 +145,43 @@ export const deletePost = createAsyncThunk(
   }
 );
 
-//Trending post 
-export const getFilteredPost = createAsyncThunk('posts/trendingPost', async({trendingPost}) => {
+//Trending post
+export const getFilteredPost = createAsyncThunk(
+  "posts/trendingPost",
+  async ({ trendingPost }) => {
+    const data = await trendingPost;
+    return data;
+  }
+);
 
-const data = await trendingPost
-return data
-})
+//Post a comment
+export const postComment = createAsyncThunk(
+  "posts/postComment",
+  async ({ postId, commentData, token }) => {
+    
+    try {
+      const {data: {posts}, status} = await axios.post(
+        `/api/comments/add/${postId}`,
+        { commentData },
+        {
+          headers: { authorization: token },
+        }
+
+        
+      );
+
+
+      if(status === 201){
+        return posts
+      }
+    
+
+      console.log(status)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 const initialState = {
   allPost: [],
@@ -269,21 +300,32 @@ const postSlice = createSlice({
       state.error = "Error occured! Try again later";
     },
 
-    //Filtered Post 
+    //Filtered Post
     [getFilteredPost.fulfilled]: (state, action) => {
-      console.log(action.payload)
-      state.allPost = action.payload
-    }
+      console.log(action.payload);
+      state.allPost = action.payload;
+    },
 
+    //Comment Post
+
+    [postComment.pending] : (state) => {
+      state.loading = true;
+    },
+
+    [postComment.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.allPost = action.payload;
+    },
+
+    [postComment.rejected]: (state) => {
+      state.loading = false;
+      state.error = "Error occured! Try again later";
+    },
 
   },
 });
 
-export const {
-  getNewPost,
-  getDeletePost,
-  userPosts,
-  getDislikePost,
-} = postSlice.actions;
+export const { getNewPost, getDeletePost, userPosts, getDislikePost } =
+  postSlice.actions;
 
 export default postSlice.reducer;
