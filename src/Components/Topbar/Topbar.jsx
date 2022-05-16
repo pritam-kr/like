@@ -4,9 +4,16 @@ import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
 import "./Topbar.css";
 import { useModalContext } from "../../Context/ModalContext";
+import { logoutHandler } from "../../Store/Slice/AuthSlice";
+import { useDispatch } from "react-redux";
 
 const Topbar = () => {
   const { setPostModal } = useModalContext();
+   const dispatch = useDispatch()
+
+   const logoutUserHandler = () => {
+    dispatch(logoutHandler())
+   }
 
   return (
     <nav className="nav w-full bg-light-bg">
@@ -33,7 +40,6 @@ const Topbar = () => {
             <ul className="mobile-bottom-icons fixed bottom-0 right-0 left-0 md:static">
               <li className="inline-block md:mr-6">
                 <Link to="/feeds">
-                  {" "}
                   <FaIcons.FaHome className="icons nav-icons" />{" "}
                 </Link>
               </li>
@@ -58,6 +64,12 @@ const Topbar = () => {
               <li className="inline-block md:mr-6">
                 <Link to="/profile">
                   <FaIcons.FaUserCircle className="icons nav-icons" />
+                </Link>
+              </li>
+
+              <li className="inline-block ml-4 md:mr-4">
+                <Link to="">
+                  <FaIcons.FaSignOutAlt className="icons nav-icons" onClick={() => logoutUserHandler()}/>
                 </Link>
               </li>
             </ul>

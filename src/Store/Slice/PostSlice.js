@@ -180,7 +180,6 @@ export const postComment = createAsyncThunk(
 );
 
 //Delete a comment from a post
-
 export const commentDelete = createAsyncThunk(
   "posts/deleteComment,",
   async ({ postId, commentId, token }, { rejectWithValue }) => {
