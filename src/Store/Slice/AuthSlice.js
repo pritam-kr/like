@@ -26,6 +26,8 @@ const authSlice = createSlice({
   },
 });
 
+
+
 export const getUser = async () => {
   try {
     const res = await axios.get("/api/users");
