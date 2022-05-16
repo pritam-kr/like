@@ -33,7 +33,7 @@ const Profile = () => {
 
   const [editPostData, setPostEditData] =  useState({ content: "", caption: "" })
  
-  
+   
 
   return (
     <>
