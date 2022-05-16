@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import axios from "axios";
-import toast from "react-hot-toast";
+ 
 import { followUserService, unFollowUserService } from "../../Services/";
 
 export const getAllUserData = createAsyncThunk(
@@ -10,12 +10,14 @@ export const getAllUserData = createAsyncThunk(
       const {
         data: { users },
         status,
-      } = await axios.get("api/users");
+      } = await axios.get("/api/users");
+
 
       if (status === 200) {
         return users;
       }
     } catch (error) {
+
       return ThunkApi.rejectWithValue("Try again later");
     }
   }
@@ -105,6 +107,7 @@ const userSlice = createSlice({
 
     [getAllUserData.fulfilled]: (state, action) => {
       state.loading = false;
+       
       state.users = action.payload;
     },
 
@@ -126,6 +129,7 @@ const userSlice = createSlice({
       state.users = updatingFollowingUser(current(state).users, user);
       state.users = updatingFollowedUser(current(state).users, followUser);
     },
+    
   },
 });
 export const userReducer = userSlice.reducer;

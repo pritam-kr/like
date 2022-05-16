@@ -7,26 +7,23 @@ import {
   NotFound,
   Feeds,
   Profile,
-  MockAPI,UserProfile
+  MockAPI,UserProfile, Bookmark , SinglePost, Explore
 } from "./Pages/Index";
 import { Footer, FeedFooter, ScrollTop } from "./Components/Index";
 import { Toaster } from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { PrivateRoute } from "./Router/PrivateRoute/PrivateRoute";
  
-
+ 
  
 
 function App() {
   const { pathname } = useLocation();
-
   const state = useSelector((state) => state);
-  const { auth } = state;
-  const token = auth.token;
+  const { auth:{token} } = state;
+    
   
-
-   
-
+  
   return (
     <div className="App">
       <Toaster />
@@ -39,7 +36,11 @@ function App() {
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="*" element={<NotFound />} />
           <Route path="/mock" element={<MockAPI />} />
-          <Route path="profile/:username" element={<PrivateRoute><UserProfile /></PrivateRoute>}  />
+          <Route path="/bookmark" element={<PrivateRoute><Bookmark /></PrivateRoute>} />
+          <Route path="/post/:postid" element={<PrivateRoute><SinglePost /></PrivateRoute>} />
+          <Route path="/profile/:username" element={<PrivateRoute><UserProfile /></PrivateRoute>}  />
+          <Route path="/explore" element={<PrivateRoute ><Explore /></PrivateRoute>} />
+           
         </Routes>
      
       {pathname === "/feeds" || pathname === "/profile" ? (

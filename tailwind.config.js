@@ -42,6 +42,10 @@ module.exports = {
           'dark-bg': '#070f1f',
           'white-color': '#f7f7f7'
       },
+
+      height: {
+        '124': '44rem',
+      }
     },
     
 

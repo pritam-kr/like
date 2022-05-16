@@ -7,6 +7,7 @@ import {
   editPostService,
   likePostService,
   dislikePostService,
+  deletePostService,
 } from "../../Services/index";
 
 export const getAllPost = createAsyncThunk(
@@ -126,30 +127,80 @@ export const dislikePost = createAsyncThunk(
 );
 
 //Delete a post of user
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async ({ postId, token }, { rejectWithValue }) => {
+    try {
+      const {
+        data: { posts },
+        status,
+      } = await deletePostService(postId, token);
 
-export const deletePost = createAsyncThunk('posts/deletePost', async ({postId, token}, {re}) => {
-  try {
-    const {
-      data: { posts },
-      status,
-    } = await axios.delete(`/api/posts/${postId}`, {
-      headers: {
-        authorization: token,
-      },
-    });
-
-    if (status === 201) {
-      // const deletedPostForThisUser = posts.filter(
-      //   (eachPost) => eachPost.username === `${username}`
-      // );
-     
-       return posts
+      if (status === 201) {
+        return posts;
+      }
+    } catch (error) {
+      return rejectWithValue("Error occured! Try Again Later");
     }
-  } catch (error) {
-      return 
   }
-})
+);
 
+//Trending post
+export const getFilteredPost = createAsyncThunk(
+  "posts/trendingPost",
+  async ({ trendingPost }) => {
+    const data = await trendingPost;
+    return data;
+  }
+);
+
+//Post a comment
+export const postComment = createAsyncThunk(
+  "posts/postComment",
+  async ({ postId, commentData, token }) => {
+    try {
+      const {
+        data: { posts },
+        status,
+      } = await axios.post(
+        `/api/comments/add/${postId}`,
+        { commentData },
+        {
+          headers: { authorization: token },
+        }
+      );
+
+      if (status === 201) {
+        return posts;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+//Delete a comment from a post
+
+export const commentDelete = createAsyncThunk(
+  "posts/deleteComment,",
+  async ({ postId, commentId, token }, { rejectWithValue }) => {
+    try {
+      const {
+        data: { posts },
+      } = await axios.post(
+        `/api/comments/delete/${postId}/${commentId}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
+
+      return posts;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 const initialState = {
   allPost: [],
@@ -161,15 +212,10 @@ const initialState = {
 const postSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {
-    getDeletePost: (state, action) => {
-      state.posts = action.payload;
-    },
-  },
+  reducers: {},
 
   extraReducers: {
     //Getting post of a specific user
-
     [getUserPosts.pending]: (state) => {
       state.loading = true;
     },
@@ -188,6 +234,7 @@ const postSlice = createSlice({
     [getAllPost.pending]: (state) => {
       state.loading = true;
     },
+
     [getAllPost.fulfilled]: (state, action) => {
       const { posts } = action.payload;
       state.loading = false;
@@ -206,8 +253,10 @@ const postSlice = createSlice({
 
     [createNewPost.fulfilled]: (state, action) => {
       state.loading = false;
+
       state.allPost = action.payload;
     },
+
     [createNewPost.rejected]: (state) => {
       state.loading = false;
       state.error = "Error occured! Try again later";
@@ -227,9 +276,8 @@ const postSlice = createSlice({
     },
 
     //Like Post
-
     [likePost.pending]: (state) => {
-      state.loading = false;
+      state.loading = true;
     },
 
     [likePost.fulfilled]: (state, action) => {
@@ -243,10 +291,8 @@ const postSlice = createSlice({
     },
 
     //Dislike Post
-
-    //Like Post
     [dislikePost.pending]: (state) => {
-      state.loading = false;
+      state.loading = true;
     },
 
     [dislikePost.fulfilled]: (state, action) => {
@@ -259,7 +305,7 @@ const postSlice = createSlice({
       state.error = "Error occured! Try again later";
     },
 
-    //Delete Post 
+    //Delete Post
     [deletePost.pending]: (state) => {
       state.loading = true;
     },
@@ -274,16 +320,45 @@ const postSlice = createSlice({
       state.error = "Error occured! Try again later";
     },
 
+    //Filtered Post
+    [getFilteredPost.fulfilled]: (state, action) => {
+      console.log(action.payload);
+      state.allPost = action.payload;
+    },
 
+    //Comment Post
+
+    [postComment.pending]: (state) => {
+      state.loading = true;
+    },
+
+    [postComment.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.allPost = action.payload;
+    },
+
+    [postComment.rejected]: (state) => {
+      state.loading = false;
+      state.error = "Error occured! Try again later";
+    },
+
+    [commentDelete.loading]: (state) => {
+      state.loading = true;
+    },
+
+    [commentDelete.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.allPost = action.payload;
+    },
+
+    [commentDelete.rejected]: (state) => {
+      state.loading = false;
+      state.error = "Error occured! Try again later";
+    },
   },
 });
 
-export const {
-  getNewPost,
-  getDeletePost,
-  userPosts,
-  setStatus,
-  getDislikePost,
-} = postSlice.actions;
+export const { getNewPost, getDeletePost, userPosts, getDislikePost } =
+  postSlice.actions;
 
 export default postSlice.reducer;
