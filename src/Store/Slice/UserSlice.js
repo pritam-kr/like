@@ -10,12 +10,14 @@ export const getAllUserData = createAsyncThunk(
       const {
         data: { users },
         status,
-      } = await axios.get("api/users");
+      } = await axios.get("/api/users");
+
 
       if (status === 200) {
         return users;
       }
     } catch (error) {
+
       return ThunkApi.rejectWithValue("Try again later");
     }
   }

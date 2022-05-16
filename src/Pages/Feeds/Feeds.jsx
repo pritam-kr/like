@@ -22,14 +22,12 @@ const Feeds = () => {
     user: { users },
   } = state;
 
- 
-
- 
 
   // filter user on the basis of user name for follow/ unfollow
   const filteredUser = users.filter(
     (eachUser) => eachUser.username !== userInfo.username
   );
+
 
   //Filter post with
   const recentPost = [ ...allPost].reverse();
@@ -52,7 +50,7 @@ const Feeds = () => {
     }
   };
 
-  
+ 
 
   return (
     <>
@@ -87,7 +85,7 @@ const Feeds = () => {
             {loading ? (
               <Loading />
             ) : (
-              <div className=" h-auto md:h-128 md:overflow-y-scroll">
+              <div className=" h-auto md:h-120 md:overflow-y-scroll">
                 {recentPost.map((eachPost) => {
                   return (
                     <FeedPostCard eachPost={eachPost} key={eachPost._id} />

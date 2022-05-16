@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import {
   getAllPost,
   getUserPosts,
@@ -10,6 +11,7 @@ import { getAllUserData} from "../Store/Slice/UserSlice";
 
 export const usePost = () => {
 
+  const pathname = useParams()
   const [postData, setPostData] = useState({ content: "", caption: "" });
  
 

@@ -53,7 +53,7 @@ export const addPostCommentHandler = function (schema, request) {
       _id: uuid(),
       ...commentData,
       username: user.username,
-    
+
       firstName: user.firstName,
       lastName: user.lastName,
       avatar: user.avatar,
@@ -65,7 +65,7 @@ export const addPostCommentHandler = function (schema, request) {
     post.comments.push(comment);
 
     this.db.posts.update({ _id: postId }, post);
-    return new Response(201, {}, { posts: this.db.posts }); 
+    return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(
       500,
@@ -134,6 +134,9 @@ export const editPostCommentHandler = function (schema, request) {
 
 export const deletePostCommentHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
+
+  // console.log(user)
+
   try {
     if (!user) {
       return new Response(
@@ -147,7 +150,9 @@ export const deletePostCommentHandler = function (schema, request) {
       );
     }
     const { postId, commentId } = request.params;
+
     const post = schema.posts.findBy({ _id: postId }).attrs;
+
     const commentIndex = post.comments.findIndex(
       (comment) => comment._id === commentId
     );

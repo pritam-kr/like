@@ -2,12 +2,21 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Topbar, PostModal, Users, Avatar } from "../../Components//Index";
-import {removeFromBookmark,addToBookmark} from "../../Store/Slice/BookmarkSlice";
-import {likePost,dislikePost,postComment,} from "../../Store/Slice/PostSlice";
+import {
+  removeFromBookmark,
+  addToBookmark,
+} from "../../Store/Slice/BookmarkSlice";
+import {
+  likePost,
+  dislikePost,
+  postComment,
+  commentDelete,
+} from "../../Store/Slice/PostSlice";
 import { likeByUser } from "../../Utils/LikeByUser";
 import * as FaIcons from "react-icons/fa";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { getAllUserData } from "../../Store/Slice/UserSlice";
 
 const SinglePost = () => {
   const state = useSelector((state) => state);
@@ -22,20 +31,23 @@ const SinglePost = () => {
     bookmark: { bookmarks },
   } = state;
 
+  useEffect(() => {
+    dispatch(getAllUserData());
+  }, []);
 
-  const [currentUser, setCurrentUser] = useState([]);
-   
-  console.log(currentUser)
+  const [currentPost, setCurrentPost] = useState([]);
 
   const getSinglePost = async (postId) => {
     try {
       const {
         data: { post },
       } = await axios.get(`/api/posts/${postId}`);
-      setCurrentUser(post);
+      setCurrentPost(post);
     } catch (error) {
-      // console.log(error.response.statusText);
-      toast.error(error.response.statusText, "Try again later" , {position: "top-right"})
+      console.log(error);
+      toast.error(error.response.statusText, "Try again later", {
+        position: "top-right",
+      });
     }
   };
 
@@ -43,10 +55,9 @@ const SinglePost = () => {
     getSinglePost(pathname.postid);
   }, [pathname.postid, pathname]);
 
-  
   //Find post a single post based on POSTID
   const singlePost = allPost?.find(
-    (eachPost) => eachPost._id === pathname.postid
+    (eachPost) => eachPost.id === pathname.postid
   );
 
   //Post Like Handler
@@ -91,6 +102,12 @@ const SinglePost = () => {
     setCommentData({ comment: "" });
   };
 
+  //Delete a comment handler
+  const commentDeleteHandler = ({ postId, commentId, token }) => {
+
+    dispatch(commentDelete({postId, commentId, token}));
+  };
+
   return (
     <>
       <Topbar />
@@ -107,15 +124,16 @@ const SinglePost = () => {
                 <div className="flex items-center justify-between p-2">
                   <div className="flex items-center ">
                     <div className="avatar post-avatar mr-2 ">
-                    <img
-                  src={
-                    "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"}
-                  alt="admin"
-                  className="post-avatar"
-                />
+                      <img
+                        src={
+                          "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
+                        }
+                        alt="admin"
+                        className="post-avatar"
+                      />
                     </div>
                     <h1 className="post-user-name cursor-pointer">
-                      {currentUser?.username}
+                      {currentPost?.username}
                     </h1>
                   </div>
                 </div>
@@ -123,10 +141,10 @@ const SinglePost = () => {
                 <div className="px-2 py-2">
                   <div>
                     <p className="font-bold text-caption-title cursor-pointer">
-                      {currentUser?.caption}
+                      {currentPost?.caption}
                     </p>
                     <p className="text-caption leading-6 cursor-pointer">
-                      {currentUser?.content}
+                      {currentPost?.content}
                     </p>
 
                     <div className="mt-6 mb-0">
@@ -135,29 +153,57 @@ const SinglePost = () => {
 
                     {/*Commented user*/}
                     <div>
-                      {currentUser?.comments?.length ===0 ? <p className="my-3">Do a comment</p>: currentUser?.comments?.map((eachComment) => {
-                        return (
-                          <li className="my-2 list-none py-2" key={eachComment._id}>
-                        <div className="admin-short-info border-b-0 bg-light-bg">
-                          <div className="flex last: items-center">
-                            <img
-                              src="https://res.cloudinary.com/dhqxln7zi/image/upload/v1652266218/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws_o3oigd.jpg"
-                              alt="users-avatar"
-                              className="post-avatar w-9 h-9"
-                            />
-                            <div className="ml-2 w-full">
-                              <p className="post-user-name leading-none flex justify-between items-center text-md">
-                                  {eachComment?.firstName} {eachComment?.lastName}
+                      {currentPost?.comments?.length === 0 ? (
+                        <p className="my-3">Do a comment</p>
+                      ) : (
+                        currentPost?.comments?.map((eachComment) => {
+                          return (
+                            <li
+                              className="my-2 list-none py-2"
+                              key={eachComment._id}
+                            >
+                              <div className="admin-short-info border-b-0 bg-light-bg">
+                                <div className="flex last: items-center">
+                                  <img
+                                    src="https://res.cloudinary.com/dhqxln7zi/image/upload/v1652266218/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws_o3oigd.jpg"
+                                    alt="users-avatar"
+                                    className="post-avatar w-9 h-9"
+                                  />
+                                  <div className="ml-2 w-full">
+                                    <p className="post-user-name leading-none flex justify-between items-center text-md">
+                                      {eachComment?.firstName}{" "}
+                                      {eachComment?.lastName}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <p className="mt-4 flex justify-between">
+                                <span className="font-semibold text-lg">
+                                  {eachComment?.comment}
+                                </span>
+                                <span className="flex items-center">
+                                  {new Date(
+                                    eachComment.createdAt
+                                  ).toDateString()}
+                                  <span className="ml-2">
+                                    <FaIcons.FaTrashAlt
+                                      className="icons text-[14px] "
+                                      onClick={() =>
+                                        commentDeleteHandler({
+                                          postId: currentPost._id,
+                                          commentId: eachComment._id,
+                                          token: token,
+                                        })
+                                      }
+                                    />
+                                  </span>{" "}
+                                </span>
                               </p>
-                            </div>
-                          </div>
-                        </div>
-                        <p className="mt-4 flex justify-between"><span className="font-semibold text-lg">{eachComment?.comment}</span> <span className="flex items-center">{new Date(eachComment.createdAt).toDateString()} <span className="ml-2"><FaIcons.FaTrashAlt className="icons text-md " /></span> </span></p>
-                      </li>
-                        )
-                      })}
+                            </li>
+                          );
+                        })
+                      )}
                     </div>
-
                   </div>
 
                   {/*Feeds icons section */}
@@ -182,10 +228,6 @@ const SinglePost = () => {
                         <span className="ml-1">
                           {singlePost?.likes?.likeCount}
                         </span>
-                      </li>
-
-                      <li className="flex justify-start items-center mr-2">
-                        <FaIcons.FaShareAlt className="icons share-icon " />
                       </li>
                     </ul>
 
@@ -227,7 +269,7 @@ const SinglePost = () => {
                     />
                     <button
                       className="text-xl ml-2 btn-follow-unfollow rounded-full pt-2 pb-2 pr-3 pl-3"
-                      onClick={() => commentHandler(pathname.postid, token)}
+                      onClick={() => commentHandler(currentPost._id, token)}
                     >
                       Comment
                     </button>

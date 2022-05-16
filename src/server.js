@@ -51,7 +51,7 @@ export function makeServer({ environment = "development" } = {}) {
           bookmarks: [],
         })
       );
-      posts.forEach((item) => server.create("post", { ...item, comments: []}));
+      posts.forEach((item) => server.create("post", { ...item,}));
     },
 
     routes() {

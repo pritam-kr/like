@@ -158,25 +158,44 @@ export const getFilteredPost = createAsyncThunk(
 export const postComment = createAsyncThunk(
   "posts/postComment",
   async ({ postId, commentData, token }) => {
-    
     try {
-      const {data: {posts}, status} = await axios.post(
+      const {
+        data: { posts },
+        status,
+      } = await axios.post(
         `/api/comments/add/${postId}`,
         { commentData },
         {
           headers: { authorization: token },
         }
-
-        
       );
 
-
-      if(status === 201){
-        return posts
+      if (status === 201) {
+        return posts;
       }
-    
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
-      console.log(status)
+//Delete a comment from a post
+
+export const commentDelete = createAsyncThunk(
+  "posts/deleteComment,",
+  async ({ postId, commentId, token }, { rejectWithValue }) => {
+    try {
+      const {
+        data: { posts },
+      } = await axios.post(
+        `/api/comments/delete/${postId}/${commentId}`,
+        {},
+        {
+          headers: { authorization: token },
+        }
+      );
+
+      return posts;
     } catch (error) {
       console.log(error);
     }
@@ -234,6 +253,7 @@ const postSlice = createSlice({
 
     [createNewPost.fulfilled]: (state, action) => {
       state.loading = false;
+
       state.allPost = action.payload;
     },
 
@@ -308,7 +328,7 @@ const postSlice = createSlice({
 
     //Comment Post
 
-    [postComment.pending] : (state) => {
+    [postComment.pending]: (state) => {
       state.loading = true;
     },
 
@@ -322,6 +342,19 @@ const postSlice = createSlice({
       state.error = "Error occured! Try again later";
     },
 
+    [commentDelete.loading]: (state) => {
+      state.loading = true;
+    },
+
+    [commentDelete.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.allPost = action.payload;
+    },
+
+    [commentDelete.rejected]: (state) => {
+      state.loading = false;
+      state.error = "Error occured! Try again later";
+    },
   },
 });
 
