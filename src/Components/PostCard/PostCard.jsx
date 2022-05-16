@@ -1,13 +1,15 @@
 import React from "react";
 import * as FaIcons from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useModalContext } from "../../Context/ModalContext";
 import { likePost, dislikePost, deletePost } from "../../Store/Slice/PostSlice";
 import { contentShort } from "../../Utils/Index";
 import { likeByUser } from "../../Utils/Index";
-import { Avatar } from "../Index";
 
 const PostCard = ({ eachPost, setPostEditData }) => {
+  const navigate = useNavigate();
+
   //Like Post Handler
   const likePostHandler = (_id, token) => {
     dispatch(likePost({ postId: _id, token: token }));
@@ -25,6 +27,7 @@ const PostCard = ({ eachPost, setPostEditData }) => {
     content,
     likes: { likeCount },
     _id,
+    id,
     avatar,
     createdAt,
     updatedAt,
@@ -45,6 +48,13 @@ const PostCard = ({ eachPost, setPostEditData }) => {
   const postEditHandler = ({ caption, content }) => {
     setEditPostModal(true);
     setPostEditData({ content: content, caption: caption, id: _id });
+  };
+
+  //Single Post and comment handler
+  const singlePostHandler = (postId) => {
+    if (postId) {
+      navigate(`/post/${postId}`);
+    }
   };
 
   return (
@@ -79,10 +89,20 @@ const PostCard = ({ eachPost, setPostEditData }) => {
       </div>
 
       <div className="px-2 py-2">
-        <p className="font-bold text-caption-title mt-2">{caption}</p>
-        <p className="text-caption leading-6 ">{contentShort(content)}</p>
+        <p
+          className="font-bold text-caption-title mt-2 cursor-pointer"
+          onClick={() => singlePostHandler(eachPost.id)}
+        >
+          {caption}
+        </p>
+        <p
+          className="text-caption leading-6 cursor-pointer"
+          onClick={() => singlePostHandler(eachPost.id)}
+        >
+          {contentShort(content)}
+        </p>
 
-        <ul className="flex justify-start items-center mt-2">
+        <ul className="flex justify-start items-center mt-6">
           <li className="flex justify-start items-center mr-2">
             {likeByUser(eachPost, userInfo) ? (
               <FaIcons.FaHeart
@@ -98,7 +118,10 @@ const PostCard = ({ eachPost, setPostEditData }) => {
             <span className="ml-1 text-lg">{likeCount} </span>
           </li>
           <li className="flex justify-start items-center mr-2">
-            <FaIcons.FaComment className="icons share-icon" />
+            <FaIcons.FaComment
+              className="icons share-icon"
+              onClick={() => singlePostHandler(eachPost.id)}
+            />
           </li>
         </ul>
       </div>

@@ -64,7 +64,7 @@ const FeedPostCard = ({ eachPost }) => {
     }
   }
 
-  //Single Post Handler
+  //Single Post and comment handler
   const singlePostHandler = (postId) => {
     if (postId) {
       navigate(`/post/${postId}`);
