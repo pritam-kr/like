@@ -16,6 +16,10 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     followers: [{
+      _id: uuid(), firstName: "Abhishek",
+      lastName: "Gautam",avatar: "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg", username: "abhishekg",
+    }], 
+    following: [{
       _id: uuid(), firstName: "Pritam",
       lastName: "Kumar",avatar: "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg", username: "pritamkr",
     }]

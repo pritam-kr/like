@@ -20,7 +20,8 @@ const Profile = () => {
   const state = useSelector((state) => state);
   const { auth:  {userInfo : {username , avatar, firstName, lastName, _id}, token }, post } = state
   
-   
+   console.log(state)
+
   const { setFollowerModal, setFollowingModal, editPostModal, } = useModalContext();
  
   //Post related Data
@@ -33,7 +34,6 @@ const Profile = () => {
 
   const [editPostData, setPostEditData] =  useState({ content: "", caption: "" })
  
-   
 
   return (
     <>

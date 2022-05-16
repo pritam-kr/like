@@ -21,11 +21,11 @@ const Users = ({ eachUser }) => {
     dispatch(unFollowUser({ unFollowUserId: userId, token: token }))
   };
 
-   const currentUser = users.find((each) => each.username === userInfo.username)
+   const currentUser = users?.find((each) => each.username === userInfo.username)
     
 
   return (
-    <li className="my-2  py-2 " key={eachUser._id}>
+    <li className="my-2  py-2 " key={eachUser?._id}>
       <div className="admin-short-info border-b-0 bg-light-bg">
         <div className="flex items-center">
           <img
@@ -36,12 +36,12 @@ const Users = ({ eachUser }) => {
           <div className="ml-2 w-full">
             <h1 className="post-user-name leading-none flex justify-between items-center ">
               <p>
-                {eachUser.firstName} {eachUser.lastName}
+                {eachUser?.firstName} {eachUser?.lastName}
               </p> 
-              {currentUser.following.find((each) => each._id === eachUser._id) ? (
+              {currentUser?.following?.find((each) => each._id === eachUser._id) ? (
                 <button
                   className="text-sm mr-2 btn-follow-unfollow rounded-full pt-2 pb-2 pr-3 pl-3"
-                  onClick={() => unfollowHandler(eachUser._id)}
+                  onClick={() => unfollowHandler(eachUser?._id)}
                 >
                    
                   Following
@@ -49,14 +49,14 @@ const Users = ({ eachUser }) => {
               ) : (
                 <button
                   className="text-sm mr-2 btn-follow-unfollow rounded-full pt-2 pb-2 pr-3 pl-3"
-                  onClick={() => followHandler(eachUser._id)}
+                  onClick={() => followHandler(eachUser?._id)}
                 >
                    
                   Follow
                 </button>
               )}
             </h1>
-            <p className="text-[#909090]">{eachUser.username}</p>
+            <p className="text-[#909090]">{eachUser?.username}</p>
           </div>
         </div>
       </div>

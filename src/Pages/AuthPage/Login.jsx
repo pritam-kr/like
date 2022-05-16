@@ -10,12 +10,12 @@ const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
 
   
-  const { loginFormHandler, error } = useLogin();
+  const { loginForm} = useLogin();
 
  
   const loginSubmitHandler = (event) => {
     event.preventDefault();
-    loginFormHandler(formData);
+    loginForm(formData);
   };
 
   //Text credential
