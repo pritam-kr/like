@@ -57,7 +57,6 @@ export const createNewPost = createAsyncThunk(
       } = await createPostService(postData, token);
 
       if (status === 201) {
-        // Doing filter data on the basis of user
         return posts;
       }
     } catch (error) {
@@ -157,7 +156,7 @@ export const getFilteredPost = createAsyncThunk(
 //Post a comment
 export const postComment = createAsyncThunk(
   "posts/postComment",
-  async ({ postId, commentData, token }) => {
+  async ({ postId, commentData, token }, {rejectWithValue}) => {
     try {
       const {
         data: { posts },
@@ -174,7 +173,7 @@ export const postComment = createAsyncThunk(
         return posts;
       }
     } catch (error) {
-      console.log(error);
+      return rejectWithValue("Error occured! Try Again Later");
     }
   }
 );
@@ -196,7 +195,7 @@ export const commentDelete = createAsyncThunk(
 
       return posts;
     } catch (error) {
-      console.log(error);
+      return rejectWithValue("Error occured! Try Again Later");
     }
   }
 );
