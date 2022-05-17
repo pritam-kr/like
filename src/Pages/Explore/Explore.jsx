@@ -41,13 +41,13 @@ const Explore = () => {
 
       <div className="parent-container feed-container ">
         <div className="feed-wrapper max-w-screen-lg mx-auto grid gap-2  px-2 my-2 ">
-          <div className="explore-post-container mx-4 md:mx-0  justify-center py-8">
+          <div className="explore-post-container mx-4 md:mx-0 md:flex md:flex-wrap md:justify-center gap-2 py-8">
             {loading ? (
               <Loading />
             ) : (
               <>
                 {allPost.map((eachPost) => (
-                  <div className="post-card  w-full border-1  mt-1 mb-3 bg-light-bg text-[#f7f7f7] p-8 rounded-3xl">
+                  <div className="post-card  w-full border-1  mt-1 bg-light-bg text-[#f7f7f7] p-8 rounded-3xl md:w-124">
                     <div className="flex items-center justify-between p-2 ">
                       <div className="flex items-center">
                         <img
