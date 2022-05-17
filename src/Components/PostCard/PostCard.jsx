@@ -58,7 +58,7 @@ const PostCard = ({ eachPost, setPostEditData }) => {
   };
 
   return (
-    <div className="post-card border-1  mt-1 bg-light-bg text-[#f7f7f7] p-4 rounded-3xl">
+    <div className="post-card border-1  mt-1 bg-light-bg text-[#f7f7f7] p-4 rounded-3xl  md:w-124">
       <div className="flex items-center justify-between p-2 ">
         <div className="flex items-center">
           <img
