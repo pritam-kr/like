@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import toast from "react-hot-toast";
 import { getBookmarkService , addToBookmarkService, removeBookmarkService} from "../../Services/index";
 
 const initialState = {
@@ -18,6 +18,7 @@ export const getBookmarkPost = createAsyncThunk(
         data: { bookmarks },
       } = await getBookmarkService(token);
       if (status === 200) {
+       
         return bookmarks;
       }
     } catch (error) {
@@ -37,6 +38,7 @@ export const addToBookmark = createAsyncThunk(
         data: { bookmarks },
       } = await addToBookmarkService(postId, token)
       if (status === 200) {
+        toast.success("Added to bookmark", {position: "top-right"})
         return bookmarks;
       }
     } catch (error) {
@@ -58,7 +60,7 @@ export const removeFromBookmark = createAsyncThunk(
         data: { bookmarks },
       } = await  removeBookmarkService(postId, token)
       if (status === 200) {
-        
+        toast.success("Removed from  bookmark", {position: "top-right"})
         return bookmarks;
       }
     } catch (error) {
