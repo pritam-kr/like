@@ -9,7 +9,6 @@ import {
 } from "../../Store/Slice/BookmarkSlice";
 import { likePost, dislikePost } from "../../Store/Slice/PostSlice";
 import { likeByUser } from "../../Utils/LikeByUser";
-import { Avatar } from "../Index";
 import "./FeedStyle.css";
 
 const FeedPostCard = ({ eachPost }) => {
@@ -54,15 +53,7 @@ const FeedPostCard = ({ eachPost }) => {
     dispatch(removeFromBookmark({ postId: _id, token: token }));
   };
 
-  async function getComment(postId) {
-    try {
-      const res = await axios.get(`/api/comments/${postId}`);
-
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  
 
   //Single Post and comment handler
   const singlePostHandler = (postId) => {
@@ -70,6 +61,16 @@ const FeedPostCard = ({ eachPost }) => {
       navigate(`/post/${postId}`);
     }
   };
+
+  //Single profile handler
+  const singleProfileHandler = (username) => {
+    if(username === userInfo.username){
+       navigate('/profile')
+    }else{
+      navigate(`/profile/${username}`)
+    }
+
+  }
 
   return (
     <div className="feed-post-card mb-4 pd-0 rounded-3xl p-3 bg-light-bg text-[#fff]">
@@ -82,7 +83,7 @@ const FeedPostCard = ({ eachPost }) => {
             alt="admin"
             className="post-avatar mr-3"
           />
-          <h1 className="post-user-name cursor-pointer">{username}</h1>
+          <h1 className="post-user-name cursor-pointer" onClick={() => singleProfileHandler(username)}>{username}</h1>
         </div>
       </div>
 
