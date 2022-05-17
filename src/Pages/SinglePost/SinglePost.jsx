@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { Topbar, PostModal, Users, Avatar } from "../../Components//Index";
 import {
   removeFromBookmark,
@@ -22,6 +22,8 @@ const SinglePost = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const pathname = useParams();
+ 
+  const navigate = useNavigate()
 
   //User data to follow
   const {
@@ -44,7 +46,6 @@ const SinglePost = () => {
       } = await axios.get(`/api/posts/${postId}`);
       setCurrentPost(post);
     } catch (error) {
-      console.log(error);
       toast.error(error.response.statusText, "Try again later", {
         position: "top-right",
       });
@@ -104,9 +105,18 @@ const SinglePost = () => {
 
   //Delete a comment handler
   const commentDeleteHandler = ({ postId, commentId, token }) => {
-
     dispatch(commentDelete({postId, commentId, token}));
   };
+
+
+  const singleProfileHandler = (username) => {
+    if(username === userInfo.username){
+       navigate('/profile')
+    }else{
+      navigate(`/profile/${username}`)
+    }
+
+  }
 
   return (
     <>
@@ -132,7 +142,7 @@ const SinglePost = () => {
                         className="post-avatar"
                       />
                     </div>
-                    <h1 className="post-user-name cursor-pointer">
+                    <h1 className="post-user-name cursor-pointer" onClick={() => singleProfileHandler (currentPost?.username)}>
                       {currentPost?.username}
                     </h1>
                   </div>
@@ -283,16 +293,14 @@ const SinglePost = () => {
               <div className="flex items-center">
                 <img
                   src={
-                    userInfo?.avatar === ""
-                      ? "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
-                      : userInfo?.avatar
+                    "https://res.cloudinary.com/dhqxln7zi/image/upload/v1652266218/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws_o3oigd.jpg"
                   }
                   alt="admin"
                   className="post-avatar"
                 />
                 <div className="ml-2">
                   <h1 className="post-user-name leading-none">
-                    {userInfo?.firstName} {userInfo?.lastName}
+                   <Link to="/profile" className="font-bold"> {userInfo?.firstName} {userInfo?.lastName} </Link>
                   </h1>
                   <p className="text-[#909090]">{userInfo?.username}</p>
                 </div>
