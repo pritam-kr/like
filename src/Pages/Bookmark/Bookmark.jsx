@@ -1,28 +1,36 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import {Topbar, PostModal, Loading,Users, BookmarkCard} from "../../Components//Index"
-import { getBookmarkPost } from '../../Store/Slice/BookmarkSlice'
-
- 
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  Topbar,
+  PostModal,
+  Loading,
+  Users,
+  BookmarkCard,
+} from "../../Components//Index";
+import { getBookmarkPost } from "../../Store/Slice/BookmarkSlice";
 
 const Bookmark = () => {
-
   const state = useSelector((state) => state);
-  const dispatch =  useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-   
   //User data to follow
-  const {auth: { token, userInfo},post: { allPost, loading },user: { users }, bookmark: {bookmarks}} = state;
+  const {
+    auth: { token, userInfo },
+    post: { allPost, loading },
+    user: { users },
+    bookmark: { bookmarks },
+  } = state;
 
- useEffect(() => {
-  dispatch(getBookmarkPost({token: token}))
- }, [token, dispatch])
+  useEffect(() => {
+    dispatch(getBookmarkPost({ token: token }));
+  }, [token, dispatch]);
 
-
-//Getting bookmark posts by filtering from all post 
-const bookmarkPost = allPost?.filter((eachPost) =>  bookmarks?.includes(eachPost._id))
-
+  //Getting bookmark posts by filtering from all post
+  const bookmarkPost = allPost?.filter((eachPost) =>
+    bookmarks?.includes(eachPost._id)
+  );
 
   // filter user on the basis of user name for follow/ unfollow
   const filteredUser = users.filter(
@@ -30,23 +38,33 @@ const bookmarkPost = allPost?.filter((eachPost) =>  bookmarks?.includes(eachPost
   );
 
   
+
   return (
     <>
-    <Topbar />
+      <Topbar />
 
-    <div className="parent-container feed-container ">
+      <div className="parent-container feed-container ">
         <div className="feed-wrapper  max-w-screen-lg mx-auto grid gap-2 grid-cols-1 md:grid-cols-feed-col px-2 my-2 ">
           <div className="feed-post p-2">
             <div className=" flex justify-between items-center text-white-color p-2">
-            <h1 className="text-xl">Bookmark</h1>
+              <h1 className="text-xl">Bookmark</h1>
             </div>
 
             {loading ? (
               <Loading />
             ) : (
-                <>{bookmarks.length === 0 ? <h1 className='text-white-color p-2  '>There is no post in the Bookmark</h1> : <div className=" h-auto md:h-128 md:overflow-y-scroll">
-                {bookmarkPost?.map((eachPost) => <BookmarkCard key={eachPost._id} eachPost ={eachPost}/>)}
-              </div>} 
+              <>
+                {bookmarks.length === 0 ? (
+                  <h1 className="text-white-color p-2  ">
+                    There is no post in the Bookmark
+                  </h1>
+                ) : (
+                  <div className=" h-auto md:h-128 md:overflow-y-scroll">
+                    {bookmarkPost?.map((eachPost) => (
+                      <BookmarkCard key={eachPost._id} eachPost={eachPost} />
+                    ))}
+                  </div>
+                )}
               </>
             )}
           </div>
@@ -55,16 +73,17 @@ const bookmarkPost = allPost?.filter((eachPost) =>  bookmarks?.includes(eachPost
               <div className="flex items-center">
                 <img
                   src={
-                    userInfo?.avatar === ""
-                      ? "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
-                      : userInfo?.avatar
+                    "https://res.cloudinary.com/dhqxln7zi/image/upload/v1652266218/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws_o3oigd.jpg"
                   }
                   alt="admin"
                   className="post-avatar"
                 />
                 <div className="ml-2">
                   <h1 className="post-user-name leading-none">
-                    {userInfo?.firstName} {userInfo?.lastName}
+                    <Link to="/profile" className="font-bold">
+                      {" "}
+                      {userInfo?.firstName} {userInfo?.lastName}{" "}
+                    </Link>
                   </h1>
                   <p className="text-[#909090]">{userInfo?.username}</p>
                 </div>
@@ -84,9 +103,8 @@ const bookmarkPost = allPost?.filter((eachPost) =>  bookmarks?.includes(eachPost
         </div>
       </div>
       <PostModal />
-
     </>
-  )
-}
+  );
+};
 
-export { Bookmark}
+export { Bookmark };
