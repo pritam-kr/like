@@ -19,21 +19,23 @@ export const posts = [
     username: "adarshbalika",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    comments: [{
-      _id: uuid(),
-      comment: "Your Post is Beautiful",
-      firstName: "Abhishek",
-      lastName: "Gautam",
-      username: "abhishekg",
-      avatar:
-        "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg",
-      createdAt: formatDate(),
-      updatedAt: formatDate(),
-      votes: {
-        upvotedBy: [],
-        downvotedBy: [],
+    comments: [
+      {
+        _id: uuid(),
+        comment: "Your Post is Beautiful",
+        firstName: "Abhishek",
+        lastName: "Gautam",
+        username: "abhishekg",
+        avatar:
+          "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg",
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
       },
-    },]
+    ],
   },
   {
     _id: uuid(),
@@ -47,7 +49,7 @@ export const posts = [
     username: "adarshbalika",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    comments: []
+    comments: [],
   },
   {
     _id: uuid(),
@@ -61,7 +63,7 @@ export const posts = [
     username: "adarshbalika",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    comments: []
+    comments: [],
   },
   {
     _id: uuid(),
@@ -106,7 +108,7 @@ export const posts = [
     username: "pritamkr",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    comments: []
+    comments: [],
   },
   {
     _id: uuid(),
@@ -120,6 +122,65 @@ export const posts = [
     username: "pritamkr",
     createdAt: formatDate(),
     updatedAt: formatDate(),
-    comments: []
+    comments: [],
+  },
+
+  {
+    _id: uuid(),
+    caption: "Hello Summer.",
+    content: "Going to puri beach",
+    likes: {
+      likeCount: 33,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    username: "shrutir",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    comments: [],
+  },
+
+  {
+    _id: uuid(),
+    caption: "Hello Swimming 🏊‍♀️ .",
+    content: "Going to Goa to chill",
+    likes: {
+      likeCount: 99,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    username: "shrutir",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    comments: [],
+  },
+
+  {
+    _id: uuid(),
+    caption: "Happy Sunday 🏊‍♀️ .",
+    content: "Going to Kailash",
+    likes: {
+      likeCount: 99,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    username: "srishtim",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    comments: [],
+  },
+  {
+    _id: uuid(),
+    caption: "I'm Don. 🔫",
+    content: "Going to Rishikesh",
+    likes: {
+      likeCount: 99,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    username: "abhishekg",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    comments: [],
   },
 ];
