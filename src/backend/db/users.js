@@ -12,7 +12,7 @@ export const users = [
     lastName: "Balika",
     username: "adarshbalika",
     bio:"Full Stack Developer", 
-    website: "https://google.com/",
+    website: "https://adarshbalika.netlify.app/",
     password: "adarshBalika123",
     avatar: "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg",
     createdAt: formatDate(),
