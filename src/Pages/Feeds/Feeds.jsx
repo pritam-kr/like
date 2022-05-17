@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { usePost } from "../../Hooks/index";
 import * as BiIcons from "react-icons/bi";
 import { getFilteredPost } from "../../Store/Slice/PostSlice";
+import { Link } from "react-router-dom";
+ 
 
 const Feeds = () => {
   const state = useSelector((state) => state);
@@ -22,27 +24,33 @@ const Feeds = () => {
     user: { users },
   } = state;
 
-
   // filter user on the basis of user name for follow/ unfollow
   const filteredUser = users.filter(
     (eachUser) => eachUser.username !== userInfo.username
   );
 
+   
 
-  //Filter post with
-  const recentPost = [ ...allPost].reverse();
+   //Filter Post on the basis of logged user following array 
+   const loggedUser = users?.find((eachUser) => eachUser.username === userInfo.username)
+   const loggedUserFollowing = loggedUser?.following
+ 
+ 
+   const feedPost = allPost.filter((eachPost) =>  loggedUserFollowing.find((each) => each.username === eachPost.username ) || eachPost.username === loggedUser.username)
 
-  const trendingPost = [...allPost].sort(
+  const recentPost = [...feedPost].reverse();
+
+  const trendingPost = [...feedPost].sort(
     (a, b) => b.likes.likeCount - a.likes.likeCount
   );
 
-  const sortByDate = [...allPost].sort(
+  const sortByDate = [...feedPost].sort(
     (a, b) => new Date(b.createdAt).getDate() - new Date(a.createdAt).getDate()
   );
 
   const filterPostHandler = (post, type) => {
     if (type === "trending") {
-      dispatch(getFilteredPost({ trendingPost: [...post].reverse()}));
+      dispatch(getFilteredPost({ trendingPost: [...post].reverse() }));
     } else if (type === "sortByDate") {
       dispatch(getFilteredPost({ trendingPost: [...post].reverse() }));
     } else {
@@ -50,7 +58,6 @@ const Feeds = () => {
     }
   };
 
- 
 
   return (
     <>
@@ -99,16 +106,14 @@ const Feeds = () => {
               <div className="flex items-center">
                 <img
                   src={
-                    userInfo?.avatar === ""
-                      ? "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
-                      : userInfo?.avatar
+                    "https://res.cloudinary.com/dhqxln7zi/image/upload/v1652266218/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws_o3oigd.jpg"
                   }
                   alt="admin"
                   className="post-avatar"
                 />
                 <div className="ml-2">
                   <h1 className="post-user-name leading-none">
-                    {userInfo?.firstName} {userInfo?.lastName}
+                  <Link to="/profile" className="font-bold"> {userInfo?.firstName} {userInfo?.lastName} </Link>
                   </h1>
                   <p className="text-[#909090]">{userInfo?.username}</p>
                 </div>
