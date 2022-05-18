@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+ 
 
 // getting token and userInfo from local Storage
 const token = localStorage.getItem("login-token") || "";
@@ -38,15 +38,7 @@ const authSlice = createSlice({
   },
 });
 
-export const getUser = async () => {
-  try {
-    const res = await axios.get("/api/users");
 
-    console.log(res);
-  } catch (error) {
-    console.log(error.response);
-  }
-};
 
 export const { authInfo, getToken } = authSlice.actions;
 
