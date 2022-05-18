@@ -266,7 +266,7 @@ const postSlice = createSlice({
     },
     [editPost.fulfilled]: (state, action) => {
       state.loading = false;
-      state.posts = action.payload;
+      state.allPost = action.payload;
     },
     [editPost.rejected]: (state) => {
       state.loading = false;
@@ -320,7 +320,6 @@ const postSlice = createSlice({
 
     //Filtered Post
     [getFilteredPost.fulfilled]: (state, action) => {
-      console.log(action.payload);
       state.allPost = action.payload;
     },
 
