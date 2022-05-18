@@ -29,13 +29,13 @@ const Users = ({ eachUser }) => {
       <div className="admin-short-info border-b-0 bg-light-bg">
         <div className="flex items-center">
           <img
-            src="https://res.cloudinary.com/dhqxln7zi/image/upload/v1652266218/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws_o3oigd.jpg"
+            src={eachUser?.avatar}
             alt="users-avatar"
             className="post-avatar"
           />
           <div className="ml-2 w-full">
             <h1 className="post-user-name leading-none flex justify-between items-center ">
-              <p>
+              <p className="cursor-pointer">
                 {eachUser?.firstName} {eachUser?.lastName}
               </p> 
               {currentUser?.following?.find((each) => each._id === eachUser._id) ? (
@@ -56,7 +56,7 @@ const Users = ({ eachUser }) => {
                 </button>
               )}
             </h1>
-            <p className="text-[#909090]">{eachUser?.username}</p>
+            <p className="text-[#909090] mt-[-6px]">{eachUser?.username}</p>
           </div>
         </div>
       </div>
