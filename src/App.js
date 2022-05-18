@@ -26,8 +26,8 @@ function App() {
   
   return (
     <div className="App">
-      <Toaster />
-       
+      <Toaster  />
+       <ScrollTop>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -42,12 +42,13 @@ function App() {
           <Route path="/explore" element={<PrivateRoute ><Explore /></PrivateRoute>} />
            
         </Routes>
-     
-      {pathname === "/feeds" || pathname === "/profile" ? (
+
+      {pathname === "/feeds" || pathname === "/profile" || pathname === "/post/:postid" || pathname === "/bookmark" ||pathname === "/explore" ? (
         <FeedFooter />
       ) : (
         <Footer />
       )}
+      </ScrollTop>
     </div>
   );
 }
