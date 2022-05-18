@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import {
   Topbar,
@@ -12,10 +12,12 @@ import {
 } from "../../Components/Index";
 import * as FaIcons from "react-icons/fa";
 import { useModalContext } from "../../Context/ModalContext";
-import { useSelector } from "react-redux";
-import { usePost } from "../../Hooks";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPost } from "../../Store/Slice/PostSlice";
+
 
 const Profile = () => {
+  const dispatch = useDispatch()
   const state = useSelector((state) => state);
   const {
     auth: {
@@ -42,19 +44,18 @@ const Profile = () => {
   );
 
   // Sort by Latest post by the user
-  const postSort = [...allPost]
-    .sort((a, b) => b.id - a.id)
-    .filter((eachPost) => eachPost.username === username);
+  const postSort = [...allPost].reverse().filter((eachPost) => eachPost.username === username);
 
-  const { deletedPost } = usePost();
+ 
 
   const [editPostData, setPostEditData] = useState({
     content: "",
     caption: "",
   });
 
-  // User profile edit handler
 
+
+  // User profile edit handler
   const [editProfileModal, setEditProfileModal] = useState(false);
   const [updateData, setUpdateData] = useState({
     website: "",
@@ -64,7 +65,6 @@ const Profile = () => {
 
   const userProfileEditHandler = async ({ website, bio }) => {
     setUpdateData({ website: website, bio: bio });
-    // console.log(updateData)
     setEditProfileModal(true);
   };
 
@@ -108,7 +108,7 @@ const Profile = () => {
                   href={currentUser?.website}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-sub-heading text-[#f7f7f7] py-3"
+                  className="text-[#f7f7f7] my-2 text-[14px]"
                 >
                   {" "}
                   {currentUser?.website}
