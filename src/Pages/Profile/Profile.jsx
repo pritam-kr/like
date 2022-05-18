@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import "./Profile.css";
 import {
   Topbar,
@@ -6,34 +6,67 @@ import {
   PostModal,
   FollowerModal,
   FollowingModal,
-  Loading,EditPostModal
+  Loading,
+  EditPostModal,
+  ProfileEdit,
 } from "../../Components/Index";
 import * as FaIcons from "react-icons/fa";
 import { useModalContext } from "../../Context/ModalContext";
 import { useSelector } from "react-redux";
 import { usePost } from "../../Hooks";
-import {likePost} from "../../Store/Slice/PostSlice"
- 
- 
 
 const Profile = () => {
   const state = useSelector((state) => state);
-  const { auth:  {userInfo : {username , avatar, firstName, lastName, _id}, token }, post } = state
-  
-   
-  const { setFollowerModal, setFollowingModal, editPostModal, } = useModalContext();
- 
+  const {
+    auth: {
+      userInfo: { username, avatar },
+      token,
+    },
+    post,
+  } = state;
+
+  //Current logged user
+  const currentUser = state.user.users.find(
+    (eachUser) => eachUser.username === username
+  );
+
+  const { setFollowerModal, setFollowingModal, editPostModal } =
+    useModalContext();
+
   //Post related Data
-  const { posts, loading, allPost } = post;
+  const { loading, allPost } = post;
 
-  // console.log(allPost)
+  //CurrentUserPost
+  const currentUserPosts = allPost.filter(
+    (eachPost) => eachPost.username === username
+  );
+
   // Sort by Latest post by the user
-  const postSort = [...allPost].sort((a, b) => b.id - a.id).filter((eachPost) => eachPost.username === username);
-  const { deletedPost, } = usePost();
+  const postSort = [...allPost]
+    .sort((a, b) => b.id - a.id)
+    .filter((eachPost) => eachPost.username === username);
 
-  const [editPostData, setPostEditData] =  useState({ content: "", caption: "" })
- 
-   
+  const { deletedPost } = usePost();
+
+  const [editPostData, setPostEditData] = useState({
+    content: "",
+    caption: "",
+  });
+
+  // User profile edit handler
+
+  const [editProfileModal, setEditProfileModal] = useState(false);
+  const [updateData, setUpdateData] = useState({
+    website: "",
+    bio: "",
+    avatar: "",
+  });
+
+  const userProfileEditHandler = async ({ website, bio }) => {
+    setUpdateData({ website: website, bio: bio });
+    // console.log(updateData)
+    setEditProfileModal(true);
+  };
 
   return (
     <>
@@ -44,42 +77,67 @@ const Profile = () => {
             <div className="user-avatar-wrapper mb-2">
               <img
                 alt="avatar"
-                className="w-40 rounded-full"
-                src={ avatar || "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg"}
+                className="w-40 h-40 object-cover rounded-full"
+                src={currentUser?.avatar}
               />
             </div>
 
             <div className="profile-info">
               <div className="text-center">
                 <h1 className="user-full-name text-medium-heading font-semibold flex justify-center items-center">
-                  { firstName} { lastName}
+                  {currentUser?.firstName} {currentUser?.lastName}
                   <span className="ml-4 ">
-                    <FaIcons.FaEdit className="icons profile-icons" />
+                    <FaIcons.FaEdit
+                      className="icons profile-icons"
+                      onClick={() =>
+                        userProfileEditHandler({
+                          website: currentUser.website,
+                          bio: currentUser.bio,
+                        })
+                      }
+                    />
                   </span>
                 </h1>
                 <p className="text-sub-heading user-name">
-                  @{ username}
+                  @{currentUser?.username}
                 </p>
                 <p className="text-sub-heading text-[#f7f7f7]">
-                  I'm front end developer based on Ranchi (Jharkhand).
+                  {currentUser?.bio}
                 </p>
+                <a
+                  href={currentUser?.website}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sub-heading text-[#f7f7f7] py-3"
+                >
+                  {" "}
+                  {currentUser?.website}
+                </a>
               </div>
               <div className="chips-container text-center mt-2 text-sub-heading">
                 <button className="btn mx-1 rounded-3xl">
                   Posts{" "}
-                  {posts?.length < 10 ? "0" + posts?.length : posts?.length}
+                  {currentUserPosts?.length < 10
+                    ? "0" + currentUserPosts?.length
+                    : currentUserPosts?.length}
                 </button>
                 <button
                   className="btn mx-1 rounded-3xl"
                   onClick={() => setFollowerModal(true)}
                 >
-                  Followers 1k
+                  Followers{" "}
+                  {currentUser?.followers?.length < 10
+                    ? "0" + currentUser?.followers?.length
+                    : currentUser?.followers?.length}
                 </button>
                 <button
                   className="btn mx-1 rounded-3xl"
                   onClick={() => setFollowingModal(true)}
                 >
-                  Following 409
+                  Following{" "}
+                  {currentUser?.following?.length < 10
+                    ? "0" + currentUser?.following?.length
+                    : currentUser?.following?.length}
                 </button>
               </div>
             </div>
@@ -89,13 +147,13 @@ const Profile = () => {
           {loading ? (
             <Loading />
           ) : (
-            <div className="post-wrapper my-6 p-3">
+            <div className="post-wrapper my-6 p-3 md:flex md:flex-wrap md:justify-start">
               {postSort?.map((eachPost, i) => (
                 <PostCard
                   eachPost={eachPost}
                   key={i}
-                  deletedPost={deletedPost}
-                  setPostEditData= {setPostEditData} 
+                 
+                  setPostEditData={setPostEditData}
                 />
               ))}
             </div>
@@ -103,11 +161,26 @@ const Profile = () => {
 
           {/*post modal start*/}
           <PostModal />
-          {editPostModal && <EditPostModal editPostData={editPostData} setPostEditData={setPostEditData}  />}
+          {editPostModal && (
+            <EditPostModal
+              editPostData={editPostData}
+              setPostEditData={setPostEditData}
+            />
+          )}
           {/*post modal end*/}
 
           <FollowerModal />
           <FollowingModal />
+
+          {editProfileModal && (
+            <ProfileEdit
+              editProfileModal={editProfileModal}
+              setEditProfileModal={setEditProfileModal}
+              updateData={updateData}
+              setUpdateData={setUpdateData}
+              currentUser={currentUser}
+            />
+          )}
         </div>
       </div>
     </>

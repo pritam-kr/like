@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
 import axios from "axios";
- 
+import toast from "react-hot-toast";
+
 import { followUserService, unFollowUserService } from "../../Services/";
 
 export const getAllUserData = createAsyncThunk(
@@ -12,12 +13,10 @@ export const getAllUserData = createAsyncThunk(
         status,
       } = await axios.get("/api/users");
 
-
       if (status === 200) {
         return users;
       }
     } catch (error) {
-
       return ThunkApi.rejectWithValue("Try again later");
     }
   }
@@ -36,8 +35,6 @@ export const followUser = createAsyncThunk(
         return { followUser: followUser, user: user };
       }
     } catch (error) {
-      console.log(error);
-
       return rejectWithValue("Try again later");
     }
   }
@@ -56,8 +53,6 @@ export const unFollowUser = createAsyncThunk(
         return { followUser: followUser, user: user };
       }
     } catch (error) {
-      console.log(error);
-
       return rejectWithValue("Try again later");
     }
   }
@@ -89,6 +84,58 @@ const updatingFollowingUser = (users, followingUser) => {
   return users;
 };
 
+//Updating user details
+
+export const updateUser = createAsyncThunk(
+  "user/getUpdate",
+  async ({ bio, website, avatar, token }, { rejectWithValue }) => {
+    try {
+      const {
+        data: { user },
+        status,
+      } = await axios.post(
+        "/api/users/edit",
+        {
+          userData: {
+            website: website,
+            bio: bio,
+            avatar: avatar,
+            token: token,
+          },
+        },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+
+      if (status === 201) {
+        toast.success("Profile successfully updated", {
+          position: "top-right",
+        });
+        return user;
+      }
+    } catch (error) {
+      return rejectWithValue("Try again later");
+    }
+  }
+);
+
+const getUpdateUser = (users, updateData) => {
+  const findUser = users.find(
+    (eachUser) => eachUser.username === updateData.username
+  );
+
+  if (findUser) {
+    users = [...users].map((user) =>
+      user.username === findUser.username ? updateData : user
+    );
+  }
+
+  return users;
+};
+
 const initialState = {
   users: [],
   loading: false,
@@ -107,7 +154,7 @@ const userSlice = createSlice({
 
     [getAllUserData.fulfilled]: (state, action) => {
       state.loading = false;
-       
+
       state.users = action.payload;
     },
 
@@ -129,7 +176,10 @@ const userSlice = createSlice({
       state.users = updatingFollowingUser(current(state).users, user);
       state.users = updatingFollowedUser(current(state).users, followUser);
     },
-    
+
+    [updateUser.fulfilled]: (state, action) => {
+      state.users = getUpdateUser(current(state).users, action.payload);
+    },
   },
 });
 export const userReducer = userSlice.reducer;
