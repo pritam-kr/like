@@ -41,21 +41,6 @@ export const posts = [
   {
     _id: uuid(),
     caption: "Hello word",
-    content: "At vero eos et accusamus et iusto.",
-    likes: {
-      likeCount: 23,
-      likedBy: [],
-      dislikedBy: [],
-    },
-    avatar: "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg",
-    username: "adarshbalika",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
-    comments: [],
-  },
-  {
-    _id: uuid(),
-    caption: "Hello word",
     content: "At vero eos et accusamus et iusto",
     likes: {
       likeCount: 56,
@@ -162,6 +147,22 @@ export const posts = [
     updatedAt: formatDate(),
     comments: [],
   },
+  
+  {
+    _id: uuid(),
+    caption: "College life too much fun.",
+    content: "Hello Every one!!",
+    likes: {
+      likeCount: 126,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    avatar: "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg",
+    username: "shrutir",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    comments: [],
+  },
 
   {
     _id: uuid(),
@@ -180,8 +181,23 @@ export const posts = [
   },
   {
     _id: uuid(),
-    caption: "I'm Don. 🔫",
-    content: "Going to Rishikesh",
+    caption: "#digitalEducation",
+    content: "Googling is just like giving an instruction.The more specific your instruction will be, the more accurate result you'll get.",
+    likes: {
+      likeCount: 463,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    avatar: "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg",
+    username: "abhishekg",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    comments: [],
+  },
+  {
+    _id: uuid(),
+    caption: "Happy Diwali 💣",
+    content: "A festival full of sweet childhood memories, a sky full of fireworks, a mouth full of sweets, a house full of diyas and a heart full of joy.",
     likes: {
       likeCount: 99,
       likedBy: [],
@@ -193,4 +209,20 @@ export const posts = [
     updatedAt: formatDate(),
     comments: [],
   },
+  {
+    _id: uuid(),
+    caption: "Gangs of Wasseypur 🔪 ",
+    content: "“Beta…Tumse na ho payega!” 😂😂",
+    likes: {
+      likeCount: 759,
+      likedBy: [],
+      dislikedBy: [],
+    },
+    avatar: "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg",
+    username: "abhishekg",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+    comments: [],
+  },
+
 ];

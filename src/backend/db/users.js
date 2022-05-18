@@ -21,10 +21,7 @@ export const users = [
       _id: uuid(), firstName: "Abhishek",
       lastName: "Gautam",avatar: "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg", username: "abhishekg",
     }], 
-    following: [{
-      _id: uuid(), firstName: "Pritam",
-      lastName: "Kumar",avatar: "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg", username: "pritamkr",
-    }]
+    following: []
   },
   {
     _id: uuid(),
@@ -52,7 +49,10 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     followers: [],
-    following: [],
+    following: [{
+      _id: uuid(), firstName: "Pritam",
+      lastName: "Kumar",avatar: "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg", username: "pritamkr123",
+    }],
   },
   {
     _id: uuid(),
@@ -87,7 +87,7 @@ export const users = [
     firstName: "Flora",
     lastName: "",
     username: "florab",
-    bio:"Full Stack Developer", 
+    bio:"Kitni Pyaari Hai", 
     website: "https://kitni-pyaari-hai.netlify.app/",
     avatar: "https://kitni-pyaari-hai.netlify.app/happy-smiling.gif",
     password: "flora123",
