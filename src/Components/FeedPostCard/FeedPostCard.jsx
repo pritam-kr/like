@@ -31,9 +31,7 @@ const FeedPostCard = ({ eachPost }) => {
     likes: { likeCount },
   } = eachPost || {};
   const navigate = useNavigate();
-
- console.log(users)
-
+ 
   //Post Like Handler
   const likePostHandler = (_id, token) => {
     dispatch(likePost({ postId: _id, token: token }));
@@ -83,7 +81,7 @@ const FeedPostCard = ({ eachPost }) => {
             src={
               "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
             }
-            alt="admin"
+            alt={username}
             className="post-avatar mr-3"
           />
           <h1 className="post-user-name cursor-pointer" onClick={() => singleProfileHandler(username)}>{username}</h1>
