@@ -18,7 +18,7 @@ const LoggedUser = () => {
         <img
           src={loggedUser?.avatar}
           alt="admin"
-          className="post-avatar border-2"
+          className="post-avatar border-0"
         />
         <div className="ml-2">
           <h1 className="post-user-name leading-none">
