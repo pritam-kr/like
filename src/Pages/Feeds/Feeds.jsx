@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Feed.css";
 import {
   Topbar,
@@ -8,8 +8,6 @@ import {
   Loading,
 } from "../../Components/Index";
 import { useDispatch, useSelector } from "react-redux";
-import { usePost } from "../../Hooks/index";
-import * as BiIcons from "react-icons/bi";
 import { getFilteredPost } from "../../Store/Slice/PostSlice";
 import { Link } from "react-router-dom";
  

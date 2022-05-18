@@ -112,8 +112,10 @@ export function makeServer({ environment = "development" } = {}) {
         downvotePostCommentHandler.bind(this)
       );
 
+      
+
       this.passthrough(
-        "https://api.upload.io/v1/files"
+        "https://api.cloudinary.com/v1_1/dtelw4yz8/image/upload"
       );
 
     },

@@ -8,19 +8,19 @@ import {
   FollowingModal,
   Loading,
   EditPostModal,
+  ProfileEdit,
 } from "../../Components/Index";
 import * as FaIcons from "react-icons/fa";
 import { useModalContext } from "../../Context/ModalContext";
 import { useSelector } from "react-redux";
 import { usePost } from "../../Hooks";
- 
-
+import axios from "axios";
 
 const Profile = () => {
   const state = useSelector((state) => state);
   const {
     auth: {
-      userInfo: { username, avatar, },
+      userInfo: { username, avatar },
       token,
     },
     post,
@@ -31,6 +31,7 @@ const Profile = () => {
     (eachUser) => eachUser.username === username
   );
 
+  
 
   const { setFollowerModal, setFollowingModal, editPostModal } =
     useModalContext();
@@ -54,11 +55,19 @@ const Profile = () => {
     caption: "",
   });
 
+  // User profile edit handler
 
-  // User profile edit handler 
-  const userProfileEditHandler = () =>{
+  const [editProfileModal, setEditProfileModal] = useState(false);
+  const [updateData, setUpdateData] = useState({website: "", bio: "", avatar: ""})
+
+
+  const userProfileEditHandler = async ({website, bio}) => {
+    setUpdateData({website: website, bio: bio})
+    // console.log(updateData)
+    setEditProfileModal(true)
+
     
-  }
+  };
 
   return (
     <>
@@ -69,10 +78,9 @@ const Profile = () => {
             <div className="user-avatar-wrapper mb-2">
               <img
                 alt="avatar"
-                className="w-40 rounded-full"
+                className="w-40 h-40 object-cover rounded-full"
                 src={
-                  avatar ||
-                  "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg"
+                    currentUser?.avatar
                 }
               />
             </div>
@@ -82,7 +90,10 @@ const Profile = () => {
                 <h1 className="user-full-name text-medium-heading font-semibold flex justify-center items-center">
                   {currentUser?.firstName} {currentUser?.lastName}
                   <span className="ml-4 ">
-                    <FaIcons.FaEdit className="icons profile-icons" onClick={() => userProfileEditHandler()}/>
+                    <FaIcons.FaEdit
+                      className="icons profile-icons"
+                      onClick={() => userProfileEditHandler({website: currentUser.website, bio: currentUser.bio})}
+                    />
                   </span>
                 </h1>
                 <p className="text-sub-heading user-name">
@@ -91,7 +102,15 @@ const Profile = () => {
                 <p className="text-sub-heading text-[#f7f7f7]">
                   {currentUser?.bio}
                 </p>
-                <a href={currentUser?.website} target="_blank" rel="noreferrer" className="text-sub-heading text-[#f7f7f7] py-3"> {currentUser?.website}</a>
+                <a
+                  href={currentUser?.website}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sub-heading text-[#f7f7f7] py-3"
+                >
+                  {" "}
+                  {currentUser?.website}
+                </a>
               </div>
               <div className="chips-container text-center mt-2 text-sub-heading">
                 <button className="btn mx-1 rounded-3xl">
@@ -104,7 +123,8 @@ const Profile = () => {
                   className="btn mx-1 rounded-3xl"
                   onClick={() => setFollowerModal(true)}
                 >
-                  Followers  {currentUser?.followers?.length < 10
+                  Followers{" "}
+                  {currentUser?.followers?.length < 10
                     ? "0" + currentUser?.followers?.length
                     : currentUser?.followers?.length}
                 </button>
@@ -149,6 +169,14 @@ const Profile = () => {
 
           <FollowerModal />
           <FollowingModal />
+
+          {editProfileModal && <ProfileEdit
+            editProfileModal={editProfileModal}
+            setEditProfileModal={setEditProfileModal}
+            updateData={updateData}
+            setUpdateData={setUpdateData}
+            currentUser={currentUser}
+          />}
         </div>
       </div>
     </>

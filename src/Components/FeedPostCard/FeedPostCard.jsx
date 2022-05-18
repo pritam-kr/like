@@ -27,9 +27,12 @@ const FeedPostCard = ({ eachPost }) => {
     username,
     content,
     caption,
+    avatar,
     likes: { likeCount },
   } = eachPost || {};
   const navigate = useNavigate();
+
+ console.log(users)
 
   //Post Like Handler
   const likePostHandler = (_id, token) => {
