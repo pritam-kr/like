@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { Topbar, PostModal, Users, Avatar } from "../../Components//Index";
+import { Topbar, PostModal, Users, LoggedUser } from "../../Components//Index";
 import {
   removeFromBookmark,
   addToBookmark,
@@ -17,13 +17,14 @@ import * as FaIcons from "react-icons/fa";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { getAllUserData } from "../../Store/Slice/UserSlice";
+import { userAvatar } from "../../Utils/userAvatar";
 
 const SinglePost = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const pathname = useParams();
- 
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
 
   //User data to follow
   const {
@@ -105,18 +106,18 @@ const SinglePost = () => {
 
   //Delete a comment handler
   const commentDeleteHandler = ({ postId, commentId, token }) => {
-    dispatch(commentDelete({postId, commentId, token}));
+    dispatch(commentDelete({ postId, commentId, token }));
   };
 
-
   const singleProfileHandler = (username) => {
-    if(username === userInfo.username){
-       navigate('/profile')
-    }else{
-      navigate(`/profile/${username}`)
+    if (username === userInfo.username) {
+      navigate("/profile");
+    } else {
+      navigate(`/profile/${username}`);
     }
+  };
 
-  }
+  
 
   return (
     <>
@@ -135,14 +136,17 @@ const SinglePost = () => {
                   <div className="flex items-center ">
                     <div className="avatar post-avatar mr-2 ">
                       <img
-                        src={
-                          "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
-                        }
-                        alt="admin"
+                        src={userAvatar(currentPost?.username, users)?.avatar}
+                        alt={currentPost.username}
                         className="post-avatar"
                       />
                     </div>
-                    <h1 className="post-user-name cursor-pointer" onClick={() => singleProfileHandler (currentPost?.username)}>
+                    <h1
+                      className="post-user-name cursor-pointer"
+                      onClick={() =>
+                        singleProfileHandler(currentPost?.username)
+                      }
+                    >
                       {currentPost?.username}
                     </h1>
                   </div>
@@ -175,14 +179,13 @@ const SinglePost = () => {
                               <div className="admin-short-info border-b-0 bg-light-bg">
                                 <div className="flex last: items-center">
                                   <img
-                                    src="https://res.cloudinary.com/dhqxln7zi/image/upload/v1652266218/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws_o3oigd.jpg"
-                                    alt="users-avatar"
+                                    src={userAvatar(eachComment?.username, users)?.avatar}
+                                    alt= {eachComment.username}
                                     className="post-avatar w-9 h-9"
                                   />
                                   <div className="ml-2 w-full">
                                     <p className="post-user-name leading-none flex justify-between items-center text-md">
-                                      {eachComment?.firstName}{" "}
-                                      {eachComment?.lastName}
+                                      {eachComment?.firstName} {eachComment?.lastName}
                                     </p>
                                   </div>
                                 </div>
@@ -289,23 +292,7 @@ const SinglePost = () => {
             )}
           </div>
           <div className="users-suggestion hidden p-2 h-min md:block">
-            <div className="admin-short-info p-2   border-b-0 rounded-3xl mb-2 bg-light-bg">
-              <div className="flex items-center">
-                <img
-                  src={
-                    "https://res.cloudinary.com/dhqxln7zi/image/upload/v1652266218/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws_o3oigd.jpg"
-                  }
-                  alt="admin"
-                  className="post-avatar"
-                />
-                <div className="ml-2">
-                  <h1 className="post-user-name leading-none">
-                   <Link to="/profile" className="font-bold"> {userInfo?.firstName} {userInfo?.lastName} </Link>
-                  </h1>
-                  <p className="text-[#909090]">{userInfo?.username}</p>
-                </div>
-              </div>
-            </div>
+            <LoggedUser />
 
             <div className="suggestion-people-wrapper p-4 bg-light-bg  rounded-3xl">
               <h1 className=" font-bold">Suggestions for You</h1>
