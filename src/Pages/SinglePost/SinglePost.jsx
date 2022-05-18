@@ -96,7 +96,7 @@ const SinglePost = () => {
     if (commentData.comment === "") {
       toast.error("Input field can't be empty.", { position: "top-right" });
     } else {
-      toast.success("Posted a comment.", { position: "top-right" });
+       
       dispatch(
         postComment({ postId: _id, token: token, commentData: commentData })
       );

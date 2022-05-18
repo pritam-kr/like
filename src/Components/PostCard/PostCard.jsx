@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useModalContext } from "../../Context/ModalContext";
 import { likePost, dislikePost, deletePost } from "../../Store/Slice/PostSlice";
-import { contentShort } from "../../Utils/Index";
+import { contentShort, userAvatar } from "../../Utils/Index";
 import { likeByUser } from "../../Utils/Index";
 
 const PostCard = ({ eachPost, setPostEditData }) => {
@@ -36,7 +36,7 @@ const PostCard = ({ eachPost, setPostEditData }) => {
 
   const state = useSelector((state) => state);
   const {
-    auth: { userInfo, token },
+    auth: { userInfo, token } ,user:{users},
   } = state;
 
   // Delete Post handler
@@ -63,7 +63,7 @@ const PostCard = ({ eachPost, setPostEditData }) => {
         <div className="flex items-center">
           <img
             src={
-              "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
+              userAvatar(username, users).avatar
             }
             alt="admin"
             className="post-avatar mr-3"

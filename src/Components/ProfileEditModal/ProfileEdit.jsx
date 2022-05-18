@@ -58,7 +58,7 @@ const ProfileEdit = ({ updateData, setUpdateData, setEditProfileModal, currentUs
 
           <form className="post-form p-2">
 
-          <img className="w-40 h-40 mx-auto" src={newUrl ? URL.createObjectURL(newUrl) : currentUser.avatar} alt=""/>
+          <img className="w-40 h-40 mx-auto  rounded-full object-cover" src={newUrl ? URL.createObjectURL(newUrl) : currentUser.avatar} alt=""/>
 
             <div className="flex items-center justify-center py-4">
               <label className="cursor-pointer">

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 import {
   getPosts,
   createPostService,
@@ -57,6 +58,14 @@ export const createNewPost = createAsyncThunk(
       } = await createPostService(postData, token);
 
       if (status === 201) {
+        toast.success("Created a new post", {
+          position: "top-right",
+          duration: 2000,
+          style: {
+            fontSize: "12px",
+            borderRadius: "10rem",
+          },
+        });
         return posts;
       }
     } catch (error) {
@@ -81,6 +90,14 @@ export const editPost = createAsyncThunk(
       } = await editPostService(id, post, token);
 
       if (status === 201) {
+        toast.success("Post Updated.", {
+          position: "top-right",
+          duration: 2000,
+          style: {
+            fontSize: "12px",
+            borderRadius: "10rem",
+          },
+        });
         return posts;
       }
     } catch (error) {
@@ -136,6 +153,14 @@ export const deletePost = createAsyncThunk(
       } = await deletePostService(postId, token);
 
       if (status === 201) {
+        toast.success("Post Deleted.", {
+          position: "top-right",
+          duration: 2000,
+          style: {
+            fontSize: "12px",
+            borderRadius: "10rem",
+          },
+        });
         return posts;
       }
     } catch (error) {
@@ -156,7 +181,7 @@ export const getFilteredPost = createAsyncThunk(
 //Post a comment
 export const postComment = createAsyncThunk(
   "posts/postComment",
-  async ({ postId, commentData, token }, {rejectWithValue}) => {
+  async ({ postId, commentData, token }, { rejectWithValue }) => {
     try {
       const {
         data: { posts },
@@ -170,6 +195,14 @@ export const postComment = createAsyncThunk(
       );
 
       if (status === 201) {
+        toast.success("Posted a comment.", {
+          position: "top-right",
+          duration: 2000,
+          style: {
+            fontSize: "12px",
+            borderRadius: "10rem",
+          },
+        });
         return posts;
       }
     } catch (error) {
@@ -185,6 +218,7 @@ export const commentDelete = createAsyncThunk(
     try {
       const {
         data: { posts },
+        status,
       } = await axios.post(
         `/api/comments/delete/${postId}/${commentId}`,
         {},
@@ -193,7 +227,17 @@ export const commentDelete = createAsyncThunk(
         }
       );
 
-      return posts;
+      if (status === 201) {
+        toast.success("Comment deleted.", {
+          position: "top-right",
+          duration: 2000,
+          style: {
+            fontSize: "12px",
+            borderRadius: "10rem",
+          },
+        });
+        return posts;
+      }
     } catch (error) {
       return rejectWithValue("Error occured! Try Again Later");
     }
