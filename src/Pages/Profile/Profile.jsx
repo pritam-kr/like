@@ -14,7 +14,6 @@ import * as FaIcons from "react-icons/fa";
 import { useModalContext } from "../../Context/ModalContext";
 import { useSelector } from "react-redux";
 import { usePost } from "../../Hooks";
-import axios from "axios";
 
 const Profile = () => {
   const state = useSelector((state) => state);
@@ -31,8 +30,6 @@ const Profile = () => {
     (eachUser) => eachUser.username === username
   );
 
-  
-
   const { setFollowerModal, setFollowingModal, editPostModal } =
     useModalContext();
 
@@ -48,6 +45,7 @@ const Profile = () => {
   const postSort = [...allPost]
     .sort((a, b) => b.id - a.id)
     .filter((eachPost) => eachPost.username === username);
+
   const { deletedPost } = usePost();
 
   const [editPostData, setPostEditData] = useState({
@@ -58,15 +56,16 @@ const Profile = () => {
   // User profile edit handler
 
   const [editProfileModal, setEditProfileModal] = useState(false);
-  const [updateData, setUpdateData] = useState({website: "", bio: "", avatar: ""})
+  const [updateData, setUpdateData] = useState({
+    website: "",
+    bio: "",
+    avatar: "",
+  });
 
-
-  const userProfileEditHandler = async ({website, bio}) => {
-    setUpdateData({website: website, bio: bio})
+  const userProfileEditHandler = async ({ website, bio }) => {
+    setUpdateData({ website: website, bio: bio });
     // console.log(updateData)
-    setEditProfileModal(true)
-
-    
+    setEditProfileModal(true);
   };
 
   return (
@@ -79,9 +78,7 @@ const Profile = () => {
               <img
                 alt="avatar"
                 className="w-40 h-40 object-cover rounded-full"
-                src={
-                    currentUser?.avatar
-                }
+                src={currentUser?.avatar}
               />
             </div>
 
@@ -92,7 +89,12 @@ const Profile = () => {
                   <span className="ml-4 ">
                     <FaIcons.FaEdit
                       className="icons profile-icons"
-                      onClick={() => userProfileEditHandler({website: currentUser.website, bio: currentUser.bio})}
+                      onClick={() =>
+                        userProfileEditHandler({
+                          website: currentUser.website,
+                          bio: currentUser.bio,
+                        })
+                      }
                     />
                   </span>
                 </h1>
@@ -150,7 +152,7 @@ const Profile = () => {
                 <PostCard
                   eachPost={eachPost}
                   key={i}
-                  deletedPost={deletedPost}
+                 
                   setPostEditData={setPostEditData}
                 />
               ))}
@@ -170,13 +172,15 @@ const Profile = () => {
           <FollowerModal />
           <FollowingModal />
 
-          {editProfileModal && <ProfileEdit
-            editProfileModal={editProfileModal}
-            setEditProfileModal={setEditProfileModal}
-            updateData={updateData}
-            setUpdateData={setUpdateData}
-            currentUser={currentUser}
-          />}
+          {editProfileModal && (
+            <ProfileEdit
+              editProfileModal={editProfileModal}
+              setEditProfileModal={setEditProfileModal}
+              updateData={updateData}
+              setUpdateData={setUpdateData}
+              currentUser={currentUser}
+            />
+          )}
         </div>
       </div>
     </>
