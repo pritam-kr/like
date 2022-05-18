@@ -58,7 +58,7 @@ const Bookmark = () => {
                     There is no post in the Bookmark
                   </h1>
                 ) : (
-                  <div className=" h-auto md:h-128 md:overflow-y-scroll">
+                  <div className=" h-auto md:h-128  ">
                     {bookmarkPost?.map((eachPost) => (
                       <BookmarkCard key={eachPost._id} eachPost={eachPost} />
                     ))}
