@@ -28,16 +28,14 @@ const Bookmark = () => {
   }, [token, dispatch]);
 
   //Getting bookmark posts by filtering from all post
-  const bookmarkPost = allPost?.filter((eachPost) =>
-    bookmarks?.includes(eachPost._id)
-  );
+  const bookmarkPost = bookmarks?.map((eachId) => allPost?.find((eachPost) => eachPost._id=== eachId))
 
   // filter user on the basis of user name for follow/ unfollow
   const filteredUser = users.filter(
     (eachUser) => eachUser.username !== userInfo.username
   );
 
-  
+
 
   return (
     <>
