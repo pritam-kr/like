@@ -9,6 +9,7 @@ import {
 } from "../../Components/Index";
 import { useDispatch, useSelector } from "react-redux";
 import { getFilteredPost } from "../../Store/Slice/PostSlice";
+import { Link } from "react-router-dom";
  
 
 const Feeds = () => {
@@ -48,6 +49,7 @@ const Feeds = () => {
   const filterPostHandler = (post, type) => {
     if (type === "trending") {
       dispatch(getFilteredPost({ trendingPost: [...post].reverse() }));
+
     } else if (type === "sortByDate") {
       dispatch(getFilteredPost({ trendingPost: [...post].reverse() }));
     } else {
@@ -65,24 +67,24 @@ const Feeds = () => {
             <div className=" flex justify-between items-center text-white-color p-2">
               <h1 className="text-xl">Feeds</h1>
               <div className="flex">
-                <button
+                <Link to=""
                   className="mr-2 flex items-center icons text-sm"
                   onClick={() => filterPostHandler(trendingPost, "trending")}
                 >
                   Trending
-                </button>
-                <button
+                </Link>
+                <Link to=""
                   className="mr-2 flex items-center icons text-sm"
                   onClick={() => filterPostHandler(sortByDate, "sortByDate")}
                 >
                   Sort By Date
-                </button>
-                <button
+                </Link>
+                <Link to=""
                   className="mr-2 flex items-center icons text-sm"
                   onClick={() => filterPostHandler(recentPost, "recent")}
                 >
                   Recent
-                </button>
+                </Link>
               </div>
             </div>
 
