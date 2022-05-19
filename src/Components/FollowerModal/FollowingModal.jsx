@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useModalContext } from "../../Context/ModalContext";
 import { followUser, unFollowUser } from "../../Store/Slice/UserSlice";
+import { userAvatar } from "../../Utils/Index";
 
 const FollowingModal = () => {
   const state = useSelector((state) => state);
@@ -13,9 +14,11 @@ const FollowingModal = () => {
       token,
     },
     post,
+    user: { users },
   } = state;
   const dispatch = useDispatch();
-const navigate =   useNavigate()
+  const navigate = useNavigate();
+
   //Current logged user
   const currentUser = state.user.users.find(
     (eachUser) => eachUser.username === username
@@ -33,13 +36,12 @@ const navigate =   useNavigate()
 
   //Single profile handler
   const singleProfileHandler = (username) => {
-    if(username === state.auth.userInfo.username){
-       navigate('/profile')
-    }else{
-      navigate(`/profile/${username}`)
+    if (username === state.auth.userInfo.username) {
+      navigate("/profile");
+    } else {
+      navigate(`/profile/${username}`);
     }
-
-  }
+  };
 
   return (
     followingModal && (
@@ -64,13 +66,31 @@ const navigate =   useNavigate()
                   <div className="admin-short-info border-b-0 flex justify-between items-center">
                     <div className="flex items-center">
                       <img
-                        src="https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
-                        alt="admin"
+                        src={userAvatar(eachUser.username, users).avatar}
+                        alt={eachUser.username}
                         className="post-avatar mr-3"
                       />
-                      <h1 className="post-user-name leading-none text-[#292929]" cursor-pointer onClick={() =>  singleProfileHandler(eachUser.username)}>
-                        {eachUser.username} 
-                      </h1>
+
+                      <div>
+                        <h1
+                          className="post-user-name leading-none text-[#292929]"
+                          cursor-pointer
+                          onClick={() =>
+                            singleProfileHandler(eachUser.username)
+                          }
+                        >
+                          {eachUser.firstName} {eachUser.lastName}
+                        </h1>
+                        <p
+                          className="post-user-name leading-none text-[#292929]"
+                          cursor-pointer
+                          onClick={() =>
+                            singleProfileHandler(eachUser.username)
+                          }
+                        >
+                          {eachUser.username}
+                        </p>
+                      </div>
                     </div>
 
                     <div className="ml-2">

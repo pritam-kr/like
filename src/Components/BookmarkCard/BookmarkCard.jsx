@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { removeFromBookmark } from "../../Store/Slice/BookmarkSlice";
 import { likePost, dislikePost } from "../../Store/Slice/PostSlice";
 import { likeByUser } from "../../Utils/LikeByUser";
+import { userAvatar } from "../../Utils/userAvatar";
 
 const BookmarkCard = ({ eachPost }) => {
   const navigate = useNavigate();
@@ -48,13 +49,14 @@ const BookmarkCard = ({ eachPost }) => {
     }
   };
 
+
   return (
     <div className="feed-post-card mb-4 pd-0 rounded-3xl p-3 bg-light-bg text-[#fff]">
       <div className="flex items-center justify-between p-2">
         <div className="flex items-center ">
           <img
             src={
-              "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
+              userAvatar(username, users)?.avatar
             }
             alt="admin"
             className="post-avatar mr-3"

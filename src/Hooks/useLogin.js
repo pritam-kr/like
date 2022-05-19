@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { authInfo, getToken } from "../Store/Slice/AuthSlice";
@@ -9,8 +8,7 @@ export const useLogin = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  //State for Forms error
-  const [error, setError] = useState("");
+ 
 
   //from we are comming from
   const from = location.state?.from?.pathname || "/feeds";
@@ -23,9 +21,13 @@ export const useLogin = () => {
       } = await axios.post("/api/auth/login", formData);
 
       if (status === 200) {
-        toast.success("Successfully Login", {
+        toast.success(`Welcome ${foundUser.firstName} ${foundUser.lastName}`, {
           position: "top-right",
-          duration: 500,
+          duration: 2000,
+          style: {
+             fontSize: "15px",
+             borderRadius: "10rem"
+          },
         });
         navigate(from);
         localStorage.setItem("login-token", encodedToken);
@@ -73,5 +75,5 @@ export const useLogin = () => {
 
    
 
-  return { loginForm, error, signupForm };
+  return { loginForm, signupForm };
 };

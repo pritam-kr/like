@@ -1,10 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Topbar, PostModal, Loading } from "../../Components/Index";
+import { Topbar, PostModal, Loading, Users } from "../../Components/Index";
 import * as FaIcons from "react-icons/fa";
 import { dislikePost, likePost } from "../../Store/Slice/PostSlice";
 import { likeByUser } from "../../Utils/LikeByUser";
 import { useNavigate } from "react-router-dom";
+import { userAvatar } from "../../Utils/userAvatar";
 
 const Explore = () => {
   const state = useSelector((state) => state);
@@ -12,11 +13,10 @@ const Explore = () => {
   const {
     auth: { userInfo, token },
     post: { allPost, loading },
+    user: { users },
   } = state;
 
-  
-
-   const navigate = useNavigate()
+  const navigate = useNavigate();
 
   //Like Post Handler
   const likePostHandler = (_id, token) => {
@@ -35,6 +35,18 @@ const Explore = () => {
     }
   };
 
+  const getUserFullName = (users, username) =>
+    users.filter((eachUser) => eachUser.username === username)[0];
+
+    //Single profile handler
+  const singleProfileHandler = (username) => {
+    if (username === userInfo.username) {
+      navigate("/profile");
+    } else {
+      navigate(`/profile/${username}`);
+    }
+  };
+
   return (
     <>
       <Topbar />
@@ -47,26 +59,42 @@ const Explore = () => {
             ) : (
               <>
                 {allPost.map((eachPost) => (
-                  <div className="post-card  w-full border-1  mt-1 bg-light-bg text-[#f7f7f7] p-8 rounded-3xl md:w-124">
+                  <div
+                    className="post-card  w-full border-1  mt-1 bg-light-bg text-[#f7f7f7] p-8 rounded-3xl md:w-124"
+                    key={eachPost._id}
+                  >
                     <div className="flex items-center justify-between p-2 ">
                       <div className="flex items-center">
                         <img
-                          src={
-                            "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
-                          }
+                          src={userAvatar(eachPost?.username, users)?.avatar}
                           alt="admin"
                           className="post-avatar mr-3"
                         />
-                        <h1 className="post-user-name"> {eachPost.username}</h1>
+                        <div>
+                          <h1 className="post-user-name leading-none cursor-pointer" onClick={() => singleProfileHandler(eachPost?.username)}>
+                            {getUserFullName(users, eachPost?.username).firstName}{" "}
+                            {getUserFullName(users, eachPost?.username).lastName}
+                          </h1>
+
+                          <p className="text-[#909090]">
+                            {eachPost?.username}{" "}
+                          </p>
+                        </div>
                       </div>
                     </div>
 
                     <div className="px-2 py-2">
                       <p className="font-bold text-caption-title mt-2"> </p>
-                      <p className="font-bold text-caption-title mt-2 cursor-pointer"  onClick={() => singlePostHandler(eachPost.id)}>
+                      <p
+                        className="font-bold text-caption-title mt-2 cursor-pointer"
+                        onClick={() => singlePostHandler(eachPost.id)}
+                      >
                         {eachPost.caption}
                       </p>
-                      <p className="text-caption leading-6 cursor-pointer"  onClick={() => singlePostHandler(eachPost.id)}>
+                      <p
+                        className="text-caption leading-6 cursor-pointer"
+                        onClick={() => singlePostHandler(eachPost.id)}
+                      >
                         {eachPost.content}
                       </p>
 
@@ -87,10 +115,16 @@ const Explore = () => {
                               }
                             />
                           )}
-                          <span className="ml-1 text-lg"> {eachPost.likes.likeCount}</span>
+                          <span className="ml-1 text-lg">
+                            {" "}
+                            {eachPost.likes.likeCount}
+                          </span>
                         </li>
                         <li className="flex justify-start items-center mr-2">
-                          <FaIcons.FaComment className="icons share-icon" onClick={() => singlePostHandler(eachPost.id)} />
+                          <FaIcons.FaComment
+                            className="icons share-icon"
+                            onClick={() => singlePostHandler(eachPost.id)}
+                          />
                         </li>
                       </ul>
                     </div>
@@ -108,61 +142,3 @@ const Explore = () => {
 };
 
 export { Explore };
-
-// <div className="post-card border-1  mt-1 bg-light-bg text-[#f7f7f7] p-4 rounded-3xl">
-// <div className="flex items-center justify-between p-2 ">
-//   <div className="flex items-center">
-//     <img
-//       src={
-//         "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
-//       }
-//       alt="admin"
-//       className="post-avatar mr-3"
-//     />
-//     <h1 className="post-user-name"> Pritam</h1>
-//   </div>
-//   <div className="flex justify-center items-center">
-//     <span className="mr-2">
-//       <FaIcons.FaTrash
-//         className="icons profile-icons"
-//         // onClick={() => postDeleteHandler(_id, token)}
-//       />
-//     </span>
-//     <span>
-//       <FaIcons.FaEdit
-//         className="icons profile-icons"
-//         // onClick={() =>
-//         //   postEditHandler({ caption: caption, content: content })
-//         // }
-//       />
-//     </span>
-//   </div>
-// </div>
-
-// <div className="px-2 py-2">
-//   <p className="font-bold text-caption-title mt-2"> </p>
-//   <p className="text-caption leading-6 ">
-
-//   </p>
-
-//   <ul className="flex justify-start items-center mt-2">
-//     <li className="flex justify-start items-center mr-2">
-//       {/* {likeByUser(eachPost, userInfo) ? (
-//         <FaIcons.FaHeart
-//           className="icons like-icon liked"
-//           onClick={() => disLikePostHandler(_id, token)}
-//         />
-//       ) : (
-//         <FaIcons.FaHeart
-//           className="icons like-icon "
-//           onClick={() => likePostHandler(_id, token)}
-//         />
-//       )} */}
-//       <span className="ml-1 text-lg">5 </span>
-//     </li>
-//     <li className="flex justify-start items-center mr-2">
-//       <FaIcons.FaComment className="icons share-icon" />
-//     </li>
-//   </ul>
-// </div>
-// </div>

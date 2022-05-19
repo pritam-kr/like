@@ -1,7 +1,7 @@
 import React from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Topbar.css";
 import { useModalContext } from "../../Context/ModalContext";
 import { logoutHandler } from "../../Store/Slice/AuthSlice";
@@ -9,11 +9,11 @@ import { useDispatch } from "react-redux";
 
 const Topbar = () => {
   const { setPostModal } = useModalContext();
-   const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-   const logoutUserHandler = () => {
-    dispatch(logoutHandler())
-   }
+  const logoutUserHandler = () => {
+    dispatch(logoutHandler());
+  };
 
   return (
     <nav className="nav w-full bg-light-bg">
@@ -39,9 +39,14 @@ const Topbar = () => {
           <div className="icons-wrapper md:flex">
             <ul className="mobile-bottom-icons fixed bottom-0 right-0 left-0 md:static">
               <li className="inline-block md:mr-6">
-                <Link to="/feeds">
+                <NavLink
+                  to="/feeds"
+                  style={({ isActive }) => ({
+                    color: isActive ? "var(--primary-color)" : "#070f1f",
+                  })}
+                >
                   <FaIcons.FaHome className="icons nav-icons" />{" "}
-                </Link>
+                </NavLink>
               </li>
               <li className="inline-block md:mr-6">
                 <FaIcons.FaPlusCircle
@@ -50,26 +55,35 @@ const Topbar = () => {
                 />
               </li>
               <li className="inline-block md:mr-6">
-                <Link to="/explore">
+                <NavLink to="/explore" style={({ isActive }) => ({
+                    color: isActive ? "var(--primary-color)" : "#070f1f",
+                  })}>
                   <FaIcons.FaCompass className="icons nav-icons" />
-                </Link>
+                </NavLink>
               </li>
               <li className="inline-block md:mr-6">
-                <Link to="/bookmark">
+                <NavLink to="/bookmark" style={({ isActive }) => ({
+                    color: isActive ? "var(--primary-color)" : "#070f1f",
+                  })}>
                   <FaIcons.FaBookmark className="icons nav-icons" />
-                </Link>
+                </NavLink>
               </li>
             </ul>
             <ul>
               <li className="inline-block md:mr-6">
-                <Link to="/profile">
+                <NavLink to="/profile" style={({ isActive }) => ({
+                    color: isActive ? "var(--primary-color)" : "#070f1f",
+                  })}>
                   <FaIcons.FaUserCircle className="icons nav-icons" />
-                </Link>
+                </NavLink>
               </li>
 
               <li className="inline-block ml-4 md:mr-4">
                 <Link to="">
-                  <FaIcons.FaSignOutAlt className="icons nav-icons" onClick={() => logoutUserHandler()}/>
+                  <FaIcons.FaSignOutAlt
+                    className="icons nav-icons"
+                    onClick={() => logoutUserHandler()}
+                  />
                 </Link>
               </li>
             </ul>

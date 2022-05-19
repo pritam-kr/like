@@ -5,7 +5,7 @@ import {
   FeedPostCard,
   PostModal,
   Users,
-  Loading,
+  Loading,LoggedUser
 } from "../../Components/Index";
 import { useDispatch, useSelector } from "react-redux";
 import { getFilteredPost } from "../../Store/Slice/PostSlice";
@@ -49,6 +49,7 @@ const Feeds = () => {
   const filterPostHandler = (post, type) => {
     if (type === "trending") {
       dispatch(getFilteredPost({ trendingPost: [...post].reverse() }));
+
     } else if (type === "sortByDate") {
       dispatch(getFilteredPost({ trendingPost: [...post].reverse() }));
     } else {
@@ -66,31 +67,31 @@ const Feeds = () => {
             <div className=" flex justify-between items-center text-white-color p-2">
               <h1 className="text-xl">Feeds</h1>
               <div className="flex">
-                <button
+                <Link to=""
                   className="mr-2 flex items-center icons text-sm"
                   onClick={() => filterPostHandler(trendingPost, "trending")}
                 >
                   Trending
-                </button>
-                <button
+                </Link>
+                <Link to=""
                   className="mr-2 flex items-center icons text-sm"
                   onClick={() => filterPostHandler(sortByDate, "sortByDate")}
                 >
                   Sort By Date
-                </button>
-                <button
+                </Link>
+                <Link to=""
                   className="mr-2 flex items-center icons text-sm"
                   onClick={() => filterPostHandler(recentPost, "recent")}
                 >
                   Recent
-                </button>
+                </Link>
               </div>
             </div>
 
             {loading ? (
               <Loading />
             ) : (
-              <div className=" h-auto md:h-120 md:overflow-y-scroll">
+              <div className=" h-auto md:h-120 ">
                 {recentPost.map((eachPost) => {
                   return (
                     <FeedPostCard eachPost={eachPost} key={eachPost._id} />
@@ -100,27 +101,9 @@ const Feeds = () => {
             )}
           </div>
           <div className="users-suggestion hidden p-2 h-min md:block">
-            <div className="admin-short-info p-2   border-b-0 rounded-3xl mb-2 bg-light-bg">
-              <div className="flex items-center">
-                <img
-                  src={
-                    "https://res.cloudinary.com/dhqxln7zi/image/upload/v1652266218/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws_o3oigd.jpg"
-                  }
-                  alt="admin"
-                  className="post-avatar"
-                />
-                <div className="ml-2">
-                  <h1 className="post-user-name leading-none">
-                  <Link to="/profile" className="font-bold"> {userInfo?.firstName} {userInfo?.lastName} </Link>
-                  </h1>
-                  <p className="text-[#909090]">{userInfo?.username}</p>
-                </div>
-              </div>
-            </div>
-
+            <LoggedUser />
             <div className="suggestion-people-wrapper p-4 bg-light-bg  rounded-3xl">
               <h1 className=" font-bold">Suggestions for You</h1>
-
               <ul className="suggestions-people-list h-96 overflow-y-scroll">
                 {filteredUser?.map((each) => (
                   <Users eachUser={each} key={each._id} />

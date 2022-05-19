@@ -59,10 +59,7 @@ h6 {
 
 }
 
-/* p {
-    color: #323232;
-} */
-
+ 
 li,
 p,
 span,
@@ -135,17 +132,19 @@ a:hover {
 
 /* width */
 ::-webkit-scrollbar {
-    width: 1px;
+    width: 0px;
   }
   
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    
+    border-radius: 10px;
   }
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: #888;
+    border-radius: 10px;
   }
   
   /* Handle on hover */

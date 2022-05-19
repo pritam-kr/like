@@ -11,7 +11,7 @@ import {
 } from "./Pages/Index";
 import { Footer, FeedFooter, ScrollTop } from "./Components/Index";
 import { Toaster } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { PrivateRoute } from "./Router/PrivateRoute/PrivateRoute";
  
  
@@ -22,12 +22,12 @@ function App() {
   const state = useSelector((state) => state);
   const { auth:{token} } = state;
     
-  
+
   
   return (
     <div className="App">
-      <Toaster />
-       
+      <Toaster  />
+       <ScrollTop>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -42,12 +42,13 @@ function App() {
           <Route path="/explore" element={<PrivateRoute ><Explore /></PrivateRoute>} />
            
         </Routes>
-     
-      {pathname === "/feeds" || pathname === "/profile" ? (
+
+      {pathname === "/feeds" || pathname === "/profile" || pathname === "/post/:postid" || pathname === "/bookmark" ||pathname === "/explore" ? (
         <FeedFooter />
       ) : (
         <Footer />
       )}
+      </ScrollTop>
     </div>
   );
 }

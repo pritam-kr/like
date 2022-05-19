@@ -1,20 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
-import {
-  Topbar,
-  PostModal,
-  FollowerModal,
-  FollowingModal,
-  Loading,
-  EditPostModal,
-} from "../../Components/Index";
+import { Topbar, PostModal, Loading } from "../../Components/Index";
 import * as FaIcons from "react-icons/fa";
 import { useModalContext } from "../../Context/ModalContext";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { likeByUser } from "../../Utils/LikeByUser";
-import { addToBookmark } from "../../Store/Slice/BookmarkSlice";
+
 import { dislikePost, likePost } from "../../Store/Slice/PostSlice";
+import { userAvatar } from "../../Utils/userAvatar";
 
 const UserProfile = () => {
   const pathname = useParams();
@@ -23,12 +17,11 @@ const UserProfile = () => {
   const state = useSelector((state) => state);
   const {
     auth: {
-      userInfo: { username, avatar, firstName, lastName, _id },
+      userInfo: { _id },
       token,
     },
     post: { loading, allPost },
     user: { users },
-    bookmark: { bookmarks },
   } = state;
 
   //Current Profile
@@ -40,7 +33,7 @@ const UserProfile = () => {
     (eachPost) => eachPost.username === currentProfile.username
   );
 
-  const { setFollowerModal, setFollowingModal, editPostModal } =
+  const { setFollowerModal, setFollowingModal } =
     useModalContext();
 
   // Dislike Post Handler
@@ -51,11 +44,6 @@ const UserProfile = () => {
   //Post Like Handler
   const likePostHandler = (_id, token) => {
     dispatch(likePost({ postId: _id, token: token }));
-  };
-
-  //add to bookmark
-  const bookmarkHandler = (_id, token) => {
-    dispatch(addToBookmark({ postId: _id, token: token }));
   };
 
   //Single Post and comment handler
@@ -75,10 +63,7 @@ const UserProfile = () => {
               <img
                 alt="avatar"
                 className="w-40 rounded-full"
-                src={
-                  avatar ||
-                  "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg"
-                }
+                src={currentProfile?.avatar}
               />
             </div>
 
@@ -90,9 +75,21 @@ const UserProfile = () => {
                 <p className=" user-name text-xl py-1">
                   @{currentProfile?.username}
                 </p>
+
                 <p className="text-sub-heading text-sm py-2 text-[#f7f7f7]">
                   {currentProfile?.bio}
                 </p>
+
+                <a
+                  href={currentProfile?.website}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-[#f7f7f7] my-2 text-[14px]"
+                >
+                  {" "}
+                  {currentProfile?.website}
+                </a>
+
                 <p className="text-sub-heading text-sm py-2 text-[#f7f7f7]"></p>
               </div>
               <div className="chips-container text-center mt-0 text-sub-heading">
@@ -129,14 +126,12 @@ const UserProfile = () => {
             <Loading />
           ) : (
             <div className="post-wrapper my-6 p-3 md:flex md:flex-wrap md:justify-start">
-              {currentProfilePosts?.map((eachPost, i) => (
-                <div className="post-card border-1  mt-1 bg-light-bg text-[#f7f7f7] p-4 rounded-3xl  md:w-124">
+              {currentProfilePosts?.map((eachPost, ) => (
+                <div className="post-card border-1  mt-1 bg-light-bg text-[#f7f7f7] p-4 rounded-3xl  md:w-124" key={eachPost._id}>
                   <div className="flex items-center justify-between p-2 ">
                     <div className="flex items-center">
                       <img
-                        src={
-                          "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
-                        }
+                        src={userAvatar(eachPost.username, users).avatar}
                         alt="admin"
                         className="post-avatar mr-3"
                       />
@@ -152,7 +147,7 @@ const UserProfile = () => {
                       {eachPost.caption}
                     </p>
                     <p
-                      className="text-caption leading-6 cursor-pointer"
+                      className="text-caption leading-6 cursor-pointer mt-3"
                       onClick={() => singlePostHandler(eachPost.id)}
                     >
                       {eachPost.content}
@@ -172,7 +167,6 @@ const UserProfile = () => {
                           />
                         )}
                         <span className="ml-1 text-lg">
-                       
                           {eachPost.likes.likeCount}{" "}
                         </span>
                       </li>

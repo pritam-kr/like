@@ -9,6 +9,7 @@ import {
 } from "../../Store/Slice/BookmarkSlice";
 import { likePost, dislikePost } from "../../Store/Slice/PostSlice";
 import { likeByUser } from "../../Utils/LikeByUser";
+import { userAvatar } from "../../Utils/userAvatar";
 import "./FeedStyle.css";
 
 const FeedPostCard = ({ eachPost }) => {
@@ -27,11 +28,11 @@ const FeedPostCard = ({ eachPost }) => {
     username,
     content,
     caption,
-    avatar,
     likes: { likeCount },
   } = eachPost || {};
   const navigate = useNavigate();
- 
+
+
   //Post Like Handler
   const likePostHandler = (_id, token) => {
     dispatch(likePost({ postId: _id, token: token }));
@@ -73,13 +74,14 @@ const FeedPostCard = ({ eachPost }) => {
 
   }
 
+
   return (
     <div className="feed-post-card mb-4 pd-0 rounded-3xl p-3 bg-light-bg text-[#fff]">
       <div className="flex items-center justify-between p-2">
         <div className="flex items-center ">
           <img
             src={
-              "https://sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
+              userAvatar(username, users).avatar
             }
             alt={username}
             className="post-avatar mr-3"

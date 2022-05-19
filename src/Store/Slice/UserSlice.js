@@ -32,6 +32,13 @@ export const followUser = createAsyncThunk(
       } = await followUserService(followUserId, token);
 
       if (status === 200) {
+        toast.success("User followed", {
+          position: "top-right",
+          duration: 2000,
+          style: {
+            fontSize: "12px",
+            borderRadius: "10rem",
+          }})
         return { followUser: followUser, user: user };
       }
     } catch (error) {
@@ -50,6 +57,13 @@ export const unFollowUser = createAsyncThunk(
       } = await unFollowUserService(unFollowUserId, token);
 
       if (status === 200) {
+        toast.success("User Unfollowed", {
+          position: "top-right",
+          duration: 2000,
+          style: {
+            fontSize: "12px",
+            borderRadius: "10rem",
+          }})
         return { followUser: followUser, user: user };
       }
     } catch (error) {
