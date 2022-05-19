@@ -57,7 +57,7 @@ const Bookmark = () => {
                   </h1>
                 ) : (
                   <div className=" h-auto md:h-128  ">
-                    {bookmarkPost?.map((eachPost) => (
+                    {[...bookmarkPost]?.reverse()?.map((eachPost) => (
                       <BookmarkCard key={eachPost._id} eachPost={eachPost} />
                     ))}
                   </div>
