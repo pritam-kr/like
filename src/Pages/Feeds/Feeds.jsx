@@ -5,12 +5,12 @@ import {
   FeedPostCard,
   PostModal,
   Users,
-  Loading,LoggedUser
+  Loading,
+  LoggedUser,
 } from "../../Components/Index";
 import { useDispatch, useSelector } from "react-redux";
 import { getFilteredPost } from "../../Store/Slice/PostSlice";
 import { Link } from "react-router-dom";
- 
 
 const Feeds = () => {
   const state = useSelector((state) => state);
@@ -23,18 +23,31 @@ const Feeds = () => {
   } = state;
 
   // filter user on the basis of user name for follow/ unfollow
-  const filteredUser = users.filter(
-    (eachUser) => eachUser.username !== userInfo.username
+
+  const currentUser = users?.find(
+    (each) => each.username === userInfo.username
   );
 
-   
+  const currentUserFollowing = currentUser?.following;
 
-   //Filter Post on the basis of logged user following array 
-   const loggedUser = users?.find((eachUser) => eachUser.username === userInfo.username)
-   const loggedUserFollowing = loggedUser?.following
- 
- 
-   const feedPost = allPost.filter((eachPost) =>  loggedUserFollowing.find((each) => each.username === eachPost.username ) || eachPost.username === loggedUser.username)
+  const allSuggestionUser = [...users].filter(
+    (eachUser) =>
+      !currentUserFollowing.find(
+        (each) => eachUser.username === each.username
+      ) && eachUser.username !== currentUser.username
+  );
+
+  //Filter Post on the basis of logged user following array
+  const loggedUser = users?.find(
+    (eachUser) => eachUser.username === userInfo.username
+  );
+  const loggedUserFollowing = loggedUser?.following;
+
+  const feedPost = allPost.filter(
+    (eachPost) =>
+      loggedUserFollowing.find((each) => each.username === eachPost.username) ||
+      eachPost.username === loggedUser.username
+  );
 
   const recentPost = [...feedPost].reverse();
 
@@ -49,14 +62,12 @@ const Feeds = () => {
   const filterPostHandler = (post, type) => {
     if (type === "trending") {
       dispatch(getFilteredPost({ trendingPost: [...post].reverse() }));
-
     } else if (type === "sortByDate") {
       dispatch(getFilteredPost({ trendingPost: [...post].reverse() }));
     } else {
       dispatch(getFilteredPost({ trendingPost: post }));
     }
   };
-
 
   return (
     <>
@@ -67,19 +78,22 @@ const Feeds = () => {
             <div className=" flex justify-between items-center text-white-color p-2">
               <h1 className="text-xl">Feeds</h1>
               <div className="flex">
-                <Link to=""
+                <Link
+                  to=""
                   className="mr-2 flex items-center icons text-sm"
                   onClick={() => filterPostHandler(trendingPost, "trending")}
                 >
                   Trending
                 </Link>
-                <Link to=""
+                <Link
+                  to=""
                   className="mr-2 flex items-center icons text-sm"
                   onClick={() => filterPostHandler(sortByDate, "sortByDate")}
                 >
                   Sort By Date
                 </Link>
-                <Link to=""
+                <Link
+                  to=""
                   className="mr-2 flex items-center icons text-sm"
                   onClick={() => filterPostHandler(recentPost, "recent")}
                 >
@@ -103,11 +117,11 @@ const Feeds = () => {
           <div className="users-suggestion hidden p-2 h-min md:block">
             <LoggedUser />
             <div className="suggestion-people-wrapper p-4 bg-light-bg  rounded-3xl">
-              <h1 className=" font-bold">Suggestions for You</h1>
+              <h1 className=" font-bold text-center">Suggestions for You</h1>
               <ul className="suggestions-people-list h-96 overflow-y-scroll">
-                {filteredUser?.map((each) => (
+                {allSuggestionUser.length === 0 ? <h1 className="text-lg text-center">There is no suggestion for Follow. </h1> : (allSuggestionUser?.map((each) => (
                   <Users eachUser={each} key={each._id} />
-                ))}
+                )))}
               </ul>
             </div>
           </div>

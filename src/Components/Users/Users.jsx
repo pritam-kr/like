@@ -35,7 +35,7 @@ const Users = ({ eachUser }) => {
   };
 
   return (
-    <li className="my-2  py-2 " key={eachUser?._id}>
+    <li className="my-2  py-2 "  >
       <div className="admin-short-info border-b-0 bg-light-bg">
         <div className="flex items-center">
           <img
@@ -44,7 +44,7 @@ const Users = ({ eachUser }) => {
             className="post-avatar"
           />
           <div className="ml-2 w-full">
-            <h1 className="post-user-name leading-none flex justify-between items-center ">
+            <div className="post-user-name leading-none flex justify-between items-center text-[#f7f7f7]">
               <p className="cursor-pointer" onClick={() => singleProfileHandler(eachUser.username)}>
                 {eachUser?.firstName} {eachUser?.lastName}
               </p>
@@ -65,7 +65,7 @@ const Users = ({ eachUser }) => {
                   Follow
                 </button>
               )}
-            </h1>
+            </div>
             <p onClick={() => singleProfileHandler(eachUser.username)} className="text-[#909090] mt-[-6px] cursor-pointer">{eachUser?.username}</p>
           </div>
         </div>
@@ -76,4 +76,3 @@ const Users = ({ eachUser }) => {
 
 export { Users };
 
-// <button className="text-sm mr-2 btn-follow-unfollow rounded-full pt-2 pb-2 pr-3 pl-3"> UnFollow</button>
