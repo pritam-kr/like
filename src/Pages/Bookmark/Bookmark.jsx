@@ -6,16 +6,15 @@ import {
   PostModal,
   Loading,
   Users,
-  BookmarkCard,LoggedUser
+  BookmarkCard,
+  LoggedUser,
 } from "../../Components//Index";
 import { getBookmarkPost } from "../../Store/Slice/BookmarkSlice";
 
 const Bookmark = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  //User data to follow
   const {
     auth: { token, userInfo },
     post: { allPost, loading },
@@ -28,14 +27,24 @@ const Bookmark = () => {
   }, [token, dispatch]);
 
   //Getting bookmark posts by filtering from all post
-  const bookmarkPost = bookmarks?.map((eachId) => allPost?.find((eachPost) => eachPost._id=== eachId))
-
-  // filter user on the basis of user name for follow/ unfollow
-  const filteredUser = users.filter(
-    (eachUser) => eachUser.username !== userInfo.username
+  const bookmarkPost = bookmarks?.map((eachId) =>
+    allPost?.find((eachPost) => eachPost._id === eachId)
   );
 
+  // filter user on the basis of user name for follow/ unfollow
 
+  const currentUser = users?.find(
+    (each) => each.username === userInfo.username
+  );
+
+  const currentUserFollowing = currentUser?.following;
+
+  const allSuggestionUser = [...users].filter(
+    (eachUser) =>
+      !currentUserFollowing.find(
+        (each) => eachUser.username === each.username
+      ) && eachUser.username !== currentUser.username
+  );
 
   return (
     <>
@@ -66,14 +75,14 @@ const Bookmark = () => {
             )}
           </div>
           <div className="users-suggestion hidden p-2 h-min md:block">
-             <LoggedUser />
+            <LoggedUser />
             <div className="suggestion-people-wrapper p-4 bg-light-bg  rounded-3xl">
-              <h1 className=" font-bold">Suggestions for You</h1>
+              <h1 className=" font-bold text-center">Suggestions for You</h1>
 
               <ul className="suggestions-people-list h-96 overflow-y-scroll">
-                {filteredUser?.map((each) => (
+              {allSuggestionUser.length === 0 ? <h1 className="text-lg text-center">There is no suggestion for Follow. </h1> : (allSuggestionUser?.map((each) => (
                   <Users eachUser={each} key={each._id} />
-                ))}
+                )))}
               </ul>
             </div>
           </div>
