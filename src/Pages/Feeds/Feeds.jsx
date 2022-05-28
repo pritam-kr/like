@@ -106,7 +106,7 @@ const Feeds = () => {
               <Loading />
             ) : (
               <div className=" h-auto md:h-120 ">
-                {recentPost.map((eachPost) => {
+                {recentPost.length === 0 ? <h1 className="text-xl ml-2">There is no Post Please Create one.</h1>: recentPost.map((eachPost) => {
                   return (
                     <FeedPostCard eachPost={eachPost} key={eachPost._id} />
                   );

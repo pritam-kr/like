@@ -49,12 +49,16 @@ const ProfileEdit = ({ updateData, setUpdateData, setEditProfileModal, currentUs
     <>
       <div className="post-form-modal fixed top-0 left-0 right-0 bottom-0 flex  justify-center items-start w-full ">
         <div className="post-form-wrapper mx-3 rounded-3xl">
-          <p className="p-6 border-b-2">
+        <div className="p-6 border-b-2 flex justify-between">
+          <span>
             <FaIcons.FaTimes
               className="icons"
               onClick={() => setEditProfileModal(false)}
             />
-          </p>
+          </span>
+
+          <h1 className="text-xl text-[#2a2929] font-bold">Profile Edit</h1>
+        </div>
 
           <form className="post-form p-2">
 

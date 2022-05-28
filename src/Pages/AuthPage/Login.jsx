@@ -20,7 +20,7 @@ const Login = () => {
 
   //Text credential
   const loginTextHandler = () => {
-    setFormData({ username: "adarshbalika", password: "adarshBalika123" });
+    setFormData({ username: "tessathom", password: "tessathom123" });
   };
 
   return (
