@@ -60,16 +60,4 @@ const SearchResult = ({ searchQuery, setShowSearchResult, inputRef }) => {
 
 export { SearchResult };
 
-{
-  /* <div className="flex items-center">
-<img
-  src="https://res.cloudinary.com/dhqxln7zi/image/upload/v1652867276/istockphoto-1168369629-612x612_wko9dt.jpg"
-  alt="users-avatar"
-  className="post-avatar"
-/>
-<div className="post-user-name leading-none flex flex-col  items-start text-[#f7f7f7] ml-2">
-  <p className="cursor-pointer">Pritam Kumar</p>
-  <p className="text-[#909090] cursor-pointer text-[12px]">pritamkr</p>
-</div>
-</div> */
-}
+ 
