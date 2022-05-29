@@ -17,7 +17,7 @@ export const posts = [
       dislikedBy: [],
     },
     avatar: "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg",
-    username: "adarshbalika",
+    username: "tessathom",
     createdAt: formatDate(),
     updatedAt: formatDate(),
     comments: [
@@ -48,7 +48,7 @@ export const posts = [
       dislikedBy: [],
     },
     avatar: "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg",
-    username: "adarshbalika",
+    username: "tessathom",
     createdAt: formatDate(),
     updatedAt: formatDate(),
     comments: [],
@@ -63,7 +63,7 @@ export const posts = [
       dislikedBy: [],
     },
     avatar: "https://t3.ftcdn.net/jpg/01/36/49/90/360_F_136499077_xp7bSQB4Dx13ktQp0OYJ5ricWXhiFtD2.jpg",
-    username: "adarshbalika",
+    username: "tessathom",
     createdAt: formatDate(),
     updatedAt: formatDate(),
 

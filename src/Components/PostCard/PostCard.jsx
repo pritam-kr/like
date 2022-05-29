@@ -27,16 +27,13 @@ const PostCard = ({ eachPost, setPostEditData }) => {
     content,
     likes: { likeCount },
     _id,
-    id,
-    avatar,
-    createdAt,
-    updatedAt,
   } = eachPost || {};
   const { setEditPostModal } = useModalContext();
 
   const state = useSelector((state) => state);
   const {
-    auth: { userInfo, token } ,user:{users},
+    auth: { userInfo, token },
+    user: { users },
   } = state;
 
   // Delete Post handler
@@ -62,9 +59,7 @@ const PostCard = ({ eachPost, setPostEditData }) => {
       <div className="flex items-center justify-between p-2 ">
         <div className="flex items-center">
           <img
-            src={
-              userAvatar(username, users).avatar
-            }
+            src={userAvatar(username, users).avatar}
             alt="admin"
             className="post-avatar mr-3"
           />
@@ -73,13 +68,13 @@ const PostCard = ({ eachPost, setPostEditData }) => {
         <div className="flex justify-center items-center">
           <span className="mr-2">
             <FaIcons.FaTrash
-              className="icons profile-icons"
+              className="icons text-[14px]"
               onClick={() => postDeleteHandler(_id, token)}
             />
           </span>
           <span>
             <FaIcons.FaEdit
-              className="icons profile-icons"
+              className="icons text-[14px]"
               onClick={() =>
                 postEditHandler({ caption: caption, content: content })
               }

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import toast from "react-hot-toast";
 import * as FaIcons from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useModalContext } from "../../Context/ModalContext";
@@ -23,6 +24,8 @@ const PostModal = () => {
       setPostModal(false);
       dispatch(createNewPost({ postData: postData, token: token }));
       setPostData({ content: "", caption: "" });
+    }else{
+      toast.error("Input Field can not be empty.", {position: "top-right"})
     }
   };
 
@@ -32,12 +35,14 @@ const PostModal = () => {
     postModal && (
       <div className="post-form-modal fixed top-0 left-0 right-0 bottom-0 flex  justify-center items-start w-full ">
         <div className="post-form-wrapper mx-3 rounded-3xl">
-          <p className="p-6 border-b-2">
-            <FaIcons.FaTimes
+          <div className="p-6 border-b-2 flex justify-between">
+            <span><FaIcons.FaTimes
               className="icons"
               onClick={() => setPostModal(false)}
-            />
-          </p>
+            /></span>
+
+            <h1 className="text-xl text-[#2a2929] font-bold">Create a new Post</h1>
+          </div>
 
           <form className="post-form p-2">
             <input

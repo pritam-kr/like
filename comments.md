@@ -1,0 +1,9 @@
+- Created a new branch p1
+- changed user credential
+- changed username in the post 
+- put a text if you don't have any post
+- Small validation in create new post's modal.
+- color change of edit and delete button of a post 
+- Top bar fixed
+- Added search bar 
+- navigate to profile page user after search

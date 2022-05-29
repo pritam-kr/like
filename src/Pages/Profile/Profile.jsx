@@ -12,17 +12,13 @@ import {
 } from "../../Components/Index";
 import * as FaIcons from "react-icons/fa";
 import { useModalContext } from "../../Context/ModalContext";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllPost } from "../../Store/Slice/PostSlice";
-
+import { useSelector } from "react-redux";
 
 const Profile = () => {
-  const dispatch = useDispatch()
   const state = useSelector((state) => state);
   const {
     auth: {
-      userInfo: { username, avatar },
-      token,
+      userInfo: { username },
     },
     post,
   } = state;
@@ -44,16 +40,14 @@ const Profile = () => {
   );
 
   // Sort by Latest post by the user
-  const postSort = [...allPost].reverse().filter((eachPost) => eachPost.username === username);
-
- 
+  const postSort = [...allPost]
+    .reverse()
+    .filter((eachPost) => eachPost.username === username);
 
   const [editPostData, setPostEditData] = useState({
     content: "",
     caption: "",
   });
-
-
 
   // User profile edit handler
   const [editProfileModal, setEditProfileModal] = useState(false);
@@ -148,14 +142,19 @@ const Profile = () => {
             <Loading />
           ) : (
             <div className="post-wrapper my-6 p-3 md:flex md:flex-wrap md:justify-start">
-              {postSort?.map((eachPost, i) => (
-                <PostCard
-                  eachPost={eachPost}
-                  key={i}
-                 
-                  setPostEditData={setPostEditData}
-                />
-              ))}
+              {postSort.length === 0 ? (
+                <h1 className="text-xl ml-2 text-center">
+                  There is no Post Please Create one.
+                </h1>
+              ) : (
+                postSort?.map((eachPost, i) => (
+                  <PostCard
+                    eachPost={eachPost}
+                    key={i}
+                    setPostEditData={setPostEditData}
+                  />
+                ))
+              )}
             </div>
           )}
 
