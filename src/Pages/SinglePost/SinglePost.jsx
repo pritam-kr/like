@@ -20,6 +20,14 @@ import { getAllUserData } from "../../Store/Slice/UserSlice";
 import { userAvatar } from "../../Utils/userAvatar";
 
 const SinglePost = () => {
+
+
+  useEffect(() => {
+
+    document.title ="Post"
+
+  }, [])
+
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const pathname = useParams();

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./Feed.css";
 import {
   Topbar,
@@ -13,6 +13,13 @@ import { getFilteredPost } from "../../Store/Slice/PostSlice";
 import { Link } from "react-router-dom";
 
 const Feeds = () => {
+
+  useEffect(() => {
+
+    document.title = "Feeds"
+
+  }, [])
+
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   //User data to follow

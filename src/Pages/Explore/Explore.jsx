@@ -1,6 +1,6 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Topbar, PostModal, Loading, Users } from "../../Components/Index";
+import React, {useEffect} from "react";
+import { useDispatch, useSelector,  } from "react-redux";
+import { Topbar, PostModal, Loading,} from "../../Components/Index";
 import * as FaIcons from "react-icons/fa";
 import { dislikePost, likePost } from "../../Store/Slice/PostSlice";
 import { likeByUser } from "../../Utils/LikeByUser";
@@ -8,6 +8,13 @@ import { useNavigate } from "react-router-dom";
 import { userAvatar } from "../../Utils/userAvatar";
 
 const Explore = () => {
+
+  useEffect(() => {
+
+    document.title = "Explore"
+
+  }, [])
+
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const {

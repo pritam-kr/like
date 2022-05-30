@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Style.css";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import { Nav } from "../../Components/Index";
 import toast from "react-hot-toast";
-import { regEx } from "../../Utils/RegEx";
+ 
 import { useLogin } from "../../Hooks/useLogin";
 
 const Signup = () => {
+  useEffect(() => {
+
+    document.title = "Sign up"
+
+  }, [])
   const { signupForm } = useLogin();
 
   const [showHide, setShowHide] = useState(false);

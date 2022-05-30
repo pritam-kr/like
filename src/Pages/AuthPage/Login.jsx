@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Style.css";
 import { Link } from "react-router-dom";
 import { Nav } from "../../Components/Index";
@@ -7,6 +7,13 @@ import {useLogin} from "../../Hooks/useLogin"
 
 
 const Login = () => {
+
+  useEffect(() => {
+
+    document.title = "Login"
+
+  }, [])
+
   const [formData, setFormData] = useState({ username: "", password: "" });
 
   

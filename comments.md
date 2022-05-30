@@ -7,3 +7,4 @@
 - Top bar fixed
 - Added search bar 
 - navigate to profile page user after search
+- Added document title

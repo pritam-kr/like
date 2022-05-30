@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+ 
 import {
   Topbar,
   PostModal,
@@ -12,6 +12,13 @@ import {
 import { getBookmarkPost } from "../../Store/Slice/BookmarkSlice";
 
 const Bookmark = () => {
+
+  useEffect(() => {
+
+    document.title = "Bookmark"
+
+  }, [])
+
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
 
