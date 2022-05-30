@@ -15,6 +15,9 @@ import { useModalContext } from "../../Context/ModalContext";
 import { useSelector } from "react-redux";
 
 const Profile = () => {
+
+  
+
   const state = useSelector((state) => state);
   const {
     auth: {
@@ -22,6 +25,12 @@ const Profile = () => {
     },
     post,
   } = state;
+
+  useEffect(() => {
+
+    document.title = username
+
+  }, [username])
 
   //Current logged user
   const currentUser = state.user.users.find(

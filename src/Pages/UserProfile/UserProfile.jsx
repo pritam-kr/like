@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import { Topbar, PostModal, Loading } from "../../Components/Index";
 import * as FaIcons from "react-icons/fa";
@@ -28,6 +28,13 @@ const UserProfile = () => {
   const currentProfile = users.find(
     (eachUser) => eachUser.username === pathname.username
   );
+
+  useEffect(() => {
+
+    document.title =currentProfile.username
+
+  }, [currentProfile.username])
+
   //Current profile posts
   const currentProfilePosts = allPost.filter(
     (eachPost) => eachPost.username === currentProfile.username
