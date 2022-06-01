@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-
 import { Topbar, PostModal, Loading } from "../../Components/Index";
 import * as FaIcons from "react-icons/fa";
 import { useModalContext } from "../../Context/ModalContext";

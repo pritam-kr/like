@@ -14,7 +14,6 @@ const BookmarkCard = ({ eachPost }) => {
   const {
     auth: { token, userInfo },
     user: { users },
-    post: { allPost },
   } = state;
   const dispatch = useDispatch();
 
@@ -49,15 +48,12 @@ const BookmarkCard = ({ eachPost }) => {
     }
   };
 
-
   return (
     <div className="feed-post-card mb-4 pd-0 rounded-3xl p-3 bg-light-bg text-[#fff]">
       <div className="flex items-center justify-between p-2">
         <div className="flex items-center ">
           <img
-            src={
-              userAvatar(username, users)?.avatar
-            }
+            src={userAvatar(username, users)?.avatar}
             alt="admin"
             className="post-avatar mr-3"
           />
@@ -102,9 +98,6 @@ const BookmarkCard = ({ eachPost }) => {
                 className="icons comment-icon "
                 onClick={() => singlePostHandler(id)}
               />
-            </li>
-            <li className="flex justify-start items-center mr-2">
-              <FaIcons.FaShareAlt className="icons share-icon " />
             </li>
           </ul>
 

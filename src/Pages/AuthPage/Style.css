@@ -16,9 +16,9 @@
 }
 
  
-.gif-wrapper .gif {
+/* .gif-wrapper .gif {
   width: 30rem;
-}
+} */
 
 .eye-icon {
   color: var(--primary-color);
@@ -37,7 +37,8 @@
 
 @media screen and (min-width: 768px) {
   .gif-wrapper .gif {
-    width: auto;
+    width: 40rem;
+    margin-top: -6rem;
   }
 }
 
