@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Topbar, PostModal, Loading } from "../../Components/Index";
 import * as FaIcons from "react-icons/fa";
 import { useModalContext } from "../../Context/ModalContext";
@@ -8,6 +8,7 @@ import { likeByUser } from "../../Utils/LikeByUser";
 
 import { dislikePost, likePost } from "../../Store/Slice/PostSlice";
 import { userAvatar } from "../../Utils/userAvatar";
+import { followUser, unFollowUser } from "../../Store/Slice/UserSlice";
 
 const UserProfile = () => {
   const pathname = useParams();
@@ -16,31 +17,42 @@ const UserProfile = () => {
   const state = useSelector((state) => state);
   const {
     auth: {
-      userInfo: { _id },
+      userInfo: { _id, username },
       token,
     },
     post: { loading, allPost },
     user: { users },
   } = state;
 
+  //current logged user
+
+  const currentUser = users?.find((eachUser) => eachUser.username === username);
+
+  const followHandler = (userId) => {
+    dispatch(followUser({ followUserId: userId, token: token }));
+  };
+
+  const unfollowHandler = (userId) => {
+    dispatch(unFollowUser({ unFollowUserId: userId, token: token }));
+  };
+
   //Current Profile
   const currentProfile = users.find(
     (eachUser) => eachUser.username === pathname.username
   );
 
+  // console.log(currentProfile)
+
   useEffect(() => {
-
-    document.title =currentProfile?.username
-
-  }, [currentProfile?.username])
+    document.title = currentProfile?.username;
+  }, [currentProfile?.username]);
 
   //Current profile posts
   const currentProfilePosts = allPost?.filter(
     (eachPost) => eachPost.username === currentProfile.username
   );
 
-  const { setFollowerModal, setFollowingModal } =
-    useModalContext();
+  const { setFollowerModal, setFollowingModal } = useModalContext();
 
   // Dislike Post Handler
   const disLikePostHandler = (_id, token) => {
@@ -75,9 +87,30 @@ const UserProfile = () => {
 
             <div className="profile-info">
               <div className="text-center">
-                <h1 className="user-full-name text-medium-heading font-semibold flex justify-center items-center">
-                  {currentProfile?.firstName} {currentProfile?.lastName}
+                <h1 className="user-full-name text-medium-heading font-semibold flex   justify-center items-center my-3">
+                  <span className="mr-4">
+                    {currentProfile?.firstName} {currentProfile?.lastName}{" "}
+                  </span>
+
+                  {currentUser?.following?.find(
+                    (each) => each._id === currentProfile._id
+                  ) ? (
+                    <span
+                      className="cursor-pointer text-sm mr-2 btn-follow-unfollow rounded-full pt-2 pb-2 pr-3 pl-3"
+                      onClick={() => unfollowHandler(currentProfile?._id)}
+                    >
+                      Following
+                    </span>
+                  ) : (
+                    <span
+                      className="cursor-pointer text-sm mr-2 btn-follow-unfollow rounded-full pt-2 pb-2 pr-3 pl-3"
+                      onClick={() => followHandler(currentProfile?._id)}
+                    >
+                      Follow
+                    </span>
+                  )}
                 </h1>
+
                 <p className=" user-name text-xl py-1">
                   @{currentProfile?.username}
                 </p>
@@ -92,7 +125,6 @@ const UserProfile = () => {
                   rel="noreferrer"
                   className="text-[#f7f7f7] my-2 text-[14px]"
                 >
-                  
                   {currentProfile?.website}
                 </a>
 
@@ -101,21 +133,20 @@ const UserProfile = () => {
               <div className="chips-container text-center mt-0 text-sub-heading">
                 <button className="btn mx-1 rounded-3xl">
                   Posts
-                 <span> { currentProfilePosts?.length}</span>
+                  <span> {currentProfilePosts?.length}</span>
                 </button>
                 <button
                   className="btn mx-1 rounded-3xl"
                   onClick={() => setFollowerModal(true)}
                 >
-                  Followers 
-                 <span> {currentProfile?.followers?.length}</span>
+                  Followers
+                  <span> {currentProfile?.followers?.length}</span>
                 </button>
                 <button
                   className="btn mx-1 rounded-3xl"
                   onClick={() => setFollowingModal(true)}
                 >
                   Following
-
                   <span> {currentProfile?.following?.length}</span>
                 </button>
               </div>
@@ -127,8 +158,11 @@ const UserProfile = () => {
             <Loading />
           ) : (
             <div className="post-wrapper my-6 p-3 md:flex md:flex-wrap md:justify-start">
-              {currentProfilePosts?.map((eachPost, ) => (
-                <div className="post-card border-1  mt-1 bg-light-bg text-[#f7f7f7] p-4 rounded-3xl  md:w-124" key={eachPost._id}>
+              {currentProfilePosts?.map((eachPost) => (
+                <div
+                  className="post-card border-1  mt-1 bg-light-bg text-[#f7f7f7] p-4 rounded-3xl  md:w-124"
+                  key={eachPost._id}
+                >
                   <div className="flex items-center justify-between p-2 ">
                     <div className="flex items-center">
                       <img

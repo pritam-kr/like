@@ -9,3 +9,4 @@
 - navigate to profile page user after search
 - Added document title
 - Refactor in login page
+- Added follow, unfollow in user profile page
