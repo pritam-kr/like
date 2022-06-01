@@ -120,27 +120,21 @@ const Profile = () => {
               <div className="chips-container text-center mt-2 text-sub-heading">
                 <button className="btn mx-1 rounded-3xl">
                   Posts{" "}
-                  {currentUserPosts?.length < 10
-                    ? "0" + currentUserPosts?.length
-                    : currentUserPosts?.length}
+                {currentUserPosts?.length}
                 </button>
                 <button
                   className="btn mx-1 rounded-3xl"
                   onClick={() => setFollowerModal(true)}
                 >
                   Followers{" "}
-                  {currentUser?.followers?.length < 10
-                    ? "0" + currentUser?.followers?.length
-                    : currentUser?.followers?.length}
+                  {currentUser?.followers?.length}
                 </button>
                 <button
                   className="btn mx-1 rounded-3xl"
                   onClick={() => setFollowingModal(true)}
                 >
                   Following{" "}
-                  {currentUser?.following?.length < 10
-                    ? "0" + currentUser?.following?.length
-                    : currentUser?.following?.length}
+                  {currentUser?.following?.length}
                 </button>
               </div>
             </div>

@@ -48,7 +48,7 @@ const PostModal = () => {
             <input
               value={postData.caption}
               className="input mt-2 text-xl"
-              type="text"
+              type="text" autoFocus
               placeholder="Write Caption"
               onChange={(event) =>
                 setPostData((prev) => ({
@@ -60,7 +60,7 @@ const PostModal = () => {
             <textarea
               value={postData.content}
               className="input mt-2 text-xl border-0"
-              type="text"
+              type="text" autoFocus
               placeholder="What's Happening..."
               onChange={(event) =>
                 setPostData((prev) => ({

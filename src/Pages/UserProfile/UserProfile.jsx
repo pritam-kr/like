@@ -30,12 +30,12 @@ const UserProfile = () => {
 
   useEffect(() => {
 
-    document.title =currentProfile.username
+    document.title =currentProfile?.username
 
-  }, [currentProfile.username])
+  }, [currentProfile?.username])
 
   //Current profile posts
-  const currentProfilePosts = allPost.filter(
+  const currentProfilePosts = allPost?.filter(
     (eachPost) => eachPost.username === currentProfile.username
   );
 
@@ -92,7 +92,7 @@ const UserProfile = () => {
                   rel="noreferrer"
                   className="text-[#f7f7f7] my-2 text-[14px]"
                 >
-                  {" "}
+                  
                   {currentProfile?.website}
                 </a>
 
@@ -101,27 +101,22 @@ const UserProfile = () => {
               <div className="chips-container text-center mt-0 text-sub-heading">
                 <button className="btn mx-1 rounded-3xl">
                   Posts
-                  {currentProfilePosts?.length < 10
-                    ? "0" + currentProfilePosts?.length
-                    : currentProfilePosts?.length}
+                 <span> { currentProfilePosts?.length}</span>
                 </button>
                 <button
                   className="btn mx-1 rounded-3xl"
                   onClick={() => setFollowerModal(true)}
                 >
-                  Followers{" "}
-                  {currentProfile?.followers?.length < 10
-                    ? "0" + currentProfile?.followers?.length
-                    : currentProfile?.followers?.length}
+                  Followers 
+                 <span> {currentProfile?.followers?.length}</span>
                 </button>
                 <button
                   className="btn mx-1 rounded-3xl"
                   onClick={() => setFollowingModal(true)}
                 >
-                  Following{" "}
-                  {currentProfile?.following?.length < 10
-                    ? "0" + currentProfile?.following?.length
-                    : currentProfile?.following?.length}
+                  Following
+
+                  <span> {currentProfile?.following?.length}</span>
                 </button>
               </div>
             </div>
