@@ -40,9 +40,7 @@ const UserProfile = () => {
   const currentProfile = users.find(
     (eachUser) => eachUser.username === pathname.username
   );
-
-  // console.log(currentProfile)
-
+ 
   useEffect(() => {
     document.title = currentProfile?.username;
   }, [currentProfile?.username]);
