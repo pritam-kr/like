@@ -34,15 +34,18 @@ const Login = () => {
     <>
     <Nav/>
       <div className="container login-container mx-auto ">
-        <div className="auth-wrapper login-wrapper min-h-screen grid p-6 md:grid-cols-2  gap-2">
-          <div className="gif-wrapper flex justify-center items-baseline max-h-36 md:max-h-full md:justify-center md:items-center ">
-            <img src="https://res.cloudinary.com/dhqxln7zi/image/upload/v1652208993/giph-unscreen_jcskdl.gif" alt="gif" className="gif" />
+        <div className="auth-wrapper login-wrapper min-h-screen md:min-h-screen grid p-6 md:grid-cols-2  gap-2">
+          <div className="gif-wrapper flex flex-col justify-center items-baseline max-h-36 md:max-h-full md:justify-center md:items-center ">
+            <img src="https://res.cloudinary.com/dhqxln7zi/image/upload/v1654064381/undraw_social_media_re_sulg_xvxgwt.svg" alt="gif" className="gif w-[4rem]" />
+            <p className="text-[2rem] mt-[-2rem] text-[#f7f7f7]">A Social Media App</p>
           </div>
 
           <div className="flex justify-center items-center">
             <div className="form w-full max-w-xl p-7 text-xl bg-light-bg rounded-3xl text-[#f7f7f7]">
               <div className="mt-4 mb-4 text-center">
+             
                 <h1 className="form-heading font-bold">Login</h1>
+                <p className="text-[1.3rem] mt-[1rem] text-[#f7f7f7] md:hidden">A Social Media App</p>
               </div>
 
               <label className="block">Username: </label>

@@ -256,8 +256,8 @@ export const posts = [
   },
   {
     _id: uuid(),
-    caption: "Gangs of Wasseypur 🔪 ",
-    content: "“Beta…Tumse na ho payega!” 😂😂",
+    caption: "No Caption",
+    content: "Going to Home...",
     likes: {
       likeCount: 759,
       likedBy: [],

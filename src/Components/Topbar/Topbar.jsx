@@ -50,7 +50,7 @@ const Topbar = () => {
         <div className="topbar-left">
           <div className="logo flex ">
             <Link to="/feeds" className="flex items-center">
-              <AiIcons.AiFillLike className="icons text-logo-icon mr-2 text-[#f7f7f7] " />
+               
               <span className="font-bold text-[#f7f7f7] text-3xl">Like</span>{" "}
             </Link>
           </div>

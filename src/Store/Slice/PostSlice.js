@@ -319,7 +319,7 @@ const postSlice = createSlice({
 
     //Like Post
     [likePost.pending]: (state) => {
-      state.loading = true;
+      state.loading = false;
     },
 
     [likePost.fulfilled]: (state, action) => {
